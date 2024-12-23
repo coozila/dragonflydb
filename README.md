@@ -1,17 +1,24 @@
-<p align="center">
-    <img width="233px" height=auto src="https://www.coozila.com/static/themes/prometheus/img/coozila.png" />
-</p>
-
 
 <p align="center">
-    <a href="https://github.com/coozila/dragonflydb/releases" target="__blank">
-        <img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="Total Downloads" />
-    </a>
     <a href="https://twitter.com/coozila" target="__blank">
         <img src="https://img.shields.io/badge/Follow%20on%20Twitter-green?style=social" alt="Follow on Twitter" />
     </a>
     <a href="https://www.facebook.com/coozila" target="__blank">
         <img src="https://img.shields.io/badge/Follow%20on%20Facebook-green?style=social" alt="Follow on Facebook" />
+    </a>
+</p>
+
+
+
+<p align="center">
+    <img width="233px" height=auto src="https://www.coozila.com/static/themes/prometheus/img/coozila.png" />
+</p>
+
+
+
+<p align="center">
+    <a href="https://github.com/coozila/dragonflydb/releases" target="__blank">
+        <img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="Total Downloads" />
     </a>
     <a href="https://github.com/coozila/dragonflydb" target="__blank">
         <img src="https://img.shields.io/badge/dynamic/json?color=yellow&label=stars&query=stars&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="GitHub Stars" />
@@ -31,7 +38,7 @@
 
 ## Sponsors
 
-**If you want to support our project and help me grow it, you can [become a sponsor on GitHub](https://github.com/sponsors/coozila)
+**If you want to support our project and help us grow it, you can [become a sponsor on GitHub](https://github.com/sponsors/coozila)
 
 <p align="center">
   <a href="https://github.com/sponsors/coozila">
