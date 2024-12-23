@@ -12,28 +12,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Count downloads
-        id: count
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
         run: |
-          # Fetch all releases
-          releases=$(curl -s https://api.github.com/repos/coozila/dragonflydb/releases)
+          pip install pyyaml requests
 
-          # Initialize total downloads
-          total_downloads=0
-
-          # Loop through each release
-          echo "$releases" | jq -c '.[]' | while read -r release; do
-            # Get the download count for each asset
-            downloads=$(echo "$release" | jq '.assets | map(.download_count) | add')
-            total_downloads=$((total_downloads + downloads))
-          done
-
-          # Output the total downloads
-          echo "Total Downloads: $total_downloads"
-
-          # Write the total downloads to downloads.yml
-          echo "downloads:" > downloads.yml
-          echo "  total: $total_downloads" >> downloads.yml
+      - name: Run download count script
+        run: python count_downloads.py
 
       - name: Commit and push downloads.yml
         run: |
