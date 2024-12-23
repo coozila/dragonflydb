@@ -4,6 +4,9 @@
 
 
 <p align="center">
+    <a href="https://github.com/coozila/dragonflydb/releases" target="__blank">
+        <img src="https://img.shields.io/badge/dynamic/yaml?color=success&label=downloads&query=$.downloads.total&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/downloads.yml" alt="Total Downloads" />
+    </a>
     <a href="https://twitter.com/coozila" target="__blank">
         <img src="https://img.shields.io/twitter/follow/coozila?style=social" alt="Follow on Twitter" />
     </a>
