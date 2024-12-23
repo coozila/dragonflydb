@@ -1,0 +1,43 @@
+name: Count Downloads
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  count_downloads:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Count downloads
+        run: |
+          # Fetch all releases
+          releases=$(curl -s https://api.github.com/repos/coozila/dragonflydb/releases)
+
+          # Initialize total downloads
+          total_downloads=0
+
+          # Loop through each release
+          echo "$releases" | jq -c '.[]' | while read -r release; do
+            # Get the download count for each asset
+            downloads=$(echo "$release" | jq '.assets | map(.download_count) | add')
+            total_downloads=$((total_downloads + downloads))
+          done
+
+          # Output the total downloads
+          echo "Total Downloads: $total_downloads"
+
+          # Write the total downloads to downloads.yml
+          echo "downloads:" > downloads.yml
+          echo "  total: $total_downloads" >> downloads.yml
+
+      - name: Commit and push downloads.yml
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add downloads.yml
+          git commit -m "Update downloads count" || echo "No changes to commit"
+          git push
