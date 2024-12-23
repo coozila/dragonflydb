@@ -5,7 +5,7 @@
 
 <p align="center">
     <a href="https://github.com/coozila/dragonflydb/releases" target="__blank">
-        <img src="https://img.shields.io/badge/dynamic/yaml?color=success&label=downloads&query=$.downloads.total&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/downloads.yml" alt="Total Downloads" />
+        <img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="Total Downloads" />
     </a>
     <a href="https://twitter.com/coozila" target="__blank">
         <img src="https://img.shields.io/twitter/follow/coozila?style=social" alt="Follow on Twitter" />
@@ -14,15 +14,19 @@
         <img src="https://img.shields.io/badge/follow-on%20facebook-1877F2?style=social" alt="Follow on Facebook" />
     </a>
     <a href="https://github.com/coozila/dragonflydb" target="__blank">
-        <img src="https://img.shields.io/github/stars/coozila/dragonflydb?style=social" alt="GitHub stars" />
+        <img src="https://img.shields.io/badge/dynamic/json?color=yellow&label=stars&query=stars&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="GitHub Stars" />
     </a>
     <a href="https://github.com/coozila/dragonflydb" target="__blank">
-        <img src="https://img.shields.io/github/forks/coozila/dragonflydb?style=social" alt="GitHub forks" />
+        <img src="https://img.shields.io/badge/dynamic/json?color=blue&label=forks&query=forks&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="GitHub Forks" />
     </a>
     <a href="https://github.com/coozila/dragonflydb/blob/main/LICENSE" target="__blank">
         <img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" />
     </a>
+    <a href="https://github.com/coozila/dragonflydb/issues" target="__blank">
+        <img src="https://img.shields.io/badge/dynamic/json?color=red&label=open%20issues&query=open_issues&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="Open Issues" />
+    </a>
 </p>
+
 
 
 ## Sponsors

@@ -1,11 +1,14 @@
-name: Count Downloads
+name: Fetch Metrics
 
 on:
+  push:
+    branches:
+      - master  # or main, depending on your default branch
   release:
     types: [published]
 
 jobs:
-  count_downloads:
+  fetch_metrics:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,13 +24,13 @@ jobs:
         run: |
           pip install pyyaml requests
 
-      - name: Run download count script
-        run: python count_downloads.py
+      - name: Run metrics fetching script
+        run: python fetch_metrics.py
 
-      - name: Commit and push downloads.yml
+      - name: Commit and push metrics.yml
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add downloads.yml
-          git commit -m "Update downloads count" || echo "No changes to commit"
+          git add metrics.yml
+          git commit -m "Update metrics" || echo "No changes to commit"
           git push
