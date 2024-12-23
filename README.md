@@ -265,7 +265,11 @@ After your purchase, please provide the following information via email:
 
 ## Additional Documentation
 
-For more details, please refer to the main repository: [Coozila! Apps](https://github.com/coozila/apps).
+For more details, please refer to the main repository: 
+
+- [Coozila! Apps](https://github.com/coozila/apps).
+- [Mcrouter](https://github.com/facebook/mcrouter)
+- [DragonflyDB](https://github.com/dragonflydb/dragonfly)
 
 ## Trademarks
 
