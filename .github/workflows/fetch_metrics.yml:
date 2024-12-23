@@ -3,7 +3,7 @@ name: Fetch Metrics
 on:
   push:
     branches:
-      - master  # or main, depending on your default branch
+      - master  # Adjust if your default branch is different
   release:
     types: [published]
 

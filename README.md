@@ -8,10 +8,10 @@
         <img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="Total Downloads" />
     </a>
     <a href="https://twitter.com/coozila" target="__blank">
-        <img src="https://img.shields.io/twitter/follow/coozila?style=social" alt="Follow on Twitter" />
+        <img src="https://img.shields.io/badge/Follow%20on%20Twitter-green?style=social" alt="Follow on Twitter" />
     </a>
     <a href="https://www.facebook.com/coozila" target="__blank">
-        <img src="https://img.shields.io/badge/follow-on%20facebook-1877F2?style=social" alt="Follow on Facebook" />
+        <img src="https://img.shields.io/badge/Follow%20on%20Facebook-green?style=social" alt="Follow on Facebook" />
     </a>
     <a href="https://github.com/coozila/dragonflydb" target="__blank">
         <img src="https://img.shields.io/badge/dynamic/json?color=yellow&label=stars&query=stars&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="GitHub Stars" />
