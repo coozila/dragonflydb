@@ -146,13 +146,6 @@ McRouter is a high-performance Memcached router developed by Facebook. It acts a
 
 Memcached, DragonFly, and McRouter work together to provide a robust caching and database solution for high-demand applications. By utilizing Memcached for caching frequently accessed data, applications can significantly reduce response times and database load. DragonFly, with its distributed architecture, ensures that data is stored reliably and can be accessed quickly, while McRouter optimizes the routing of requests to Memcached servers.
 
-## Copyright
-
-```
-Copyright (C) 2009 - 2024 Coozila! MIT License
-See the full license at: [Coozila! License](https://github.com/coozila/dragonflydb/license.md)
-```
-
 ## Project Structure
 
 - **Docker Compose Configuration**: Defines services for DragonflyDB and McRouter.
@@ -318,20 +311,20 @@ For more details, please refer to the main repository:
 - [Mcrouter](https://github.com/facebook/mcrouter)
 - [DragonflyDB](https://github.com/dragonflydb/dragonfly/tree/main/docs)
 
-## Trademarks
+## Trademarks and Copyright
 
-This software listing is packaged by Coozila!. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+This software listing is packaged by Coozila!. All trademarks mentioned are the property of their respective owners, and their use does not imply any affiliation or endorsement.
 
-## License
+### Copyright
 
-- This project is licensed under the MIT License. See the full license at: [Coozila! License](https://github.com/coozila/dragonflydb/blob/master/LICENSE).
-  
-- For the DragonflyDB application, please refer to the license in: [DragonflyDB License](https://github.com/dragonflydb/dragonfly/blob/main/LICENSE.md).
+Copyright (C) 2009 - 2024 Coozila! Licensed under the MIT License.
 
-- For McRouter, see the license in: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE).
+### Licenses
 
-- For Memcached, see the license in: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE).
-
+- **Coozila!**: [MIT License](https://github.com/coozila/dragonflydb/blob/master/LICENSE)
+- **DragonflyDB**: [DragonflyDB License](https://github.com/dragonflydb/dragonfly/blob/main/LICENSE.md)
+- **McRouter**: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE)
+- **Memcached**: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE)
 
 ## Disclaimer
 
