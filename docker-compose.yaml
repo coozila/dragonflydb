@@ -23,7 +23,26 @@ networks:                                                                       
     #   Private network for application services    --------------------------------#
 
     stack_private_network:
+        #
+        #   SSH command to create the Docker network: docker network create --driver bridge stack_private_network --subnet=172.16.0.0/
+        #
+
         external: true
+
+    #   Custom private network exemple for stack services    -----------------------#
+
+#    stack_private_network:
+#        driver: bridge 
+#        driver_opts:
+#            com.docker.network.enable_ipv6: "false"
+#        ipam:
+#            driver: default
+#            config:
+#                - subnet: 172.16.238.0/24
+#                  gateway: 172.16.238.1
+
+
+# ----------------------------------------------------------------------------------#
 
 # ----------------------------------------------------------------------------------#
 
