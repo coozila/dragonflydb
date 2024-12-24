@@ -277,7 +277,13 @@ This software listing is packaged by Coozila!. The respective trademarks mention
 
 ## License
 
-This project is licensed under the MIT License. See the full license at: [Coozila! License](https://github.com/coozila/dragonflydb/blob/master/LICENSE).
+- This project is licensed under the MIT License. See the full license at: [Coozila! License](https://github.com/coozila/dragonflydb/blob/master/LICENSE).
+  
+- For the DragonflyDB application, please refer to the license in: [DragonflyDB License](https://github.com/dragonflydb/dragonfly/blob/main/LICENSE.md).
+
+- For McRouter, see the license in: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE).
+
+- For Memcached, see the license in: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE).
 
 
 ## Disclaimer
