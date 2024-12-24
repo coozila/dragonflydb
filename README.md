@@ -269,7 +269,7 @@ For more details, please refer to the main repository:
 
 - [Coozila! Apps](https://github.com/coozila/apps).
 - [Mcrouter](https://github.com/facebook/mcrouter)
-- [DragonflyDB](https://github.com/dragonflydb/dragonfly)
+- [DragonflyDB](https://github.com/dragonflydb/dragonfly/tree/main/docs)
 
 ## Trademarks
 

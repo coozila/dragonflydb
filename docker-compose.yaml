@@ -16,7 +16,7 @@
 # ----------------------------------------------------------------------------------#
 
 
-#   STACK NETWORK    ----------------------------------------------------------------#
+#   STACK NETWORK    ---------------------------------------------------------------#
 
 networks:                                                                           #
 
@@ -40,12 +40,14 @@ services:                                                                       
             #
             #   Set memory lock limits
             #
+
             memlock: -1
 
         command:
             #
             #   Command to set the Memcache port
             #
+
             - "--memcached_port"
             - "11211"
 
@@ -53,12 +55,14 @@ services:                                                                       
             #
             #   Port mapping for DragonflyDB
             #
+
             - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11212:11211"
 
         volumes:
             #
             #   Volume to store DragonflyDB data
             #
+
             - dragonflydata1:/data
 
             #
@@ -97,6 +101,7 @@ services:                                                                       
             #
             #   Set memory lock limits
             #
+
             memlock: -1
 
         command:
@@ -251,21 +256,21 @@ services:                                                                       
 volumes:
 
     #
-    #   COOZILA STACK DRAGINFLY DATA 1 STORAGE
+    #   STACK DRAGINFLY DATA 1 STORAGE
     #
 
     dragonflydata1:
         driver: local
 
     #
-    #   COOZILA STACK DRAGINFLY DATA 2 STORAGE
+    #   STACK DRAGINFLY DATA 2 STORAGE
     #
 
     dragonflydata2:
         driver: local
 
     #
-    #   COOZILA STACK DRAGINFLY DATA 2 STORAGE
+    #   STACK DRAGINFLY DATA 2 STORAGE
     #
 
     dragonflydata3:
