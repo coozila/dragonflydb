@@ -207,7 +207,18 @@ git clone https://github.com/coozila/dragonflydb.git
 cd dragonflydb
 ```
 
-### 3. Prepare the Environment Variables
+> [!TIP]
+>  Before proceeding, please ensure you are on the correct branch and using the appropriate version of the application. The `dev` branch is continuously updated and may contain untested errors. For stability, it is recommended to download and use version `1.0.0`, which is the last published stable version.
+
+### 3. Checkout Version 1.0.0
+
+Switch to the stable version `1.0.0`:
+
+```bash
+git checkout 1.0.0
+```
+
+### 4. Prepare the Environment Variables
 
 Copy the example environment file and set the necessary variables:
 
@@ -217,7 +228,7 @@ cp .env.example .env
 
 Edit the `.env` file to set the required environment variables.
 
-### 4. Launch the Application
+### 5. Launch the Application
 
 Run the following command to launch the application:
 
@@ -225,7 +236,7 @@ Run the following command to launch the application:
 docker compose up -d
 ```
 
-### 5. Accessing the Services
+### 6. Accessing the Services
 
 - DragonflyDB instances:
   - Instance 1: [http://127.0.0.1:11212](http://127.0.0.1:11212)
