@@ -185,8 +185,8 @@ Each instance:
 
 Before you begin, ensure you have the following installed on your system:
 
-- Docker
-- Docker Compose
+- [Docker Engine](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Getting Started
 
