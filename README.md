@@ -192,11 +192,42 @@ Before you begin, ensure you have the following installed on your system:
 
 ### 1. Create the Private Network
 
-Before building the containers and images, you must manually create the `stack_private_network`:
+Before building the containers and images, you must manually create the `stack_private_network` Exemple:
 
 ```bash
-docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
+docker network create --driver bridge stack_private_network --subnet=172.16.0.0/
 ```
+
+Alternatively, you can personalize your network according to your preferences directly in your docker-compose.yaml file like this:
+
+
+```yaml
+
+#   STACK NETWORK    ---------------------------------------------------------------#
+
+networks:                                                                           #
+
+    #   Private network for application services    --------------------------------#
+
+    stack_private_network:
+        driver: bridge 
+        driver_opts:
+            com.docker.network.enable_ipv6: "false"
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.16.238.0/24
+                  gateway: 172.16.238.1
+
+
+# ----------------------------------------------------------------------------------#
+
+```
+
+> [!TIP]
+>  For better performance, using the host network mode is often the best choice, depending on the structure of the application in which you want to integrate the cluster. This mode can reduce the latency and improve speed, but keep in mind that it may expose your services directly to the host network.
+
+
 
 ### 2. Clone the Repository
 
