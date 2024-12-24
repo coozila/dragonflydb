@@ -225,8 +225,13 @@ networks:                                                                       
 ```
 
 > [!TIP]
->  For better performance, using the host network mode is often the best choice, depending on the structure of the application in which you want to integrate the cluster. This mode can reduce the latency and improve speed, but keep in mind that it may expose your services directly to the host network.
-
+> For better performance, using the host network mode is often the best choice, depending on the structure of the application in which you want to integrate the cluster. This mode can reduce latency and improve speed, but keep in mind that it may expose your services directly to the host network.
+> 
+> Additionally, Docker is not the most efficient for managing disk I/O. It is advisable to manage volumes on an alternative path or directly by the system, or to use another file system. This may require customization to achieve the best performance.
+> 
+> Depending on your specific configuration and preferences, you should choose the solution that best fits your needs. Assessing the trade-offs between ease of use, performance, and security is essential. In some cases, using the default Docker settings may be sufficient, while in others, adapting the network and volume configuration may bring significant benefits in terms of speed and operational efficiency.
+> 
+> Ultimately, the choice of network mode and volume management strategy should align with your application's requirements and the environment in which it will be deployed.
 
 
 ### 2. Clone the Repository
