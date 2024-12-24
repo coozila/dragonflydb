@@ -326,6 +326,13 @@ Copyright (C) 2009 - 2024 Coozila! Licensed under the MIT License.
 - **McRouter**: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE)
 - **Memcached**: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE)
 
+### Important Notice Regarding DragonflyDB Usage  
+
+In compliance with the **Dragonfly Business Source License 1.1 (BSL 1.1)**:  
+- **Permitted Use:** This project involves installing and configuring DragonflyDB as part of your private caching infrastructure.  
+- **Prohibited Use:** You cannot offer DragonflyDB as a hosted or managed service, nor provide any solution that allows third parties (other than your employees or contractors) to access or use DragonflyDB features.  
+- This ensures that our service fully respects the licensing terms of DragonflyDB.
+
 ## Disclaimer
 
 This product is provided "as is," without any guarantees or warranties regarding its functionality, performance, or reliability. By using this product, you acknowledge that you do so at your own risk. Coozila! and its contributors are not liable for any issues, damages, or losses that may arise from the use of this product. We recommend thoroughly testing the product in your own environment before deploying it in a production setting.
