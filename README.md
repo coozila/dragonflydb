@@ -225,7 +225,8 @@ networks:                                                                       
 > Depending on your specific configuration and preferences, you should choose the solution that best fits your needs. Assessing the trade-offs between ease of use, performance, and security is essential. In some cases, using the default Docker settings may be sufficient, while in others, adapting the network and volume configuration may bring significant benefits in terms of speed and operational efficiency.
 > 
 > Ultimately, the choice of network mode and volume management strategy should align with your application's requirements and the environment in which it will be deployed.
-
+> 
+> For more exemples see [Docker Engine Network](https://docs.docker.com/engine/network/)
 
 ### 2. Clone the Repository
 
