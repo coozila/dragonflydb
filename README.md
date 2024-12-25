@@ -47,6 +47,8 @@
 
 # DragonflyDB Cluster
 
+![Cluster](assets/cluster-coozila-memcached.png)
+
 ## Coozila! Docker Package APP for Memcached Cluster with DragonflyDB and McRouter
 
 The **Coozila! Package for Memcached Cluster** integrates **DragonflyDB** and **McRouter**, delivering a cutting-edge caching solution tailored for modern applications. Designed to maximize scalability and performance, this package empowers developers to deploy a distributed caching layer effortlessly, alleviating database load while significantly improving response times.
