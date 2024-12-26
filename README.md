@@ -264,10 +264,15 @@ docker compose up -d
 
 ## Cleanup
 
-To stop and remove all containers, networks, and volumes, run:
+To stop and remove all containers and networks, run:
 
 ```bash
 docker compose down
+```
+To stop and remove all containers, networks, and volumes, run:
+
+```bash
+docker compose down -v 
 ```
 
 ## Installation Assistance
