@@ -1,18 +1,20 @@
 # Security Release Process
 
-The community has adopted this security disclosure and response policy to ensure responsible handling of critical issues.
+The community has adopted this security disclosure and response policy to responsibly handle critical issues.
 
 ## Supported Versions
 
-For a list of supported versions that this project will potentially create security fixes for, please refer to the Releases page on this project's GitHub and/or related project documentation on release cadence and support.
+For a list of supported versions that this project will potentially create security fixes for, please refer to the [Releases page](https://github.com/<your-repo>/releases) on this project's GitHub and/or the related project documentation on release cadence and support.
 
 ## Reporting a Vulnerability - Private Disclosure Process
 
-Security is of utmost importance, and all security vulnerabilities or suspected vulnerabilities should be reported privately to minimize risks to current users before they are fixed. Vulnerabilities will be investigated and patched in the next patch (or minor) release as soon as possible. This information will remain internal to the project.
+Security is of utmost importance. All security vulnerabilities or suspected vulnerabilities should be reported privately to minimize risks to current users before they are addressed. Vulnerabilities will be investigated and patched in the next patch (or minor) release as soon as possible. This information will remain internal to the project.
 
 If you are aware of a publicly disclosed security vulnerability for this project, please **IMMEDIATELY** contact the maintainers privately. The use of encrypted email is encouraged.
 
 **IMPORTANT: Do not file public issues on GitHub for security vulnerabilities.**
+
+### Reporting Channels
 
 To report a vulnerability or security-related issue, please contact the maintainers with sufficient details through one of the following channels:
 
@@ -21,19 +23,21 @@ To report a vulnerability or security-related issue, please contact the maintain
 
 The report will be handled by maintainers with committer and release permissions. Feedback will be provided within 3 business days, including a detailed plan to investigate the issue and any potential workarounds.
 
-Please do not report non-security-impacting bugs through this channel; use GitHub issues for all non-security-related bugs.
+Do not report non-security-impacting bugs through this channel; use GitHub issues for all non-security-related bugs.
 
 ## Proposed Report Content
 
 When reporting a vulnerability, please provide a descriptive title and include the following information in the description:
 
-- Basic identity information, such as your name and affiliation or company.
-- Detailed steps to reproduce the vulnerability (POC scripts, screenshots, and logs are all helpful).
-- A description of the effects of the vulnerability on this project and related hardware/software configurations, enabling maintainers to reproduce it.
-- How the vulnerability affects the project's usage and an estimation of the attack surface.
-- A list of other projects or dependencies that were used in conjunction with this project to produce the vulnerability.
+- **Identity Information**: Your name and affiliation or company.
+- **Reproduction Steps**: Detailed steps to reproduce the vulnerability (POC scripts, screenshots, and logs are all helpful).
+- **Impact Description**: A description of the effects of the vulnerability on this project and related hardware/software configurations.
+- **Usage Impact**: Explanation of how the vulnerability affects the project's usage and an estimation of the attack surface.
+- **Dependencies**: A list of other projects or dependencies that were used in conjunction with this project to produce the vulnerability.
 
 ## When to Report a Vulnerability
+
+You should report a vulnerability:
 
 - When you believe this project has a potential security vulnerability.
 - When you suspect a potential vulnerability but are unsure if it impacts this project.
@@ -46,8 +50,8 @@ The maintainers will respond to vulnerability reports as follows:
 1. Investigate the vulnerability and determine its effects and criticality.
 2. If the issue is not deemed a vulnerability, provide a detailed reason for rejection.
 3. Initiate a conversation with the reporter within 3 business days.
-4. If a vulnerability is acknowledged and a timeline for a fix is established, work on a plan to communicate with the appropriate community, including identifying mitigating steps for affected users.
-5. Create a [Security Advisory](https://docs.github.com/en/code-security/repository-security-advisories/publishing-a-repository-security-advisory) using the [CVSS Calculator](https://www.first.org/cvss/calculator/3.0) if it has not yet been created. Maintain final authority on the calculated CVSS; it is better to act quickly than to perfect the CVSS. Issues may also be reported to [Mitre](https://cve.mitre.org/) using this [scoring calculator](https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator). The draft advisory will initially be set to private.
+4. If a vulnerability is acknowledged, determine the timeline for a fix and communicate with the community, including identifying mitigating steps for affected users.
+5. Create a [Security Advisory](https://docs.github.com/en/code-security/repository-security-advisories/publishing-a-repository-security-advisory) using the [CVSS Calculator](https://www.first.org/cvss/calculator/3.0) if it has not yet been created. The maintainers will make the final call on the calculated CVSS; it is better to act quickly than to perfect the CVSS. Issues may also be reported to [Mitre](https://cve.mitre.org/) using this [scoring calculator](https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator). The draft advisory will initially be set to private.
 6. Work on fixing the vulnerability and perform internal testing before preparing to roll out the fix.
 7. Once the fix is confirmed, patch the vulnerability in the next patch or minor release, and backport the patch to all earlier supported releases.
 
