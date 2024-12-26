@@ -4,7 +4,7 @@ The community has adopted this security disclosure and response policy to respon
 
 ## Supported Versions
 
-For a list of supported versions that this project will potentially create security fixes for, please refer to the [Releases page](https://github.com/<your-repo>/releases) on this project's GitHub and/or the related project documentation on release cadence and support.
+For a list of supported versions that this project will potentially create security fixes for, please refer to the [Releases page](https://github.com/coozila/dragonfydb/releases) on this project's GitHub and/or the related project documentation on release cadence and support.
 
 ## Reporting a Vulnerability - Private Disclosure Process
 
