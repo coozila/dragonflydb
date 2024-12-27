@@ -174,7 +174,7 @@ Before you begin, ensure you have the following installed on your system:
 Before building the containers and images, you must manually create the `stack_private_network` Exemple:
 
 ```bash
-docker network create --driver bridge stack_private_network --subnet=172.16.0.0/
+docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
 ```
 
 Alternatively, you can personalize your network according to your preferences directly in your docker-compose.yaml file like this:
