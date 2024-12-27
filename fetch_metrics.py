@@ -12,8 +12,6 @@ data = response.json()
 
 # Extract required metrics
 metrics = {
-    'stars': data.get('stargazers_count', 0),
-    'forks': data.get('forks_count', 0),
     'open_issues': data.get('open_issues_count', 0),
     'downloads': 0  # This will be handled separately if you track downloads as assets
 }

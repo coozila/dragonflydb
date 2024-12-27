@@ -8,10 +8,7 @@
 </p>
 <p align="center">
     <a href="https://github.com/coozila/dragonflydb/releases" target="_blank"><img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="Total Downloads" /></a>
-    <a href="https://github.com/coozila/dragonflydb" target="_blank"><img src="https://img.shields.io/badge/dynamic/json?color=yellow&label=stars&query=stars&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="GitHub Stars" /></a>
-    <a href="https://github.com/coozila/dragonflydb" target="_blank"><img src="https://img.shields.io/badge/dynamic/json?color=blue&label=forks&query=forks&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="GitHub Forks" /></a>
     <a href="https://github.com/coozila/dragonflydb/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" /></a>
-    <a href="https://github.com/coozila/dragonflydb/issues" target="_blank"><img src="https://img.shields.io/badge/dynamic/json?color=red&label=open%20issues&query=open_issues&url=https://raw.githubusercontent.com/coozila/dragonflydb/master/metrics.yml" alt="Open Issues" /></a>
 </p>
 
 ## Sponsors
