@@ -5,16 +5,6 @@
 #                                                                                   #
 # ----------------------------------------------------------------------------------#
 
-# ----------------------------------------------------------------------------------#
-#
-#   MEMCACHED CLUSTER WITH DRAGONFLY AND MCROUTER
-#
-#   Credit: Sandeep Kongathi
-#   Website: https://kn-sandeep.medium.com/
-#   Inspiration: https://kn-sandeep.medium.com/ha-memcached-with-mcrouter-with-ui-on-docker-compose-5eca2989afdd
-#
-# ----------------------------------------------------------------------------------#
-
 
 #   STACK NETWORK    ---------------------------------------------------------------#
 
