@@ -1,8 +1,9 @@
 <p align="center">
-    <a href="https://www.coozila.com/plus/view-organization-profile/coozila-labs" target="_blank"><img src="https://img.shields.io/badge/Follow%20on%20Coozila-green?style=social" alt="Follow on Coozila!" /></a>
-    <a href="https://www.facebook.com/coozila" target="_blank"><img src="https://img.shields.io/badge/Follow%20on%20Facebook-green?style=social" alt="Follow on Facebook" /></a>
-    <a href="https://twitter.com/coozila" target="_blank"><img src="https://img.shields.io/badge/Follow%20on%20Twitter-green?style=social" alt="Follow on Twitter" /></a>
+    <a href="https://www.coozila.com/plus/view-organization-profile/coozila-labs" target="_blank"><img src="https://img.shields.io/coozila/follow/coozila?style=social" alt="Follow on Coozila!" /></a>
+    <a href="https://www.facebook.com/coozila" target="_blank"><img src="https://img.shields.io/facebook/follow/coozila?style=social" alt="Follow on Facebook" /></a>
+    <a href="https://twitter.com/coozila" target="_blank"><img src="https://img.shields.io/twitter/follow/coozila?style=social" alt="Follow on Twitter" /></a>
 </p>
+
 <p align="center">
     <img width="233px" height="auto" src="https://www.coozila.com/static/themes/prometheus/img/coozila.png" />
 </p>
