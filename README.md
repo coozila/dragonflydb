@@ -1,5 +1,4 @@
 <p align="center">
-    <a href="https://www.facebook.com/coozila" target="_blank"><img src="https://img.shields.io/facebook/follow/:coozila" alt="Follow on Facebook" /></a>
     <a href="https://twitter.com/coozila" target="_blank"><img src="https://img.shields.io/twitter/follow/:coozila" alt="Follow on Twitter" /></a>
 </p>
 
