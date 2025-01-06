@@ -29,7 +29,7 @@ for release in releases:
 metrics['downloads'] = total_downloads
 
 # Save metrics to YAML file
-with open('metrics.yml', 'w') as file:
+with open('metrics.yaml', 'w') as file:
     yaml.dump(metrics, file)
 
 print(f"Metrics: {metrics}")
