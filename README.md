@@ -6,8 +6,8 @@
     <img width="233px" height="auto" src="https://www.coozila.com/static/themes/prometheus/img/coozila.png" />
 </p>
 <p align="center">
-    <a href="https://github.com/coozila/dragonflydb/releases" target="_blank"><img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/dragonflydb/dev/metrics.yaml" alt="Total Downloads" /></a>
-    <a href="https://github.com/coozila/dragonflydb/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" /></a>
+    <a href="https://github.com/coozila/dragonflydb-cluster/releases" target="_blank"><img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/memcached-cluster/dev/metrics.yaml" alt="Total Downloads" /></a>
+    <a href="https://github.com/coozila/dragonflydb-cluster/dev/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" /></a>
 </p>
 
 ## Sponsors
@@ -23,9 +23,9 @@
 
 ![Cluster](assets/cluster-coozila-memcached.png)
 
-## Coozila! Docker Package APP for Memcached Cluster with DragonflyDB and McRouter
+## Coozila! Docker Package APP for DragonflyDB Cluster with McRouter
 
-The **Coozila! Package for Memcached Cluster** integrates **DragonflyDB** and **McRouter**, delivering a cutting-edge caching solution tailored for modern applications. Designed to maximize scalability and performance, this package empowers developers to deploy a distributed caching layer effortlessly, alleviating database load while significantly improving response times.
+The **Coozila! Package for DragonflyDB Cluster** integrates **DragonflyDB** and **McRouter**, delivering a cutting-edge caching solution tailored for modern applications. Designed to maximize scalability and performance, this package empowers developers to deploy a distributed caching layer effortlessly, alleviating database load while significantly improving response times.
 
 ### Why Choose Coozila?
 
@@ -309,7 +309,7 @@ Copyright (C) 2009 - 2024 Coozila! Licensed under the MIT License.
 
 ### Licenses
 
-- **Coozila!**: [MIT License](https://github.com/coozila/dragonflydb/blob/master/LICENSE)
+- **Coozila!**: [MIT License](https://github.com/coozila/dragonflydb-cluster/blob/dev/LICENSE)
 - **DragonflyDB**: [DragonflyDB License](https://github.com/dragonflydb/dragonfly/blob/main/LICENSE.md)
 - **McRouter**: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE)
 - **Memcached**: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE)
