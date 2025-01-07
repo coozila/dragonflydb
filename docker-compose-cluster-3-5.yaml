@@ -403,7 +403,7 @@ services:                                                                       
             #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
 
             #
-            #   Map failover config file 
+            #   Map operation selector config file 
             #
 
             #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
