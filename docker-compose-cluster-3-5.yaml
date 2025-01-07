@@ -329,13 +329,19 @@ services:                                                                       
             #   Map config file
             #
 
-            - ./config/intermediate_mcrouter_config.json:/etc/mcrouter/mcrouter_config.json
+            - ./config/intermediate_cluster_3_5_config.json:/etc/mcrouter/mcrouter_config.json
 
             #
             #   Map failover config file 
             #
 
-            #- ./config/mcrouter_intermediate_failover_config.json:/etc/mcrouter/mcrouter_config.json
+            #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
+
+            #
+            #   Map failover config file 
+            #
+
+            #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
 
         command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
         ports:
@@ -388,13 +394,19 @@ services:                                                                       
             #   Map config file
             #
 
-            - ./config/intermediate_mcrouter_config.json:/etc/mcrouter/mcrouter_config.json
+            - ./config/intermediate_cluster_3_5_config.json:/etc/mcrouter/mcrouter_config.json
 
             #
             #   Map failover config file 
             #
 
-            #- ./config/mcrouter_intermediate_failover_config.json:/etc/mcrouter/mcrouter_config.json
+            #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
+
+            #
+            #   Map failover config file 
+            #
+
+            #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
 
         command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
         ports:
@@ -447,13 +459,19 @@ services:                                                                       
             #   Map config file
             #
 
-            - ./config/intermediate_mcrouter_config.json:/etc/mcrouter/mcrouter_config.json
+            - ./config/intermediate_cluster_3_5_config.json:/etc/mcrouter/mcrouter_config.json
 
             #
             #   Map failover config file 
             #
 
-            #- ./config/mcrouter_intermediate_failover_config.json:/etc/mcrouter/mcrouter_config.json
+            #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
+
+            #
+            #   Map failover config file 
+            #
+
+            #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
 
         command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
         ports:

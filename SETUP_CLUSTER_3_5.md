@@ -7,41 +7,22 @@ This document outlines the setup of an intermediate DragonflyDB cluster using Do
 
 ### Key Features of DragonflyDB
 
-1. **High Performance**:
-   - DragonflyDB is built to handle a massive number of operations per second, significantly outperforming Redis and Memcached in many benchmarks.
-   - It leverages modern multi-threading and hardware to maximize efficiency.
-
-2. **Optimized Resource Usage**:
-   - It is designed to reduce memory fragmentation and optimize CPU usage, making it cost-effective for large-scale deployments.
-   - Supports efficient memory management for high-density workloads.
-
-3. **Rich Compatibility**:
-   - Fully compatible with Redis protocols, allowing users to migrate existing applications seamlessly.
-   - Provides support for Memcached APIs, making it versatile for various use cases.
-
-4. **Ease of Scaling**:
-   - Built with scalability in mind, DragonflyDB can handle large datasets and distributed workloads efficiently.
-   - Its architecture supports modern hardware innovations like NVMe storage and high-speed networking.
-
-5. **Simple Deployment**:
-   - Lightweight and easy to deploy on cloud platforms, containers, or bare-metal servers.
-   - Provides pre-built binaries and Docker images for quick setup.
-
-6. **Advanced Features**:
-   - Includes built-in support for advanced data structures like strings, hashes, sets, and sorted sets, similar to Redis.
-   - Offers enhanced mechanisms for data eviction, persistence, and snapshotting.
+1. **High Performance**
+2. **Optimized Resource Usage**
+3. **Rich Compatibility**
+4. **Ease of Scaling**
+5. **Simple Deployment**
+6. **Advanced Features**
 
 ### Recommended Server Specifications
 For the Intermediate Cluster configuration, we recommend using a cloud server instance with the following specifications:
-- **Instance Type**: **t3.large** (or equivalent)
-- **CPU**: 2 vCPUs
-- **RAM**: 8 GB
-
-This configuration strikes a balance between cost and performance, making it suitable for applications that experience moderate to high traffic.
+- **Minimum Instance Type**: **t3.large** (or equivalent)
+- **Minimum RAM**: 8 GB (This is the minimum requirement to run the cluster effectively.)
+- **Maximum RAM Supported**: Each DragonflyDB instance can support up to **1 TB of RAM**, allowing for extensive caching capabilities and handling of large datasets.
 
 ### Architecture
-- **DragonflyDB Instances**: The cluster contains 5 instances of DragonflyDB, each responsible for storing key-value pairs in memory.
-- **Mcrouter Instances**: There are 3 instances of mcrouter, which act as a routing layer to distribute requests among the DragonflyDB instances. Mcrouter handles sharding and provides redundancy.
+- **DragonflyDB Instances**: The cluster contains 5 instances of DragonflyDB.
+- **Mcrouter Instances**: There are 3 instances of mcrouter.
 
 ## Cluster Configuration
 
@@ -49,79 +30,185 @@ This configuration strikes a balance between cost and performance, making it sui
 The configuration is defined in a `docker-compose-cluster-3-5.yaml` file, which is used to create and manage the cluster's services located in the `config` folder.
 
 ### Key Components:
-- **DragonflyDB Instances**: 5 instances of DragonflyDB are configured, each with unique ports to avoid conflicts. They are responsible for storing and retrieving key-value pairs.
-- **Mcrouter Instances**: 3 instances of mcrouter are set up to route requests to the DragonflyDB instances. Each mcrouter instance is configured with a command line that specifies the routing policy.
-- **Networking**: All services are connected to a private Docker network to facilitate communication.
+- **DragonflyDB Instances**: 5 instances configured with unique ports.
+- **Mcrouter Instances**: 3 instances to route requests to the DragonflyDB instances.
+- **Networking**: All services are connected to a private Docker network.
 
-## Running the Cluster
-To start the cluster, run the following command in the terminal:
+### Using Configuration Files
+The following configuration files are already set up in the volumes section of your Docker Compose file. You can uncomment the desired configuration file to use it. Only one configuration variant should be active at a time.
 
-```bash
-docker-compose -f docker-compose-cluster-3-5.yaml up -d
+```yaml
+volumes:
+            #
+            #   Map config file
+            #
+            - ./config/intermediate_cluster_3_5_config.json:/etc/mcrouter/mcrouter_config.json
+
+            #
+            #   Map failover config file 
+            #
+            #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
+
+            #
+            #   Map operation selector config file 
+            #
+            #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
 ```
 
-The `-d` flag runs the containers in detached mode.
+To use a specific configuration:
+1. **Choose the desired configuration** by uncommenting the corresponding line.
+2. **Comment out the other configurations** to ensure only one is active.
+3. **Save the changes** and then run your Docker Compose setup.
 
-## Monitoring
-You can monitor the logs of each service using:
+### Overriding Default Variables
+To override certain variables set in the `docker-compose` file, you can create a `.env` file based on the default template provided. Follow these steps:
 
-```bash
-docker-compose -f docker-compose-cluster-3-5.yaml logs -f
-```
-
-## Cleanup
-
-To stop and remove all containers and networks, run:
-
-```bash
-docker-compose -f docker-compose-cluster-3-5.yaml down
-```
-
-## Data Distribution in the DragonflyDB Cluster
-
-### Overview
-In the configured DragonflyDB cluster, data distribution is achieved through sharding and managed by mcrouter. Sharding involves dividing the keyspace among multiple DragonflyDB instances to ensure that no single instance becomes a bottleneck. This also improves performance and availability.
-
-### Sharding Mechanism
-1. **Hashing Function**: When a key-value pair is stored in DragonflyDB, a hashing function is applied to the key to determine which DragonflyDB instance will hold the value. The hashing function typically converts the key into a numeric value, which is then used to select an instance based on the total number of instances.
-   
-   For example, if you have 5 DragonflyDB instances, the formula to determine which instance to use could be:
-   ```plaintext
-   index = hash(key) % number_of_instances
+1. **Copy the example file:**
+   ```bash
+   cp .env.example .env
    ```
 
-   Here, `number_of_instances` would be 5. This means that the output of the hash function would be an integer between 0 and 4, corresponding to one of the 5 DragonflyDB instances.
+2. **Edit the `.env` file** to modify any variables you wish to override. This allows you to customize specific settings for your environment while keeping the default values intact.
 
-2. **Key Distribution**: Each key is routed to one of the 5 DragonflyDB instances based on the result of the hashing function. This ensures that data is evenly distributed across all instances, allowing for parallel reads and writes, which improves overall performance.
+### Configuration Variants
 
-### Role of mcrouter
-- **Routing Requests**: Mcrouter acts as a routing layer between the application and the DragonflyDB instances. When an application makes a request to set or get a value, it sends the request to one of the mcrouter instances. 
-- **Internal Logic**: Mcrouter uses the same hashing logic to determine which DragonflyDB instance should handle the request. It abstracts this complexity away from the application, allowing the application to interact with mcrouter as if it were a single DragonflyDB instance.
-- **Load Balancing**: By managing the distribution of keys, mcrouter helps balance the load across all DragonflyDB instances. If one instance is overloaded or unavailable, mcrouter can redirect requests to the other instances.
+#### 1. Intermediate Cluster Configuration
 
-### Fault Tolerance and Availability
-- **Redundant Copies**: While this specific configuration does not include data replication, you can implement a strategy for redundancy by using multiple instances to store the same key-value pairs. If one instance fails, data can still be accessed from the other instances.
-- **Dynamic Reconfiguration**: If you add or remove DragonflyDB instances, mcrouter can dynamically adjust the routing of requests without requiring changes in the application code.
+**File Name:** `intermediate_cluster_3_5_config.json`
 
-## Example of Data Flow
-1. An application wants to store a value with the key `user:123`.
-2. The application sends the request to mcrouter.
-3. Mcrouter applies the hashing function to `user:123` and determines that it should be stored in `dragonfly1`.
-4. Mcrouter forwards the request to `dragonfly1`, which stores the value.
-5. When the application requests the value for `user:123`, it sends a request to mcrouter.
-6. Mcrouter hashes the key again, finds that it belongs to `dragonfly1`, and retrieves the value.
+```json
+{
+  "pools": {
+    "A": {
+      "servers": [
+        "dragonfly1:11211",
+        "dragonfly2:11211",
+        "dragonfly3:11211",
+        "dragonfly4:11211",
+        "dragonfly5:11211"
+      ]
+    }
+  },
+  "route": {
+    "type": "OperationSelectorRoute",
+    "operation_policies": {
+      "add": "AllFastestRoute|Pool|A",
+      "delete": "AllFastestRoute|Pool|A",
+      "get": "AllFastestRoute|Pool|A",
+      "set": "AllFastestRoute|Pool|A"
+    }
+  }
+}
+```
 
-## Conclusion
-In summary, this setup provides a robust caching solution using DragonflyDB, with mcrouter handling the routing and sharding. The architecture is designed for scalability and fault tolerance, ensuring that your application can efficiently handle caching needs.
+**Description:** This configuration uses all five DragonflyDB instances within pool A, applying an operation selector for efficient request routing.
 
-### Cluster Variants
+**Advantages:**
+- **Simplified Routing:** Easy to manage with straightforward operation selection.
+- **Balanced Load:** Efficiently distributes requests across all five instances.
 
-We provide 2 variants of the DragonflyDB cluster:
+**Disadvantages:**
+- **No Redundancy:** If all servers in pool A become unavailable, operations will fail.
 
-1. **Basic Cluster with 3 DragonflyDB Instances and 1 Mcrouter Instance**:
-   - Configuration file: [docker-compose.yaml](docker-compose.yaml)
-   - Documentation: [Basic Cluster Documentation](SETUP_CLUSTER_1_3.md)
+---
 
-2. **Intermediate Cluster with 5 DragonflyDB Instances and 3 Mcrouter Instances**:
-   - Configuration file: [docker-compose-cluster-3-5.yaml](docker-compose-cluster-3-5.yaml)
-   - Documentation: [Cluster 3-5 Documentation](SETUP_CLUSTER_3_5.md)
+#### 2. Intermediate Cluster Configuration with Failover
+
+**File Name:** `intermediate_cluster_3_5_failover_config.json`
+
+```json
+{
+  "pools": {
+    "A": {
+      "servers": [
+        "dragonfly1:11211",
+        "dragonfly2:11211",
+        "dragonfly3:11211"
+      ]
+    },
+    "B": {
+      "servers": [
+        "dragonfly4:11211",
+        "dragonfly5:11211"
+      ]
+    }
+  },
+  "route": {
+    "type": "FailoverRoute",
+    "children": [
+      {
+        "type": "PoolRoute",
+        "name": "poolA",
+        "pool": "A"
+      },
+      {
+        "type": "PoolRoute",
+        "name": "poolB",
+        "pool": "B"
+      }
+    ]
+  }
+}
+```
+
+**Description:** This configuration allows for failover between pools A and B, ensuring requests can be rerouted if one pool becomes unavailable.
+
+**Advantages:**
+- **Increased Redundancy:** Allows rerouting of requests to pool B if pool A is unavailable.
+- **Better Availability:** Ensures application functionality even if one pool experiences issues.
+
+**Disadvantages:**
+- **Increased Complexity:** Failover mechanisms add complexity to routing.
+- **Potential Latency:** Failover may introduce delays during routing.
+
+---
+
+#### 3. Intermediate Cluster Configuration with Operation Selector
+
+**File Name:** `intermediate_cluster_3_5_operation_selector_config.json`
+
+```json
+{
+  "pools": {
+    "A": {
+      "servers": [
+        "dragonfly1:11211",
+        "dragonfly2:11211",
+        "dragonfly3:11211"
+      ]  
+    },
+    "B": {
+      "servers": [
+        "dragonfly4:11211",
+        "dragonfly5:11211"
+      ]
+    }
+  },
+  "route": {
+    "type": "OperationSelectorRoute",
+    "operation_policies": {
+      "add": "AllFastestRoute|Pool|A",
+      "delete": "AllFastestRoute|Pool|A",
+      "get": "AllFastestRoute|Pool|A",
+      "set": "AllFastestRoute|Pool|A"
+    }
+  }
+}
+```
+
+**Description:** This configuration uses an operation selector for both pools A and B, distributing operations efficiently.
+
+**Advantages:**
+- **Simplicity:** Easy to configure and understand.
+- **Efficient Load Balancing:** Operates effectively with basic load balancing.
+
+**Disadvantages:**
+- **No Redundancy:** Operations may fail if all servers in either pool become unavailable.
+
+---
+
+These configuration files are designed for the intermediate cluster setup with DragonflyDB and mcrouter, providing options for varying levels of redundancy and routing strategies. To utilize a specific configuration, simply uncomment the desired option in the Docker Compose file and comment out the others. Additionally, to override default settings, copy the example `.env` file and modify the desired variables.
+
+For suggestions or to propose alternative configurations, you are encouraged to fork the repository and submit a pull request with your changes.
+
+If you have any further questions or need more information, feel free to contribute or reach out!

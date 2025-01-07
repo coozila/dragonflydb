@@ -12,7 +12,7 @@
 
 ## Sponsors
 
-**If you want to support our project and help us grow it, you can [become a sponsor on GitHub](https://github.com/sponsors/coozila)
+If you want to support our project and help us grow it, you can [become a sponsor on GitHub](https://github.com/sponsors/coozila)
 
 <p align="center">
   <a href="https://github.com/sponsors/coozila">
@@ -87,8 +87,6 @@ For questions or contributions, feel free to contact the **Coozila! Labs** at [l
 
 We are committed to fostering an inclusive and respectful environment. Please review our [Contributor Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on acceptable behavior.
 
----
-
 ## References and Credits
 
 We extend our gratitude to the creators and maintainers of the tools and technologies that power this project. Below are some key references:
@@ -121,8 +119,6 @@ Special thanks to **Sandeep Kongathi** for the inspiration behind this project.
 ### AI Contributions:
 
 We would also like to acknowledge **Hypatia AI**, a project of Coozila! AGI, for providing intelligent assistance and support in developing this documentation and enhancing the overall project experience.
-
----
 
 ### What is Memcached?
 
