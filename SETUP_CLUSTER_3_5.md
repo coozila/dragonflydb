@@ -18,7 +18,7 @@ This document outlines the setup of an intermediate DragonflyDB cluster using Do
 For the Intermediate Cluster configuration, we recommend using a cloud server instance with the following specifications:
 - **Minimum Instance Type**: **t3.large** (or equivalent)
 - **Minimum RAM**: 8 GB (This is the minimum requirement to run the cluster effectively.)
-- **Maximum RAM Supported**: Each DragonflyDB instance can support up to **1 TB of RAM**, allowing for extensive caching capabilities and handling of large datasets.
+- **Maximum RAM Supported**: Each DragonflyDB instance can support up to **1 TB of RAM**, allowing for extensive caching capabilities and handling of large datasets. With 5 instances, the cluster can manage a total of **up to 5 TB of data**, making it suitable for applications with significant data requirements.
 
 ### Architecture
 - **DragonflyDB Instances**: The cluster contains 5 instances of DragonflyDB.
@@ -207,8 +207,9 @@ To override certain variables set in the `docker-compose` file, you can create a
 
 ---
 
-These configuration files are designed for the intermediate cluster setup with DragonflyDB and mcrouter, providing options for varying levels of redundancy and routing strategies. To utilize a specific configuration, simply uncomment the desired option in the Docker Compose file and comment out the others. Additionally, to override default settings, copy the example `.env` file and modify the desired variables.
+This cluster setup can manage up to **5 TB of data** in total across its instances, making it suitable for applications with significant data demands. It is recommended to scale the infrastructure when utilization reaches **60-70%** of capacity to maintain optimal performance.
 
-For suggestions or to propose alternative configurations, you are encouraged to fork the repository and submit a pull request with your changes.
-
-If you have any further questions or need more information, feel free to contribute or reach out!
+> [!TIP]
+> For suggestions or to propose alternative configurations, you are encouraged to [fork the repository](https://github.com/coozila/dragonflydb-cluster/fork) and submit a pull request with your changes.
+>
+> For any inquiries, please contact **Coozila! LABS** at **contact@coozila.com** or visit our official page for updates and more information: [Coozila! LABS](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
