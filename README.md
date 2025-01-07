@@ -232,14 +232,14 @@ cd dragonflydb
 ```
 
 > [!TIP]
->  Before proceeding, please ensure you are on the correct branch and using the appropriate version of the application. The `dev` branch is continuously updated and may contain untested errors. For stability, it is recommended to download and use version `1.0.0`, which is the last published stable version.
+>  Before proceeding, please ensure you are on the correct branch and using the appropriate version of the application. The `dev` branch is continuously updated and may contain untested errors. For stability, it is recommended to download and use version `1.0.1`, which is the last published stable version.
 
-### 3. Checkout Version 1.0.0
+### 3. Checkout Version 1.0.1
 
-Switch to the stable version `1.0.0`:
+Switch to the stable version `1.0.1`:
 
 ```bash
-git checkout 1.0.0
+git checkout 1.0.1
 ```
 
 ### 4. Prepare the Environment Variables
