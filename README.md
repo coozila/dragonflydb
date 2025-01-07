@@ -35,6 +35,18 @@ The **Coozila! Package for DragonflyDB Cluster** integrates **DragonflyDB** and 
 - **Dynamic Configuration**: Easily manage and scale your caching infrastructure with live updates, ensuring zero downtime.
 - **Multi-Level Caching**: Implement tiered caching with local and remote caches for enhanced data retrieval efficiency.
 
+### Cluster Variants
+
+We provide 2 variants of the DragonflyDB cluster:
+
+1. **Basic Cluster with 3 DragonflyDB Instances and 1 Mcrouter Instance**:
+   - Configuration file: [docker-compose.yaml](docker-compose.yaml)
+   - Documentation: [Basic Cluster Documentation](SETUP_CLUSTER_1_3.md)
+
+2. **Intermediate Cluster with 5 DragonflyDB Instances and 3 Mcrouter Instances**:
+   - Configuration file: [docker-compose-cluster-3-5.yaml](docker-compose-cluster-3-5.yaml)
+   - Documentation: [Cluster 3-5 Documentation](SETUP_CLUSTER_3_5.md)
+
 ### Core Features
 
 - **High Availability**: Ensure reliable data storage with integrated failover and replication mechanisms, even during node failures.

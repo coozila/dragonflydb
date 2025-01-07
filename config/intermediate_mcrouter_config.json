@@ -1,0 +1,22 @@
+{
+    "pools": {
+        "A": {
+            "servers": [
+                "memcached1:11211",
+                "memcached2:11211",
+                "memcached3:11211",
+                "memcached4:11211",
+                "memcached5:11211"
+            ]
+        }
+    },
+    "route": {
+        "type": "OperationSelectorRoute",
+        "operation_policies": {
+            "add": "AllFastestRoute|Pool|A",
+            "delete": "AllFastestRoute|Pool|A",
+            "get": "AllFastestRoute|Pool|A",
+            "set": "AllFastestRoute|Pool|A"
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "pools": {
+      "A": {
+        "servers": [
+          "dragonfly1:11211",
+          "dragonfly2:11211",
+          "dragonfly3:11211"
+        ]
+      },
+      "B": {
+        "servers": [
+          "dragonfly4:11211",
+          "dragonfly5:11211"
+        ]
+      }
+    },
+    "route": {
+      "type": "FailoverRoute",
+      "children": [
+        {
+          "type": "PoolRoute",
+          "name": "poolA",
+          "pool": "A"
+        },
+        {
+          "type": "PoolRoute",
+          "name": "poolB",
+          "pool": "B"
+        }
+      ]
+    }
+  }
+  
