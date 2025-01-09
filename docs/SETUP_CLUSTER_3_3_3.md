@@ -598,27 +598,27 @@ command: dragonfly --memcached_port=11211 --master=dragonfly_master1:11211
 To start the DragonflyDB master-slave cluster using Docker Compose, navigate to the directory containing the `docker-compose-cluster-master-slave-3-3-3.yaml` file and run the following command:
 
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml up -d
+docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml up -d
 ```
 #### Restarting the Cluster
 To restart the cluster:
 
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml restart
+docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml restart
 ```
 
 #### Stopping the Cluster
 To stop the running cluster, use:
 
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml down
+docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml down
 ```
 
 #### Removing Volumes
 To remove all the volumes associated with the containers:
 
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml down -v
+docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml down -v
 ```
 
 ### Commands for Configuring the Cluster
