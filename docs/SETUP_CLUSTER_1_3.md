@@ -82,18 +82,3 @@ In the configured DragonflyDB cluster, data distribution is achieved through sha
 4. Mcrouter forwards the request to `dragonfly1`, which stores the value.
 5. When the application requests the value for `user:123`, it sends a request to mcrouter.
 6. Mcrouter hashes the key again, finds that it belongs to `dragonfly1`, and retrieves the value.
-
-## Conclusion
-In summary, this setup provides a simple yet effective caching solution using DragonflyDB, with mcrouter handling the routing and sharding. The architecture is designed for scalability and basic fault tolerance, ensuring that your application can efficiently handle caching needs.
-
-### Cluster Variants
-
-We provide 2 variants of the DragonflyDB cluster:
-
-1. **Basic Cluster with 3 DragonflyDB Instances and 1 Mcrouter Instance**:
-   - Configuration file: [docker-compose.yaml](docker-compose.yaml)
-   - Documentation: [Basic Cluster Documentation](SETUP_CLUSTER_1_3.md)
-
-2. **Intermediate Cluster with 5 DragonflyDB Instances and 3 Mcrouter Instances**:
-   - Configuration file: [docker-compose-cluster-3-5.yaml](docker-compose-cluster-3-5.yaml)
-   - Documentation: [Cluster 3-5 Documentation](SETUP_CLUSTER_3_5.md)
