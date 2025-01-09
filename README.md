@@ -166,7 +166,7 @@ This software listing is packaged by Coozila!. All trademarks mentioned are the 
 
 ### Copyright
 
-Copyright (C) 2009 - 2024 Coozila! Licensed under the MIT License.
+Copyright (C) 2009 - 2025 Coozila! Licensed under the MIT License.
 
 ### Licenses
 
