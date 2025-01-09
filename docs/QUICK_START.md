@@ -77,12 +77,19 @@ docker compose down -v
 
 ---
 
-## Additional Setup Guides  
+### Cluster Variants
 
-For detailed cluster setup instructions, refer to the following guides:  
-- [1 Router, 3 Nodes](SETUP_CLUSTER_1_3.md)  
-- [3 Routers, 3 Masters, 3 Slaves](SETUP_CLUSTER_3_3_3.md)  
+We provide 2 variants of the DragonflyDB cluster:
+
+1. **Basic Cluster with 3 DragonflyDB Instances and 1 Mcrouter Instance**:
+   - Documentation: [Basic Cluster Documentation](SETUP_CLUSTER_1_3.md)
+
+2. **Intermediate Cluster with 5 DragonflyDB Instances and 3 Mcrouter Instances**:
 - [3 Routers, 5 Nodes](SETUP_CLUSTER_3_5.md)  
+
+
+2. **Advance Cluster with 6 DragonflyDB Instances 3 Master & 3 Slave and 3 Mcrouter Instances**:
+- [3 Routers, 3 Masters, 3 Slaves](SETUP_CLUSTER_3_3_3.md)  
 
 ---
 
