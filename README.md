@@ -6,7 +6,7 @@
     <img width="233px" height="auto" src="https://www.coozila.com/static/themes/prometheus/img/coozila.png" />
 </p>
 <p align="center">
-    <a href="https://github.com/coozila/dragonflydb-cluster/releases" target="_blank"><img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/memcached-cluster/dev/metrics.yaml" alt="Total Downloads" /></a>
+    <a href="https://github.com/coozila/dragonflydb-cluster/releases" target="_blank"><img src="https://img.shields.io/badge/dynamic/json?color=green&label=downloads&query=downloads&url=https://raw.githubusercontent.com/coozila/dragonflydb-cluster/dev/metrics.yaml" alt="Total Downloads" /></a>
     <a href="https://github.com/coozila/dragonflydb-cluster/dev/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" /></a>
 </p>
 
