@@ -10,7 +10,7 @@
     <a href="https://github.com/coozila/dragonflydb-cluster/dev/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" /></a>
 </p>
 
-> Before moving on, please consider giving us a GitHub star ⭐️. Thank you!
+> If you enjoy the project, please consider giving us a GitHub star ⭐️. Thank you!
 
 ## Sponsors
 
