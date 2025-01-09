@@ -576,12 +576,13 @@ services:
             #   Links to DragonflyDB instances
             #
 
-            - dragonfly_master1
-            - dragonfly_master2
-            - dragonfly_master3
-            - dragonfly_slave1
-            - dragonfly_slave2
-            - dragonfly_slave3
+            - ${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}
+            - ${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}
+            - ${DRAGONFLYDB_MASTER3_HOSTNAME:-dragonfly_master3}
+            - ${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
+            - ${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
+            - ${DRAGONFLYDB_SLAVE3_HOSTNAME:-dragonfly_slave3}
+
 
         volumes:
 
@@ -638,12 +639,12 @@ services:
             #   Links to DragonflyDB instances
             #
 
-            - dragonfly_master1
-            - dragonfly_master2
-            - dragonfly_master3
-            - dragonfly_slave1
-            - dragonfly_slave2
-            - dragonfly_slave3
+            - ${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}
+            - ${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}
+            - ${DRAGONFLYDB_MASTER3_HOSTNAME:-dragonfly_master3}
+            - ${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
+            - ${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
+            - ${DRAGONFLYDB_SLAVE3_HOSTNAME:-dragonfly_slave3}
 
         volumes:
 
@@ -699,12 +700,12 @@ services:
             #   Links to DragonflyDB instances
             #
 
-            - dragonfly_master1
-            - dragonfly_master2
-            - dragonfly_master3
-            - dragonfly_slave1
-            - dragonfly_slave2
-            - dragonfly_slave3
+            - ${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}
+            - ${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}
+            - ${DRAGONFLYDB_MASTER3_HOSTNAME:-dragonfly_master3}
+            - ${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
+            - ${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
+            - ${DRAGONFLYDB_SLAVE3_HOSTNAME:-dragonfly_slave3}
 
         volumes:
 
