@@ -52,7 +52,7 @@ services:
         #build:
         #    context: .
         #    dockerfile: Dockerfile
-        container_name: dragonflydb-cluster.${DRAGONFLYDB1_HOSTNAME:-dragonfly_master1}
+        container_name: dragonflydb-cluster.${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}
         hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
         restart: always
         healthcheck:
@@ -124,7 +124,7 @@ services:
             #   Add extra service entries for internal resolution
             #
 
-            - "${DRAGONFLYDB1_HOSTNAME:-dragonfly_master1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+            - "${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
 
     # ------------------------------------------------------------------------------#
@@ -134,7 +134,7 @@ services:
     dragonfly_master2:
         image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
         #image: coozila/dragonflydb-cluster:latest
-        container_name: dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-dragonfly_master2}
+        container_name: dragonflydb-cluster.${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}
         hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
         restart: always
         healthcheck:
@@ -206,7 +206,7 @@ services:
             #   Add extra service entries for internal resolution
             #
 
-            - "${DRAGONFLYDB2_HOSTNAME:-dragonfly_master2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+            - "${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
 
     # ------------------------------------------------------------------------------#
@@ -216,7 +216,7 @@ services:
     dragonfly_master3:
         image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
         #image: coozila/dragonflydb-cluster:latest
-        container_name: dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-dragonfly_master3}
+        container_name: dragonflydb-cluster.${DRAGONFLYDB_MASTER3_HOSTNAME:-dragonfly_master3}
         hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
         restart: always
         healthcheck:
@@ -289,7 +289,7 @@ services:
             #   Add extra service entries for internal resolution
             #
 
-            - "${DRAGONFLYDB3_HOSTNAME:-dragonfly_master}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+            - "${DRAGONFLYDB_MASTER3_HOSTNAME:-dragonfly_master}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
 
     # ------------------------------------------------------------------------------#
@@ -299,7 +299,7 @@ services:
     dragonfly_slave1:
         image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
         #image: coozila/dragonflydb-cluster:latest        
-        container_name: dragonflydb-cluster.${DRAGONFLYDB4_HOSTNAME:-ldragonfly_slave1}
+        container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE1_HOSTNAME:-ldragonfly_slave1}
         hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
         restart: always
         healthcheck:
@@ -373,7 +373,7 @@ services:
             #   Add extra service entries for internal resolution
             #
 
-            - "${DRAGONFLYDB4_HOSTNAME:-ldragonfly_slave1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+            - "${DRAGONFLYDB_SLAVE1_HOSTNAME:-ldragonfly_slave1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
         depends_on:
             dragonfly_master1:
@@ -387,7 +387,7 @@ services:
     dragonfly_slave2:
         image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
         #image: coozila/dragonflydb-cluster:latest        
-        container_name: dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-ldragonfly_slave2}
+        container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE2_HOSTNAME:-ldragonfly_slave2}
         hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
         restart: always
         healthcheck:
@@ -461,7 +461,7 @@ services:
             #   Add extra service entries for internal resolution
             #
 
-            - "${DRAGONFLYDB5_HOSTNAME:-ldragonfly_slave2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+            - "${DRAGONFLYDB_SLAVE2_HOSTNAME:-ldragonfly_slave2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
         depends_on:
             dragonfly_master2:
@@ -475,7 +475,7 @@ services:
     dragonfly_slave3:
         image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
         #image: coozila/dragonflydb-cluster:latest
-        container_name: dragonflydb-cluster.${DRAGONFLYDB3_HOSTNAME:-ldragonfly_slave3}
+        container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE3_HOSTNAME:-ldragonfly_slave3}
         hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
         restart: always
         healthcheck:
@@ -555,7 +555,7 @@ services:
             #   Add extra service entries for internal resolution
             #
 
-            - "${DRAGONFLYDB6_HOSTNAME:-ldragonfly_slave3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+            - "${DRAGONFLYDB_SLAVE3_HOSTNAME:-ldragonfly_slave3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
         depends_on:
             dragonfly_master3:
