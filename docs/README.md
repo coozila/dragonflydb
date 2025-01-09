@@ -20,8 +20,12 @@ cd dragonflydb-cluster
 
 ---
 
-## 2. Checkout the Desired Version  
-- To use the stable version:  
+## 2. Checkout the Desired Version
+- To use the first version:  
+  ```bash
+  git checkout 1.0.0
+  ```  
+- To use the latest stable version:  
   ```bash
   git checkout 1.0.1  
   ```  
