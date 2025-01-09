@@ -10,6 +10,8 @@
     <a href="https://github.com/coozila/dragonflydb-cluster/dev/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" /></a>
 </p>
 
+> Before moving on, please consider giving us a GitHub star ⭐️. Thank you!
+
 ## Sponsors
 
 If you want to support our project and help us grow it, you can [become a sponsor on GitHub](https://github.com/sponsors/coozila)
@@ -21,7 +23,7 @@ If you want to support our project and help us grow it, you can [become a sponso
 
 # DragonflyDB Cluster
 
-![Cluster](assets/cluster-coozila-memcached.png)
+![Cluster](assets/dragpnflydb-cluster.png)
 
 ## Coozila! Docker Package APP for DragonflyDB Cluster with McRouter
 

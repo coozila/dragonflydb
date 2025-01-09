@@ -1,0 +1,19 @@
+{
+    "pools": {
+      "WeightedPool": {
+        "servers": [
+          { "ip": "dragonfly_master1", "port": 11211, "weight": 3 },
+          { "ip": "dragonfly_master2", "port": 11211, "weight": 3 },
+          { "ip": "dragonfly_master3", "port": 11211, "weight": 3 },
+          { "ip": "dragonfly_slave1", "port": 11211, "weight": 1 },
+          { "ip": "dragonfly_slave2", "port": 11211, "weight": 1 },
+          { "ip": "dragonfly_slave3", "port": 11211, "weight": 1 }
+        ]
+      }
+    },
+    "route": {
+      "type": "WeightedRoute",
+      "children": ["Pool|WeightedPool"]
+    }
+  }
+  

@@ -1,0 +1,20 @@
+{
+    "pools": {
+      "HashPool": {
+        "servers": [
+          "dragonfly_master1:11211",
+          "dragonfly_master2:11211",
+          "dragonfly_master3:11211",
+          "dragonfly_slave1:11211",
+          "dragonfly_slave2:11211",
+          "dragonfly_slave3:11211"
+        ]
+      }
+    },
+    "route": {
+      "type": "HashRoute",
+      "hash_function": "crc32",
+      "pool": "HashPool"
+    }
+  }
+  

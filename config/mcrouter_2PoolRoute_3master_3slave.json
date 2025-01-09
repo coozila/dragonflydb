@@ -1,0 +1,42 @@
+{
+  "pools": {
+    "master_pool": {
+      "servers": [
+        "dragonfly_master1:11211",
+        "dragonfly_master2:11211",
+        "dragonfly_master3:11211"
+      ]
+    },
+    "slave_pool": {
+      "servers": [
+        "dragonfly_slave1:11211",
+        "dragonfly_slave2:11211",
+        "dragonfly_slave3:11211"
+      ]
+    }
+  },
+  "route": {
+    "type": "OperationSelectorRoute",
+    "operation_policies": {
+      "add": {
+        "type": "PoolRoute",
+        "pool": "master_pool"
+      },
+      "delete": {
+        "type": "PoolRoute",
+        "pool": "master_pool"
+      },
+      "set": {
+        "type": "PoolRoute",
+        "pool": "master_pool"
+      },
+      "get": {
+        "type": "AllSyncRoute",
+        "children": [
+          { "type": "PoolRoute", "pool": "master_pool" },
+          { "type": "PoolRoute", "pool": "slave_pool" }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+    "pools": {
+      "failover_pool": {
+        "servers": [
+          "dragonfly_master1:11211",
+          "dragonfly_master2:11211",
+          "dragonfly_master3:11211",
+          "dragonfly_slave1:11211",
+          "dragonfly_slave2:11211",
+          "dragonfly_slave3:11211"
+        ]
+      }
+    },
+    "route": {
+      "type": "OperationSelectorRoute",
+      "operation_policies": {
+        "add": {
+          "type": "FailoverRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "failover_pool" }
+          ]
+        },
+        "delete": {
+          "type": "FailoverRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "failover_pool" }
+          ]
+        },
+        "set": {
+          "type": "FailoverRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "failover_pool" }
+          ]
+        },
+        "get": {
+          "type": "FailoverRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "failover_pool" }
+          ]
+        }
+      }
+    }
+  }

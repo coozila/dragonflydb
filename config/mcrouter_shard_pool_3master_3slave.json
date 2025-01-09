@@ -1,0 +1,31 @@
+{
+    "pools": {
+      "ShardPool1": {
+        "servers": [
+          "dragonfly_master1:11211",
+          "dragonfly_slave1:11211"
+        ]
+      },
+      "ShardPool2": {
+        "servers": [
+          "dragonfly_master2:11211",
+          "dragonfly_slave2:11211"
+        ]
+      },
+      "ShardPool3": {
+        "servers": [
+          "dragonfly_master3:11211",
+          "dragonfly_slave3:11211"
+        ]
+      }
+    },
+    "route": {
+      "type": "ShardRoute",
+      "children": [
+        { "type": "PoolRoute", "pool": "ShardPool1" },
+        { "type": "PoolRoute", "pool": "ShardPool2" },
+        { "type": "PoolRoute", "pool": "ShardPool3" }
+      ]
+    }
+  }
+  

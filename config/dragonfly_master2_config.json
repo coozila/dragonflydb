@@ -1,0 +1,20 @@
+{
+  "slot_ranges": [
+    {
+      "start": 0,
+      "end": 8191
+    }
+  ],
+  "master": {
+    "id": "master2_id_placeholder",
+    "ip": "dragonfly_master2",
+    "port": 11211
+  },
+  "replicas": [
+    {
+      "id": "replica2_id_placeholder",
+      "ip": "dragonfly_slave2",
+      "port": 11211
+    }
+  ]
+}
