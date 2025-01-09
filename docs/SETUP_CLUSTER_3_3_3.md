@@ -158,7 +158,7 @@ You'll create three instances of this file for each slave as well:
 
 The cluster supports multiple pool configurations for routing requests, each designed for specific scalability and redundancy requirements:
 
-1. **Single-Pool Variant**
+#### 1. **Single-Pool Variant**
    - **Description**: A simple configuration that combines all master and slave instances into a single pool.
    - **Technical Characteristics**: 
      - All instances are accessed through one pool.
@@ -170,7 +170,7 @@ The cluster supports multiple pool configurations for routing requests, each des
      - Lack of logical separation can lead to performance bottlenecks.
      - Limited flexibility in managing load distribution.
 
-#### Exemple:
+##### Exemple:
 
 - **Single-Pool Variant**: A simple configuration with less logical separation.
    ```json
@@ -213,7 +213,7 @@ The cluster supports multiple pool configurations for routing requests, each des
    }
    ```
 
-2. **Two-Pool Variant**
+#### 2. **Two-Pool Variant**
    - **Description**: This configuration separates masters and slaves into two distinct pools.
    - **Technical Characteristics**: 
      - One pool for all master instances and another for all slave instances.
@@ -224,7 +224,7 @@ The cluster supports multiple pool configurations for routing requests, each des
      - Increased complexity compared to a single pool.
      - Requires careful management of read/write distribution.
 
-#### Exemple:
+##### Exemple:
 
 - **Two-Pool Variant**: Redundancy and balanced utilization between master and slave, optimal for moderate scalability.
    ```json
@@ -272,7 +272,7 @@ The cluster supports multiple pool configurations for routing requests, each des
    }
    ```
 
-3. **Three-Pool Variant**
+#### 3. **Three-Pool Variant**
    - **Description**: Each pool contains a master and its corresponding slave, providing maximum redundancy.
    - **Technical Characteristics**: 
      - Three pools, each with one master and one slave.
@@ -283,7 +283,7 @@ The cluster supports multiple pool configurations for routing requests, each des
      - More complex configuration management.
      - Potential for uneven load distribution if not properly managed.
 
-#### Exemple:
+##### Exemple:
 
 - **Three-Pool Variant**: Maximum performance, scalability, and localized redundancy.
    ```json
@@ -348,7 +348,7 @@ The cluster supports multiple pool configurations for routing requests, each des
    }
    ```
 
-4. **Failover Pool**
+#### 4. **Failover Pool**
    - **Description**: This configuration ensures high availability by failing over requests to alternative pools in case of server failure.
    - **Technical Characteristics**: 
      - Requests are routed to a primary pool, with a secondary pool available for failover.
@@ -359,7 +359,7 @@ The cluster supports multiple pool configurations for routing requests, each des
      - May not be as efficient under normal operation due to failover logic.
      - Increased latency during failover events.
 
-#### Exemple:
+##### Exemple:
 
 - **Failover Pool**: Ensures high availability by failing over requests to alternative pools in case of server failure.
    ```json
@@ -408,7 +408,7 @@ The cluster supports multiple pool configurations for routing requests, each des
    }
    ```
 
-5. **Load Balancer Pool**
+#### 5. **Load Balancer Pool**
    - **Description**: Distributes requests based on server load, optimizing performance.
    - **Technical Characteristics**: 
      - Utilizes a load-balancing algorithm to distribute requests.
@@ -419,7 +419,7 @@ The cluster supports multiple pool configurations for routing requests, each des
      - Requires careful tuning of load-balancing algorithms.
      - Additional complexity in configuration.
 
-#### Exemple:
+##### Exemple:
 
 - **Load Balancer Pool**: Distributes requests based on server load for optimized performance.
    ```json
@@ -445,7 +445,7 @@ The cluster supports multiple pool configurations for routing requests, each des
    }
    ```
 
-6. **Shard Pool**
+#### 6. **Shard Pool**
    - **Description**: Routes requests to shards based on key segmentation for distributed caching.
    - **Technical Characteristics**: 
      - Segments data into shards, with each shard being managed by its master and slave.
@@ -456,7 +456,7 @@ The cluster supports multiple pool configurations for routing requests, each des
      - Complexity in managing shard keys.
      - Potential for uneven load if shard distribution is not balanced.
 
-#### Exemple:
+##### Exemple:
 
 - **Shard Pool**: Routes requests to shards based on key segmentation for distributed caching.
    ```json
@@ -492,7 +492,7 @@ The cluster supports multiple pool configurations for routing requests, each des
    }
    ```
 
-7. **Weighted Pool**
+#### 7. **Weighted Pool**
    - **Description**: Assigns weights to servers for uneven distribution based on server capacity.
    - **Technical Characteristics**: 
      - Servers are assigned weights to determine request distribution.
@@ -503,7 +503,7 @@ The cluster supports multiple pool configurations for routing requests, each des
      - Requires careful management of weights to avoid bottlenecks.
      - Increased complexity in configuration.
 
-#### Exemple:
+##### Exemple:
 
 - **Weighted Pool**: Assigns weights to servers for uneven distribution based on server capacity.
    ```json
@@ -529,7 +529,7 @@ The cluster supports multiple pool configurations for routing requests, each des
    }
    ```
 
-8. **Custom Hash Pool**
+#### 8. **Custom Hash Pool**
    - **Description**: Routes requests using a specific hash function for specialized workloads.
    - **Technical Characteristics**: 
      - Utilizes a hash function to distribute requests based on keys.
@@ -540,7 +540,7 @@ The cluster supports multiple pool configurations for routing requests, each des
      - Additional complexity in implementing and managing hash functions.
      - Potential for uneven distribution if not properly configured.
 
-#### Exemple:
+##### Exemple:
 
 - **Custom Hash Pool**: Routes requests using a specific hash function for specialized workloads.
    ```json
