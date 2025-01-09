@@ -39,7 +39,7 @@ The **Coozila! Package for DragonflyDB Cluster** integrates **DragonflyDB** and 
 
 ### Documentation
 
-- [Quick Start Guide](docs/QUICK_START.md)
+- [Quick Start Guide](docs/README.md)
 - [Basic Cluster Documentation](docs/SETUP_CLUSTER_1_3.md)
 - [Cluster 3-5 Documentation](docs/SETUP_CLUSTER_3_5.md)
 
