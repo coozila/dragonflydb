@@ -2,15 +2,70 @@
 
 Welcome to the **DragonflyDB Cluster Docs**! Follow these steps to quickly set up and run the application.  
 
+## Prerequisites
 
-## 1. Clone the Repository  
+Before you begin, ensure you have the following installed on your system:
+
+- [Docker Engine](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Getting Started
+
+### 1. Create the Private Network
+
+Before building the containers and images, you must manually create the `stack_private_network` Exemple:
+
+```bash
+docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
+```
+
+Alternatively, you can personalize your network according to your preferences directly in your docker-compose.yaml file like this:
+
+
+```yaml
+
+#   STACK NETWORK    ---------------------------------------------------------------#
+
+networks:                                                                           #
+
+    #   Private network for application services    --------------------------------#
+
+    stack_private_network:
+        driver: bridge 
+        driver_opts:
+            com.docker.network.enable_ipv6: "false"
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.16.238.0/24
+                  gateway: 172.16.238.1
+
+
+# ----------------------------------------------------------------------------------#
+
+```
+
+> [!TIP]
+> For better performance, using the host network mode is often the best choice, depending on the structure of the application in which you want to integrate the cluster. This mode can reduce latency and improve speed, but keep in mind that it may expose your services directly to the host network.
+> 
+> Additionally, Docker is not the most efficient for managing disk I/O. It is advisable to manage volumes on an alternative path or directly by the system, or to use another file system. This may require customization to achieve the best performance.
+> 
+> Depending on your specific configuration and preferences, you should choose the solution that best fits your needs. Assessing the trade-offs between ease of use, performance, and security is essential. In some cases, using the default Docker settings may be sufficient, while in others, adapting the network and volume configuration may bring significant benefits in terms of speed and operational efficiency.
+> 
+> Ultimately, the choice of network mode and volume management strategy should align with your application's requirements and the environment in which it will be deployed.
+> 
+> For more exemples see [Docker Engine Network](https://docs.docker.com/engine/network/)
+
+
+### 2. Clone the Repository  
 Clone the Coozila! Apps repository to your local machine:  
 ```bash
 git clone https://github.com/coozila/dragonflydb-cluster.git  
 cd dragonflydb-cluster
 ```  
 
-**Tip**: Before proceeding, ensure you are on the correct branch and using the appropriate version of the application.  
+> [!TIP]
+>  Before proceeding, ensure you are on the correct branch and using the appropriate version of the application.  
 
 - **Stable Version (Recommended)**: For stability and reliability, use version `1.0.1`, the latest published stable version.  
 - **Development Version**: If you prefer the latest features and updates, you can switch to the `dev` branch. However, please note:  
@@ -20,7 +75,7 @@ cd dragonflydb-cluster
 
 ---
 
-## 2. Checkout the Desired Version
+### 3. Checkout the Desired Version
 - To use the first version:  
   ```bash
   git checkout 1.0.0
@@ -36,7 +91,7 @@ cd dragonflydb-cluster
 
 ---
 
-## 3. Prepare the Environment Variables  
+### 4. Prepare the Environment Variables  
 Copy the example environment file and configure it:  
 ```bash
 cp .env.example .env  
@@ -45,7 +100,7 @@ Edit the `.env` file to set the required variables for your setup.
 
 ---
 
-## 4. Launch the Application  
+### 5. Launch the Application  
 Start the application using Docker Compose:  
 ```bash
 docker compose up -d  
@@ -53,7 +108,7 @@ docker compose up -d
 
 ---
 
-## 5. Accessing the Services  
+### 6. Accessing the Services  
 
 - **DragonflyDB Instances**:  
   - Instance 1: [http://127.0.0.1:11212](http://127.0.0.1:11212)  
@@ -65,7 +120,7 @@ docker compose up -d
 
 ---
 
-## 6. Cleanup  
+### 7. Cleanup  
 To stop and remove all containers and networks:  
 ```bash
 docker compose down  
@@ -75,28 +130,53 @@ To stop and remove all containers, networks, and volumes:
 docker compose down -v  
 ```  
 
----
-
 ### Cluster Variants
 
-We provide 2 variants of the DragonflyDB cluster:
+We provide 3 variants of the DragonflyDB cluster:
 
 1. **Basic Cluster with 3 DragonflyDB Instances and 1 Mcrouter Instance**:
-   - Documentation: [Basic Cluster Documentation](SETUP_CLUSTER_1_3.md)
+- Documentation: [Basic Cluster Documentation](SETUP_CLUSTER_1_3.md)
 
 2. **Intermediate Cluster with 5 DragonflyDB Instances and 3 Mcrouter Instances**:
 - [3 Routers, 5 Nodes](SETUP_CLUSTER_3_5.md)  
 
-
 2. **Advance Cluster with 6 DragonflyDB Instances 3 Master & 3 Slave and 3 Mcrouter Instances**:
 - [3 Routers, 3 Masters, 3 Slaves](SETUP_CLUSTER_3_3_3.md)  
 
----
 
 **Important Note**: If you opt for the `dev` branch, please understand that:  
 - Features in this branch may be subject to change without notice.  
 - Some functionalities may not work as expected or could impact performance.  
 - Always test the `dev` branch in a controlled environment before deploying it in production.  
+
+## Installation Assistance
+
+If you would like assistance with the installation of this product, please contact **Coozila! Labs** at [labs@coozila.com](mailto:lab@coozila.com). Our team is ready to help you with the installation process and ensure a smooth setup.
+
+Based on the size and complexity of your project, we will provide you with a tailored pricing quote.
+
+For purchasing the installation, please visit the following link: [Coozila Docker Package App for Memcached](https://www.coozila.com/plus/view-product/coozila-docker-package-app-for-memcached).
+
+You can also check out the official Coozila! Labs page for more information: [Coozila! Labs](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
+
+For any inquiries, feel free to reach out through our contact page: [Contact Coozila!](https://www.coozila.com/plus/contact).
+
+### After Purchase Notes
+
+After your purchase, please provide the following information via email:
+
+- Server login credentials
+- An SSH key for secure access
+- Details about the project you wish to integrate
+
+## Additional Documentation
+
+For more details, please refer to the main repository: 
+
+- [Coozila! Apps](https://github.com/coozila/apps).
+- [Mcrouter](https://github.com/facebook/mcrouter)
+- [DragonflyDB](https://github.com/dragonflydb/dragonfly/tree/main/docs)
+
 
 Happy coding! 🚀  
 ```
