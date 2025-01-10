@@ -154,6 +154,10 @@ Each instance:
 - Maps port `11211` to local ports `11212`, `11213`, and `11214`.
 - Persists data in separate volumes.
 
+### Usage:
+1. **Start the services**: Run `docker-compose up -d` to start the DragonflyDB instances.
+2. **Point your application**: Configure your application to connect to the mcrouter port `11211`, which will route requests to the respective DragonflyDB instances.
+
 ### McRouter
 
 - Image: `coozila/mcrouter:40.0.0`
