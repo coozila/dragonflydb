@@ -70,7 +70,7 @@ The package comes with pre-configured Docker containers and a straightforward se
 - **Streaming Services**: Overseeing user preferences, recommendations, and playback data.
 - **Enterprises**: Running data-intensive applications that require high availability and responsiveness.
 
-Elevate your application's performance with the **Coozila! Memcached Cluster**—a powerful caching solution that combines the reliability of DragonflyDB with the flexibility of McRouter. Whether you're managing high-demand environments or planning for future growth, Coozila! is your ideal package for effortless deployment and unparalleled efficiency.
+Elevate your application's performance with the **Coozila! Memcached Cluster** a powerful caching solution that combines the reliability of DragonflyDB with the flexibility of McRouter. Whether you're managing high-demand environments or planning for future growth, Coozila! is your ideal package for effortless deployment and unparalleled efficiency.
 
 ## Contributing
 
