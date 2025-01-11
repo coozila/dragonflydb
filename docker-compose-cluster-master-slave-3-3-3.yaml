@@ -569,7 +569,7 @@ services:
     mcrouter1:
         image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
         container_name: dragonflydb-cluster.${MCROUTER1_HOSTNAME:-mcrouter1}.${MCROUTER_VERSION:-40.0.0}
-        hostname: ${MCROUTER1_HOSTNAME:-localhost}
+        hostname: ${MCROUTER_HOSTNAME:-localhost}
         platform: linux/amd64
         links:
             #
@@ -632,7 +632,7 @@ services:
     mcrouter2:
         image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
         container_name: dragonflydb-cluster.${MCROUTER2_HOSTNAME:-mcrouter2}.${MCROUTER_VERSION:-40.0.0}
-        hostname: ${MCROUTER2_HOSTNAME:-localhost}
+        hostname: ${MCROUTER_HOSTNAME:-localhost}
         platform: linux/amd64
         links:
             #
@@ -684,7 +684,7 @@ services:
             #   Setup MCROUTER3_HOSTNAME variable in .env file
             #
 
-            - "${MCROUTER3_HOSTNAME:-mcrouter3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+            - "${MCROUTER2_HOSTNAME:-mcrouter2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
     # ------------------------------------------------------------------------------#
 
@@ -693,7 +693,7 @@ services:
     mcrouter3:
         image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
         container_name: dragonflydb-cluster.${MCROUTER3_HOSTNAME:-mcrouter3}.${MCROUTER_VERSION:-40.0.0}
-        hostname: ${MCROUTER3_HOSTNAME:-localhost}
+        hostname: ${MCROUTER_HOSTNAME:-localhost}
         platform: linux/amd64
         links:
             #
