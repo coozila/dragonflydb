@@ -620,6 +620,22 @@ To remove all the volumes associated with the containers:
 docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml down -v
 ```
 
+### 6. Accessing the Services  
+
+- **DragonflyDB Instances**:  
+  - Instance 1: [http://127.0.0.1:11214](http://127.0.0.1:11214)
+  - Instance 2: [http://127.0.0.1:11215](http://127.0.0.1:11215)
+  - Instance 3: [http://127.0.0.1:11216](http://127.0.0.1:11216)
+  - Instance 4: [http://127.0.0.1:11217](http://127.0.0.1:11217)
+  - Instance 4: [http://127.0.0.1:11218](http://127.0.0.1:11218)
+  - Instance 4: [http://127.0.0.1:11219](http://127.0.0.1:11219)
+
+
+- **McRouter Interface**:
+  - [http://127.0.0.1:11211](http://127.0.0.1:11211)
+  - [http://127.0.0.1:11212](http://127.0.0.1:11212)
+  - [http://127.0.0.1:11213](http://127.0.0.1:11213)
+
 ### Commands for Configuring the Cluster
 
 - **Retrieve Node IDs**:

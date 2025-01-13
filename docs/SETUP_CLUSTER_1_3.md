@@ -25,7 +25,97 @@ The configuration is defined in a `docker-compose.yaml` file, which is used to c
 - **Mcrouter Instance**: 1 instance of mcrouter is set up to route requests to the DragonflyDB instances. The mcrouter instance is configured with a command line that specifies the routing policy.
 - **Networking**: All services are connected to a private Docker network to facilitate communication.
 
-## Running the Cluster
+## Getting Started
+
+### 1. Create the Private Network
+
+Before building the containers and images, you must manually create the `stack_private_network` Exemple:
+
+```bash
+docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
+```
+
+Alternatively, you can personalize your network according to your preferences directly in your docker-compose.yaml file like this:
+
+
+```yaml
+
+#   STACK NETWORK    ---------------------------------------------------------------#
+
+networks:                                                                           #
+
+    #   Private network for application services    --------------------------------#
+
+    stack_private_network:
+        driver: bridge 
+        driver_opts:
+            com.docker.network.enable_ipv6: "false"
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.16.238.0/24
+                  gateway: 172.16.238.1
+
+
+# ----------------------------------------------------------------------------------#
+
+```
+
+> [!TIP]
+> For better performance, using the host network mode is often the best choice, depending on the structure of the application in which you want to integrate the cluster. This mode can reduce latency and improve speed, but keep in mind that it may expose your services directly to the host network.
+> 
+> Additionally, Docker is not the most efficient for managing disk I/O. It is advisable to manage volumes on an alternative path or directly by the system, or to use another file system. This may require customization to achieve the best performance.
+> 
+> Depending on your specific configuration and preferences, you should choose the solution that best fits your needs. Assessing the trade-offs between ease of use, performance, and security is essential. In some cases, using the default Docker settings may be sufficient, while in others, adapting the network and volume configuration may bring significant benefits in terms of speed and operational efficiency.
+> 
+> Ultimately, the choice of network mode and volume management strategy should align with your application's requirements and the environment in which it will be deployed.
+> 
+> For more exemples see [Docker Engine Network](https://docs.docker.com/engine/network/)
+
+
+### 2. Clone the Repository  
+Clone the Coozila! Apps repository to your local machine:  
+```bash
+git clone https://github.com/coozila/dragonflydb-cluster.git  
+cd dragonflydb-cluster
+```  
+
+> [!TIP]
+>  Before proceeding, ensure you are on the correct branch and using the appropriate version of the application.  
+
+- **Stable Version (Recommended)**: For stability and reliability, use version `1.0.1`, the latest published stable version.  
+- **Development Version**: If you prefer the latest features and updates, you can switch to the `dev` branch. However, please note:  
+  - The `dev` branch is continuously updated.  
+  - It may contain experimental features or changes that have not yet been fully tested.  
+  - Use this version with caution, and ensure you test thoroughly in a non-production environment before deployment.  
+
+---
+
+### 3. Checkout the Desired Version
+- To use the first version:  
+  ```bash
+  git checkout 1.0.0
+  ```  
+- To use the latest stable version:  
+  ```bash
+  git checkout 1.0.1  
+  ```  
+- To use the development version:  
+  ```bash
+  git checkout dev  
+  ```  
+
+---
+
+### 4. Prepare the Environment Variables  
+Copy the example environment file and configure it:  
+```bash
+cp .env.example .env  
+```  
+Edit the `.env` file to set the required variables for your setup.  
+
+---
+
 To start the cluster, run the following command in the terminal:
 
 ```bash
@@ -48,6 +138,15 @@ To stop and remove all containers and networks, run:
 ```bash
 docker compose -f docker-compose.yaml down
 ```
+### Accessing the Services  
+
+- **DragonflyDB Instances**:  
+  - Instance 1: [http://127.0.0.1:11212](http://127.0.0.1:11212)
+  - Instance 2: [http://127.0.0.1:11213](http://127.0.0.1:11213)
+  - Instance 3: [http://127.0.0.1:11214](http://127.0.0.1:11214)
+
+- **McRouter Interface**:  
+  - [http://127.0.0.1:11211](http://127.0.0.1:11211)  
 
 ## Data Distribution in the DragonflyDB Cluster
 
