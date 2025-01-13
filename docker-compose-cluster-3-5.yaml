@@ -9,33 +9,33 @@
 
 networks:                                                                           #
 
-    #   Private network for application services    --------------------------------#
+  #   Private network for application services    --------------------------------#
 
-    stack_private_network:
-        #
-        #   SSH command to create the Docker network: 
-        #   docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
-        #
+  stack_private_network:
+    #
+    #   SSH command to create the Docker network: 
+    #   docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
+    #
 
-        external: true
+    external: true
 
-    #   Private network for mcrouter services    ----------------------------------#
+  #   Private network for mcrouter services    ----------------------------------#
 
-    mcrouter_private_network:
-        #
-        #   Setup Network Driver in .env or use default bridge
-        #
-        driver: bridge
-        external: false
+  mcrouter_private_network:
+    #
+    #   Setup Network Driver in .env or use default bridge
+    #
+    driver: "bridge"
+    external: false
 
-    #   Private network for memcached services    ----------------------------------#
+  #   Private network for DragonflyDB services    ----------------------------------#
 
-    memcached_private_network:
-        #
-        #   Setup Network Driver in .env or use default bridge
-        #
-        driver: bridge
-        external: false
+  dragonfly_private_network:
+    #
+    #   Setup Network Driver in .env or use default bridge
+    #
+    driver: "bridge"
+    external: false
 
 # ----------------------------------------------------------------------------------#
 
@@ -43,307 +43,435 @@ networks:                                                                       
 
 services:                                                                           #
 
-    #   DRAGONFLY SERVERS    -------------------------------------------------------#
+  #   DRAGONFLY SERVER 1    ------------------------------------------------------#
 
-    dragonfly1:
-        image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-        container_name: dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-ldragonfly1}
-        hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
-        restart: always
-        ulimits:
-            #
-            #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
-            #
+  dragonfly1:
+    image: "docker.dragonflydb.io/dragonflydb/dragonfly"
+    container_name: "dragonflydb-cluster.${DRAGONFLYDB1_HOSTNAME:-dragonfly1}"
+    hostname: "${DRAGONFLYDB_HOSTNAME:-localhost}"
 
-            memlock: ${MEMLOCK:--1}
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "11211"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
+    restart: "always"
+    ulimits:
+      #
+      #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
+      #
 
-        command:
-            #
-            #   Command to set the Memcache port
-            #
+      memlock: "${MEMLOCK:--1}"
 
-            - "--memcached_port"
-            - "11211"
+    command:
+      #
+      #   Command to set the Memcache port
+      #
 
-        ports:
-            #
-            #   Port mapping for DragonflyDB
-            #
+      - "dragonfly"
+      - "--memcached_port"
+      - "11211"
+      #
+      #   Use the environment variable for setup cron
+      #
 
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11214:11211"
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
 
-        volumes:
-            #
-            #   Volume to store DragonflyDB data
-            #
+    ports:
+      #
+      #   Port mapping for DragonflyDB
+      #
 
-            - dragonflydata1:/data
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11214:11211"
 
-            #
-            #   Local time
-            #
+    volumes:
+      #
+      #   Volume to store DragonflyDB data
+      #
 
-            - /etc/localtime:/etc/localtime:ro
+      - "dragonflydata1:/data"
+      #
+      #   Config for dragonfly instance
+      #
 
-        networks:
-            #
-            #   Connect to the private network
-            #
+      - ./config/dragonfly1_config.json:/etc/dragonfly/dragonfly_config.json
+      #
+      #   Local time
+      #
 
-            - memcached_private_network
+      - "/etc/localtime:/etc/localtime:ro"
 
-        extra_hosts:
-            #
-            #   Add extra host entries for internal resolution
-            #
+    networks:
+      #
+      #   Connect to the private network
+      #
 
-            - "host.docker.internal:host-gateway"
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
+      - "dragonfly_private_network"
 
-            #
-            #   Setup DRAGONFLYDB1_HOSTNAME variable in .env file
-            #
+    links:
+      #
+      #   Links to DragonflyDB instances
+      #
 
-            - "${DRAGONFLYDB1_HOSTNAME:-ldragonfly1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+      - "${DRAGONFLYDB1_HOSTNAME:-dragonfly1}"
+      - "${DRAGONFLYDB2_HOSTNAME:-dragonfly2}"
+      - "${DRAGONFLYDB3_HOSTNAME:-dragonfly3}"
+      - "${DRAGONFLYDB4_HOSTNAME:-dragonfly4}"
+      - "${DRAGONFLYDB5_HOSTNAME:-dragonfly5}"
 
-    dragonfly2:
-        image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-        container_name: dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-ldragonfly2}
-        hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
-        restart: always
-        ulimits:
-            #
-            #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
-            #
+    extra_hosts:
+      #
+      #   Add extra host entries for internal resolution
+      #
 
-            memlock: ${MEMLOCK:--1}
+      - "host.docker.internal:host-gateway"
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
+      #
+      #   Setup DRAGONFLYDB1_HOSTNAME variable in .env file
+      #
 
-        command:
-            #
-            #   Command to set the Memcache port
-            #
-
-            - "--memcached_port"
-            - "11211"
-
-        ports:
-            #
-            #   Port mapping for DragonflyDB
-            #
-
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11215:11211"
-
-        volumes:
-            #
-            #   Volume to store DragonflyDB data
-            #
-
-            - dragonflydata2:/data
-
-        networks:
-            #
-            #   Connect to the private network
-            #
-
-            - memcached_private_network
-
-        extra_hosts:
-            #
-            #   Add extra host entries for internal resolution
-            #
-
-            - "host.docker.internal:host-gateway"
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
-
-            #
-            #   Setup DRAGONFLYDB2_HOSTNAME variable in .env file
-            #
-
-            - "${DRAGONFLYDB2_HOSTNAME:-ldragonfly2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
-
-    dragonfly3:
-        image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-        container_name: dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-ldragonfly3}
-        hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
-        restart: always
-        ulimits:
-            #
-            #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
-            #
-
-            memlock: ${MEMLOCK:--1}
-
-        command:
-            #
-            #   Command to set the Memcache port
-            #
-            - "--memcached_port"
-            - "11211"
-        ports:
-            #
-            #   Port mapping for DragonflyDB
-            #
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11216:11211"
-        volumes:
-            #
-            #   Volume to store DragonflyDB data
-            #
-            - dragonflydata3:/data
-        networks:
-            #
-            #   Connect to the private network
-            #
-            - memcached_private_network
-        extra_hosts:
-            #
-            #   Add extra host entries for internal resolution
-            #
-            - "host.docker.internal:host-gateway"
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
-            #
-            #   Setup DRAGONFLYDB3_HOSTNAME variable in .env file
-            #
-            - "${DRAGONFLYDB3_HOSTNAME:-ldragonfly3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
-
-    dragonfly4:
-        image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-        container_name: dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-ldragonfly4}
-        hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
-        restart: always
-        ulimits:
-            #
-            #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
-            #
-
-            memlock: ${MEMLOCK:--1}
-
-        command:
-            #
-            #   Command to set the Memcache port
-            #
-            - "--memcached_port"
-            - "11211"
-        ports:
-            #
-            #   Port mapping for DragonflyDB
-            #
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11217:11211"
-        volumes:
-            #
-            #   Volume to store DragonflyDB data
-            #
-            - dragonflydata4:/data
-        networks:
-            #
-            #   Connect to the private network
-            #
-            - memcached_private_network
-        extra_hosts:
-            #
-            #   Add extra host entries for internal resolution
-            #
-            - "host.docker.internal:host-gateway"
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
-            #
-            #   Setup DRAGONFLYDB4_HOSTNAME variable in .env file
-            #
-            - "${DRAGONFLYDB4_HOSTNAME:-ldragonfly4}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
-
-    dragonfly5:
-        image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-        container_name: dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-ldragonfly5}
-        hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
-        restart: always
-        ulimits:
-            #
-            #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
-            #
-
-            memlock: ${MEMLOCK:--1}
-
-        command:
-            #
-            #   Command to set the Memcache port
-            #
-
-            - "--memcached_port"
-            - "11211"
-
-        ports:
-            #
-            #   Port mapping for DragonflyDB
-            #
-
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11218:11211"
-
-        volumes:
-            #
-            #   Volume to store DragonflyDB data
-            #
-
-            - dragonflydata5:/data
-
-        networks:
-            #
-            #   Connect to the private network
-            #
-
-            - memcached_private_network
-
-        extra_hosts:
-            #
-            #   Add extra host entries for internal resolution
-            #
-
-            - "host.docker.internal:host-gateway"
-            - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
-
-            #
-            #   Setup DRAGONFLYDB5_HOSTNAME variable in .env file
-            #
-
-            - "${DRAGONFLYDB5_HOSTNAME:-ldragonfly5}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+      - "${DRAGONFLYDB1_HOSTNAME:-dragonfly1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
 
-    #   MCROUTER SERVERS    ---------------------------------------------------------#
+  #   DRAGONFLY SERVER 2    ------------------------------------------------------#
+
+  dragonfly2:
+    image: "docker.dragonflydb.io/dragonflydb/dragonfly"
+    container_name: "dragonflydb-cluster.${DRAGONFLYDB2_HOSTNAME:-dragonfly2}"
+    hostname: "${DRAGONFLYDB_HOSTNAME:-localhost}"
+
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "11211"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+    restart: "always"
+    ulimits:
+      #
+      #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
+      #
+
+      memlock: "${MEMLOCK:--1}"
+
+    command:
+      #
+      #   Command to set the Memcache port
+      #
+
+      - "dragonfly"
+      - "--memcached_port"
+      - "11211"
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
+
+    ports:
+      #
+      #   Port mapping for DragonflyDB
+      #
+
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11215:11211"
+
+    volumes:
+      #
+      #   Volume to store DragonflyDB data
+      #
+
+      - "dragonflydata2:/data"
+      #
+      #   Config for dragonfly instance
+      #
+
+      - ./config/dragonfly2_config.json:/etc/dragonfly/dragonfly_config.json
+
+    networks:
+      #
+      #   Connect to the private network
+      #
+
+      - "dragonfly_private_network"
+
+    links:
+      #
+      #   Links to DragonflyDB instances
+      #
+
+      - "${DRAGONFLYDB1_HOSTNAME:-dragonfly1}"
+      - "${DRAGONFLYDB2_HOSTNAME:-dragonfly2}"
+      - "${DRAGONFLYDB3_HOSTNAME:-dragonfly3}"
+      - "${DRAGONFLYDB4_HOSTNAME:-dragonfly4}"
+      - "${DRAGONFLYDB5_HOSTNAME:-dragonfly5}"
+
+    extra_hosts:
+      #
+      #   Add extra host entries for internal resolution
+      #
+
+      - "host.docker.internal:host-gateway"
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
+      #
+      #   Setup DRAGONFLYDB2_HOSTNAME variable in .env file
+      #
+
+      - "${DRAGONFLYDB2_HOSTNAME:-dragonfly2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+
+
+  #   DRAGONFLY SERVER 3    ------------------------------------------------------#
+
+  dragonfly3:
+    image: "docker.dragonflydb.io/dragonflydb/dragonfly"
+    container_name: "dragonflydb-cluster.${DRAGONFLYDB3_HOSTNAME:-dragonfly3}"
+    hostname: "${DRAGONFLYDB_HOSTNAME:-localhost}"
+
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "11211"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+    restart: "always"
+    ulimits:
+      #
+      #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
+      #
+
+      memlock: "${MEMLOCK:--1}"
+
+    command:
+      #
+      #   Command to set the Memcache port
+      #
+
+      - "dragonfly"
+      - "--memcached_port"
+      - "11211"
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
+
+    ports:
+      #
+      #   Port mapping for DragonflyDB
+      #
+
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11216:11211"
+
+    volumes:
+      #
+      #   Volume to store DragonflyDB data
+      #
+
+      - "dragonflydata3:/data"
+      #
+      #   Config for dragonfly instance
+      #
+
+      - ./config/dragonfly3_config.json:/etc/dragonfly/dragonfly_config.json
+
+    networks:
+      #
+      #   Connect to the private network
+      #
+
+      - "dragonfly_private_network"
+
+    extra_hosts:
+      #
+      #   Add extra host entries for internal resolution
+      #
+
+      - "host.docker.internal:host-gateway"
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
+      #
+      #   Setup DRAGONFLYDB3_HOSTNAME variable in .env file
+      #
+
+      - "${DRAGONFLYDB3_HOSTNAME:-dragonfly3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+
+
+  #   DRAGONFLY SERVER 4    ------------------------------------------------------#
+
+  dragonfly4:
+    image: "docker.dragonflydb.io/dragonflydb/dragonfly"
+    container_name: "dragonflydb-cluster.${DRAGONFLYDB4_HOSTNAME:-dragonfly4}"
+    hostname: "${DRAGONFLYDB_HOSTNAME:-localhost}"
+
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "11211"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+    restart: "always"
+    ulimits:
+      #
+      #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
+      #
+
+      memlock: "${MEMLOCK:--1}"
+
+    command:
+      #
+      #   Command to set the Memcache port
+      #
+
+      - "dragonfly"
+      - "--memcached_port"
+      - "11211"
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
+
+    ports:
+      #
+      #   Port mapping for DragonflyDB
+      #
+
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11217:11211"
+
+    volumes:
+      #
+      #   Volume to store DragonflyDB data
+      #
+
+      - "dragonflydata4:/data"
+      #
+      #   Config for dragonfly instance
+      #
+
+      - ./config/dragonfly4_config.json:/etc/dragonfly/dragonfly_config.json
+
+    networks:
+      #
+      #   Connect to the private network
+      #
+
+      - "dragonfly_private_network"
+
+    extra_hosts:
+      #
+      #   Add extra host entries for internal resolution
+      #
+
+      - "host.docker.internal:host-gateway"
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
+
+      #
+      #   Setup DRAGONFLYDB4_HOSTNAME variable in .env file
+      #
+
+      - "${DRAGONFLYDB4_HOSTNAME:-dragonfly4}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+
+
+  #   DRAGONFLY SERVER 5    ------------------------------------------------------#
+
+  dragonfly5:
+    image: "docker.dragonflydb.io/dragonflydb/dragonfly"
+    container_name: "dragonflydb-cluster.${DRAGONFLYDB5_HOSTNAME:-dragonfly5}"
+    hostname: "${DRAGONFLYDB_HOSTNAME:-localhost}"
+
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "11211"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+    restart: "always"
+    ulimits:
+      #
+      #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
+      #
+
+      memlock: "${MEMLOCK:--1}"
+
+    command:
+      #
+      #   Command to set the Memcache port
+      #
+
+      - "dragonfly"
+      - "--memcached_port"
+      - "11211"
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
+
+    ports:
+      #
+      #   Port mapping for DragonflyDB
+      #
+
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11218:11211"
+
+    volumes:
+      #
+      #   Volume to store DragonflyDB data
+      #
+
+      - "dragonflydata5:/data"
+      #
+      #   Config for dragonfly instance
+      #
+      - ./config/dragonfly5_config.json:/etc/dragonfly/dragonfly_config.json
+
+    networks:
+      #
+      #   Connect to the private network
+      #
+
+      - "dragonfly_private_network"
+
+    extra_hosts:
+      #
+      #   Add extra host entries for internal resolution
+      #
+
+      - "host.docker.internal:host-gateway"
+      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
+
+      #
+      #   Setup DRAGONFLYDB5_HOSTNAME variable in .env file
+      #
+
+      - "${DRAGONFLYDB5_HOSTNAME:-dragonfly5}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+
+
+    #   MCROUTER SERVER 1    --------------------------------------------------------#
 
     mcrouter1:
-        image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
-        container_name: dragonflydb-cluster.${MCROUTER3_HOSTNAME:-mcrouter1}.${MCROUTER_VERSION:-40.0.0}
-        hostname: ${MCROUTER_HOSTNAME:-localhost}
-        platform: linux/amd64
+        image: "coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}"
+        container_name: "dragonflydb-cluster.${MCROUTER1_HOSTNAME:-mcrouter1}.${MCROUTER_VERSION:-40.0.0}"
+        hostname: "${MCROUTER_HOSTNAME:-localhost}"
+        platform: "linux/amd64"
         links:
             #
             #   Links to DragonflyDB instances
             #
 
-            - dragonfly1
-            - dragonfly2
-            - dragonfly3
-            - dragonfly4
-            - dragonfly5
+            - "${DRAGONFLYDB1_HOSTNAME:-dragonfly1}"
+            - "${DRAGONFLYDB2_HOSTNAME:-dragonfly2}"
+            - "${DRAGONFLYDB3_HOSTNAME:-dragonfly3}"
+            - "${DRAGONFLYDB4_HOSTNAME:-dragonfly4}"
+            - "${DRAGONFLYDB5_HOSTNAME:-dragonfly5}"
 
         volumes:
             #
             #   Map config file
             #
 
-            - ./config/intermediate_cluster_3_5_config.json:/etc/mcrouter/mcrouter_config.json
+            - "./config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
 
-            #
-            #   Map failover config file 
-            #
-
-            #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
-
-            #
-            #   Map failover config file 
-            #
-
-            #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
-
-        command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
+        command: "mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211"
         ports:
             #
             #   Port mapping for Mcrouter
@@ -358,6 +486,7 @@ services:                                                                       
 
             - stack_private_network
             - mcrouter_private_network
+            - dragonfly_private_network
 
         extra_hosts:
             #
@@ -373,42 +502,33 @@ services:                                                                       
 
             - "${MCROUTER1_HOSTNAME:-mcrouter1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
+
+    #   MCROUTER SERVER 2    --------------------------------------------------------#
+
     mcrouter2:
-        image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
-        container_name: dragonflydb-cluster.${MCROUTER2_HOSTNAME:-mcrouter2}.${MCROUTER_VERSION:-40.0.0}
-        hostname: ${MCROUTER2_HOSTNAME:-localhost}
-        platform: linux/amd64
+        image: "coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}"
+        container_name: "dragonflydb-cluster.${MCROUTER2_HOSTNAME:-mcrouter2}.${MCROUTER_VERSION:-40.0.0}"
+        hostname: "${MCROUTER2_HOSTNAME:-localhost}"
+        platform: "linux/amd64"
         links:
             #
             #   Links to DragonflyDB instances
             #
 
-            - dragonfly1
-            - dragonfly2
-            - dragonfly3
-            - dragonfly4
-            - dragonfly5
+            - "${DRAGONFLYDB1_HOSTNAME:-dragonfly1}"
+            - "${DRAGONFLYDB2_HOSTNAME:-dragonfly2}"
+            - "${DRAGONFLYDB3_HOSTNAME:-dragonfly3}"
+            - "${DRAGONFLYDB4_HOSTNAME:-dragonfly4}"
+            - "${DRAGONFLYDB5_HOSTNAME:-dragonfly5}"
 
         volumes:
             #
             #   Map config file
             #
 
-            - ./config/intermediate_cluster_3_5_config.json:/etc/mcrouter/mcrouter_config.json
+            - "./config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
 
-            #
-            #   Map failover config file 
-            #
-
-            #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
-
-            #
-            #   Map operation selector config file 
-            #
-
-            #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
-
-        command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
+        command: "mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211"
         ports:
             #
             #   Port mapping for Mcrouter
@@ -423,6 +543,7 @@ services:                                                                       
 
             - stack_private_network
             - mcrouter_private_network
+            - dragonfly_private_network
 
         extra_hosts:
             #
@@ -438,42 +559,33 @@ services:                                                                       
 
             - "${MCROUTER2_HOSTNAME:-mcrouter2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
+
+    #   MCROUTER SERVER 3    --------------------------------------------------------#
+
     mcrouter3:
-        image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
-        container_name: dragonflydb-cluster.${MCROUTER2_HOSTNAME:-mcrouter3}.${MCROUTER_VERSION:-40.0.0}
-        hostname: ${MCROUTER3_HOSTNAME:-localhost}
-        platform: linux/amd64
+        image: "coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}"
+        container_name: "dragonflydb-cluster.${MCROUTER3_HOSTNAME:-mcrouter3}.${MCROUTER_VERSION:-40.0.0}"
+        hostname: "${MCROUTER3_HOSTNAME:-localhost}"
+        platform: "linux/amd64"
         links:
             #
             #   Links to DragonflyDB instances
             #
 
-            - dragonfly1
-            - dragonfly2
-            - dragonfly3
-            - dragonfly4
-            - dragonfly5
+            - "${DRAGONFLYDB1_HOSTNAME:-dragonfly1}"
+            - "${DRAGONFLYDB2_HOSTNAME:-dragonfly2}"
+            - "${DRAGONFLYDB3_HOSTNAME:-dragonfly3}"
+            - "${DRAGONFLYDB4_HOSTNAME:-dragonfly4}"
+            - "${DRAGONFLYDB5_HOSTNAME:-dragonfly5}"
 
         volumes:
             #
             #   Map config file
             #
 
-            - ./config/intermediate_cluster_3_5_config.json:/etc/mcrouter/mcrouter_config.json
+            - "./config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
 
-            #
-            #   Map failover config file 
-            #
-
-            #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
-
-            #
-            #   Map failover config file 
-            #
-
-            #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
-
-        command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
+        command: "mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211"
         ports:
             #
             #   Port mapping for Mcrouter
@@ -488,6 +600,7 @@ services:                                                                       
 
             - stack_private_network
             - mcrouter_private_network
+            - dragonfly_private_network
 
         extra_hosts:
             #
@@ -515,30 +628,30 @@ volumes:
     #   STACK DRAGONFLY DATA 1 STORAGE
     #
     dragonflydata1:
-        driver: local
+        driver: "local"
 
     #
     #   STACK DRAGONFLY DATA 2 STORAGE
     #
     dragonflydata2:
-        driver: local
+        driver: "local"
 
     #
     #   STACK DRAGONFLY DATA 3 STORAGE
     #
     dragonflydata3:
-        driver: local
+        driver: "local"
 
     #
     #   STACK DRAGONFLY DATA 4 STORAGE
     #
     dragonflydata4:
-        driver: local
+        driver: "local"
 
     #
     #   STACK DRAGONFLY DATA 5 STORAGE
     #
     dragonflydata5:
-        driver: local
+        driver: "local"
 
 # ----------------------------------------------------------------------------------#

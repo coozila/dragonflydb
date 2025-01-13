@@ -1,0 +1,14 @@
+{
+    "slot_ranges": [
+      {
+        "start": 24576,
+        "end": 32767
+      }
+    ],
+    "instance": {
+      "id": "dragonfly4_id_placeholder",
+      "ip": "dragonfly4",
+      "port": 11211
+    }
+  }
+  

@@ -1,0 +1,37 @@
+{
+    "pools": {
+      "unified_pool": {
+        "servers": [
+          "dragonfly1:11211",
+          "dragonfly2:11211",
+          "dragonfly3:11211",
+          "dragonfly4:11211",
+          "dragonfly5:11211"
+        ]
+      }
+    },
+    "route": {
+      "type": "OperationSelectorRoute",
+      "operation_policies": {
+        "add": {
+          "type": "PoolRoute",
+          "pool": "unified_pool"
+        },
+        "delete": {
+          "type": "PoolRoute",
+          "pool": "unified_pool"
+        },
+        "set": {
+          "type": "PoolRoute",
+          "pool": "unified_pool"
+        },
+        "get": {
+          "type": "HashRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "unified_pool" }
+          ]
+        }
+      }
+    }
+  }
+  
