@@ -1,9 +1,11 @@
+I apologize for the confusion. Here’s the updated documentation reflecting the current configuration, focusing on the use of a single variable for the mcrouter configuration and removing any references to multiple configuration files.
+
 ### Intermediate DragonflyDB Cluster Setup Documentation
 
 ## Overview
 This document outlines the setup of an intermediate DragonflyDB cluster using Docker, Docker Compose, and mcrouter. The cluster consists of 5 DragonflyDB instances and 3 mcrouter instances, designed to provide a robust caching solution for production environments.
 
-**DragonflyDB** is a modern, high-performance in-memory database and cache designed as an alternative to Redis and Memcached. It addresses some of the limitations of traditional in-memory solutions by offering better scalability and optimized resource usage. 
+**DragonflyDB** is a modern, high-performance in-memory database and cache designed as an alternative to Redis and Memcached. It addresses some of the limitations of traditional in-memory solutions by offering better scalability and optimized resource usage.
 
 ### Key Features of DragonflyDB
 
@@ -17,8 +19,8 @@ This document outlines the setup of an intermediate DragonflyDB cluster using Do
 ### Recommended Server Specifications
 For the Intermediate Cluster configuration, we recommend using a cloud server instance with the following specifications:
 - **Minimum Instance Type**: **t3.large** (or equivalent)
-- **Minimum RAM**: 8 GB (This is the minimum requirement to run the cluster effectively.)
-- **Maximum RAM Supported**: Each DragonflyDB instance can support up to **1 TB of RAM**, allowing for extensive caching capabilities and handling of large datasets. With 5 instances, the cluster can manage a total of **up to 5 TB of data**, making it suitable for applications with significant data requirements.
+- **Minimum RAM**: 4 GB per instance (This is the minimum requirement to run each instance effectively.)
+- **Total RAM for Cluster**: With 5 instances, the total minimum RAM required is **20 GB**. This allows for effective caching capabilities and handling of large datasets, ensuring that the cluster can manage significant data requirements.
 
 ### Architecture
 - **DragonflyDB Instances**: The cluster contains 5 instances of DragonflyDB.
@@ -35,30 +37,19 @@ The configuration is defined in a `docker-compose-cluster-3-5.yaml` file, which 
 - **Networking**: All services are connected to a private Docker network.
 
 ### Using Configuration Files
-The following configuration files are already set up in the volumes section of your Docker Compose file. You can uncomment the desired configuration file to use it. Only one configuration variant should be active at a time.
+The configuration for mcrouter is now managed through a single variable, allowing for easier management. The volume mapping in the Docker Compose file is as follows:
 
 ```yaml
 volumes:
-            #
-            #   Map config file
-            #
-            - ./config/intermediate_cluster_3_5_config.json:/etc/mcrouter/mcrouter_config.json
-
-            #
-            #   Map failover config file 
-            #
-            #- ./config/intermediate_cluster_3_5_failover_config.json:/etc/mcrouter/mcrouter_config.json
-
-            #
-            #   Map operation selector config file 
-            #
-            #- ./config/intermediate_cluster_3_5_operation_selector_config.json:/etc/mcrouter/mcrouter_config.json
+  #
+  #   Map config file
+  #
+  - ./config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json
 ```
 
 To use a specific configuration:
-1. **Choose the desired configuration** by uncommenting the corresponding line.
-2. **Comment out the other configurations** to ensure only one is active.
-3. **Save the changes** and then run your Docker Compose setup.
+1. **Set the desired pool variant** in the `.env` file by modifying the `MCROUTER_POOL_VARIANT` variable.
+2. **Save the changes** and then run your Docker Compose setup.
 
 ### Overriding Default Variables
 To override certain variables set in the `docker-compose` file, you can create a `.env` file based on the default template provided. Follow these steps:
@@ -72,140 +63,63 @@ To override certain variables set in the `docker-compose` file, you can create a
 
 ### Configuration Variants
 
-#### 1. Intermediate Cluster Configuration
+The cluster supports multiple pool configurations for routing requests, each designed for specific scalability and redundancy requirements:
 
-**File Name:** `intermediate_cluster_3_5_config.json`
+1. **Single-Pool Variant**: A simple configuration that combines all instances into a single pool.
+   - Example: `MCROUTER_POOL_VARIANT=1pool`
 
-```json
-{
-  "pools": {
-    "A": {
-      "servers": [
-        "dragonfly1:11211",
-        "dragonfly2:11211",
-        "dragonfly3:11211",
-        "dragonfly4:11211",
-        "dragonfly5:11211"
-      ]
-    }
-  },
-  "route": {
-    "type": "OperationSelectorRoute",
-    "operation_policies": {
-      "add": "AllFastestRoute|Pool|A",
-      "delete": "AllFastestRoute|Pool|A",
-      "get": "AllFastestRoute|Pool|A",
-      "set": "AllFastestRoute|Pool|A"
-    }
-  }
-}
-```
+2. **Two-Pool Variant**: Redundancy and balanced utilization between instances.
+   - Example: `MCROUTER_POOL_VARIANT=2pool`
 
-**Description:** This configuration uses all five DragonflyDB instances within pool A, applying an operation selector for efficient request routing.
+3. **Three-Pool Variant**: Maximum performance and scalability.
+   - Example: `MCROUTER_POOL_VARIANT=3pool`
 
-**Advantages:**
-- **Simplified Routing:** Easy to manage with straightforward operation selection.
-- **Balanced Load:** Efficiently distributes requests across all five instances.
+4. **Failover Pool**: Ensures high availability by failing over requests to alternative pools.
+   - Example: `MCROUTER_POOL_VARIANT=failover_pool`
 
-**Disadvantages:**
-- **No Redundancy:** If all servers in pool A become unavailable, operations will fail.
+5. **Load Balancer Pool**: Distributes requests based on server load.
+   - Example: `MCROUTER_POOL_VARIANT=loadbalancer_pool`
 
----
+6. **Shard Pool**: Routes requests to shards based on key segmentation.
+   - Example: `MCROUTER_POOL_VARIANT=shard_pool`
 
-#### 2. Intermediate Cluster Configuration with Failover
+7. **Weighted Pool**: Assigns weights to servers for uneven distribution.
+   - Example: `MCROUTER_POOL_VARIANT=weighted_pool`
 
-**File Name:** `intermediate_cluster_3_5_failover_config.json`
+8. **Custom Hash Pool**: Routes requests using a specific hash function.
+   - Example: `MCROUTER_POOL_VARIANT=custom_hash_pool`
+
+
+### Configuration Variants
+
+### Example Configuration for Mcrouter
+
+The following is an example of the mcrouter configuration file that uses the variable for routing:
 
 ```json
 {
-  "pools": {
-    "A": {
-      "servers": [
-        "dragonfly1:11211",
-        "dragonfly2:11211",
-        "dragonfly3:11211"
-      ]
+    "pools": {
+        "A": {
+            "servers": [
+                "dragonfly1:11211",
+                "dragonfly2:11211",
+                "dragonfly3:11211",
+                "dragonfly4:11211",
+                "dragonfly5:11211"
+            ]
+        }
     },
-    "B": {
-      "servers": [
-        "dragonfly4:11211",
-        "dragonfly5:11211"
-      ]
+    "route": {
+        "type": "OperationSelectorRoute",
+        "operation_policies": {
+            "add": "AllFastestRoute|Pool|A",
+            "delete": "AllFastestRoute|Pool|A",
+            "get": "AllFastestRoute|Pool|A",
+            "set": "AllFastestRoute|Pool|A"
+        }
     }
-  },
-  "route": {
-    "type": "FailoverRoute",
-    "children": [
-      {
-        "type": "PoolRoute",
-        "name": "poolA",
-        "pool": "A"
-      },
-      {
-        "type": "PoolRoute",
-        "name": "poolB",
-        "pool": "B"
-      }
-    ]
-  }
 }
 ```
-
-**Description:** This configuration allows for failover between pools A and B, ensuring requests can be rerouted if one pool becomes unavailable.
-
-**Advantages:**
-- **Increased Redundancy:** Allows rerouting of requests to pool B if pool A is unavailable.
-- **Better Availability:** Ensures application functionality even if one pool experiences issues.
-
-**Disadvantages:**
-- **Increased Complexity:** Failover mechanisms add complexity to routing.
-- **Potential Latency:** Failover may introduce delays during routing.
-
----
-
-#### 3. Intermediate Cluster Configuration with Operation Selector
-
-**File Name:** `intermediate_cluster_3_5_operation_selector_config.json`
-
-```json
-{
-  "pools": {
-    "A": {
-      "servers": [
-        "dragonfly1:11211",
-        "dragonfly2:11211",
-        "dragonfly3:11211"
-      ]  
-    },
-    "B": {
-      "servers": [
-        "dragonfly4:11211",
-        "dragonfly5:11211"
-      ]
-    }
-  },
-  "route": {
-    "type": "OperationSelectorRoute",
-    "operation_policies": {
-      "add": "AllFastestRoute|Pool|A",
-      "delete": "AllFastestRoute|Pool|A",
-      "get": "AllFastestRoute|Pool|A",
-      "set": "AllFastestRoute|Pool|A"
-    }
-  }
-}
-```
-
-**Description:** This configuration uses an operation selector for both pools A and B, distributing operations efficiently.
-
-**Advantages:**
-- **Simplicity:** Easy to configure and understand.
-- **Efficient Load Balancing:** Operates effectively with basic load balancing.
-
-**Disadvantages:**
-- **No Redundancy:** Operations may fail if all servers in either pool become unavailable.
-
----
 
 This cluster setup can manage up to **5 TB of data** in total across its instances, making it suitable for applications with significant data demands. It is recommended to scale the infrastructure when utilization reaches **60-70%** of capacity to maintain optimal performance.
 
@@ -213,3 +127,57 @@ This cluster setup can manage up to **5 TB of data** in total across its instanc
 > For suggestions or to propose alternative configurations, you are encouraged to [fork the repository](https://github.com/coozila/dragonflydb-cluster/fork) and submit a pull request with your changes.
 >
 > For any inquiries, please contact **Coozila! LABS** at **lab@coozila.com** or visit our official page for updates and more information: [Coozila! LABS](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
+
+## Installation Assistance
+
+If you would like assistance with the installation of this product, please contact **Coozila! Labs** at [labs@coozila.com](mailto:lab@coozila.com). Our team is ready to help you with the installation process and ensure a smooth setup.
+
+Based on the size and complexity of your project, we will provide you with a tailored pricing quote.
+
+For purchasing the installation, please visit the following link: [Coozila Docker Package App for Memcached](https://www.coozila.com/plus/view-product/coozila-docker-package-app-for-memcached).
+
+You can also check out the official Coozila! Labs page for more information: [Coozila! Labs](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
+
+For any inquiries, feel free to reach out through our contact page: [Contact Coozila!](https://www.coozila.com/plus/contact).
+
+### After Purchase Notes
+
+After your purchase, please provide the following information via email:
+
+- Server login credentials
+- An SSH key for secure access
+- Details about the project you wish to integrate
+
+## Additional Documentation
+
+For more details, please refer to the main repository: 
+
+- [Coozila! Apps](https://github.com/coozila/apps).
+- [Mcrouter](https://github.com/facebook/mcrouter)
+- [DragonflyDB](https://github.com/dragonflydb/dragonfly/tree/main/docs)
+
+## Trademarks and Copyright
+
+This software listing is packaged by Coozila!. All trademarks mentioned are the property of their respective owners, and their use does not imply any affiliation or endorsement.
+
+### Copyright
+
+Copyright (C) 2009 - 2025 Coozila! Licensed under the MIT License.
+
+### Licenses
+
+- **Coozila!**: [MIT License](https://github.com/coozila/dragonflydb-cluster/blob/dev/LICENSE)
+- **DragonflyDB**: [DragonflyDB License](https://github.com/dragonflydb/dragonfly/blob/main/LICENSE.md)
+- **McRouter**: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE)
+- **Memcached**: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE)
+
+### Important Notice Regarding DragonflyDB Usage  
+
+In compliance with the **Dragonfly Business Source License 1.1 (BSL 1.1)**:  
+- **Permitted Use:** This project involves installing and configuring DragonflyDB as part of your private caching infrastructure.  
+- **Prohibited Use:** You cannot offer DragonflyDB as a hosted or managed service, nor provide any solution that allows third parties (other than your employees or contractors) to access or use DragonflyDB features.  
+- This ensures that our service fully respects the licensing terms of DragonflyDB.
+
+## Disclaimer
+
+This product is provided "as is," without any guarantees or warranties regarding its functionality, performance, or reliability. By using this product, you acknowledge that you do so at your own risk. Coozila! and its contributors are not liable for any issues, damages, or losses that may arise from the use of this product. We recommend thoroughly testing the product in your own environment before deploying it in a production setting.

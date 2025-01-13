@@ -164,6 +164,34 @@ Each instance:
 - Links to the three DragonflyDB instances.
 - Command configuration for routing operations.
 
+## Installation Assistance
+
+If you would like assistance with the installation of this product, please contact **Coozila! Labs** at [labs@coozila.com](mailto:lab@coozila.com). Our team is ready to help you with the installation process and ensure a smooth setup.
+
+Based on the size and complexity of your project, we will provide you with a tailored pricing quote.
+
+For purchasing the installation, please visit the following link: [Coozila Docker Package App for Memcached](https://www.coozila.com/plus/view-product/coozila-docker-package-app-for-memcached).
+
+You can also check out the official Coozila! Labs page for more information: [Coozila! Labs](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
+
+For any inquiries, feel free to reach out through our contact page: [Contact Coozila!](https://www.coozila.com/plus/contact).
+
+### After Purchase Notes
+
+After your purchase, please provide the following information via email:
+
+- Server login credentials
+- An SSH key for secure access
+- Details about the project you wish to integrate
+
+## Additional Documentation
+
+For more details, please refer to the main repository: 
+
+- [Coozila! Apps](https://github.com/coozila/apps).
+- [Mcrouter](https://github.com/facebook/mcrouter)
+- [DragonflyDB](https://github.com/dragonflydb/dragonfly/tree/main/docs)
+
 ## Trademarks and Copyright
 
 This software listing is packaged by Coozila!. All trademarks mentioned are the property of their respective owners, and their use does not imply any affiliation or endorsement.

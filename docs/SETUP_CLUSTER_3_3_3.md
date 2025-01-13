@@ -638,14 +638,64 @@ docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml down -v
    DFLYCLUSTER CONFIG <json-encoded-string>
    ```
 
-### Tips for Setup
 
-- Ensure all configuration files are correctly formatted and accessible at the specified paths.
-- Use Docker logs to troubleshoot any issues that arise during the startup process.
-- Keep the DragonflyDB documentation handy for reference on commands and configurations.
+This cluster setup can manage up to **5 TB of data** in total across its instances, making it suitable for applications with significant data demands. It is recommended to scale the infrastructure when utilization reaches **60-70%** of capacity to maintain optimal performance.
 
+> [!TIP]
 > For suggestions or to propose alternative configurations, you are encouraged to [fork the repository](https://github.com/coozila/dragonflydb-cluster/fork) and submit a pull request with your changes.
 >
 > For any inquiries, please contact **Coozila! LABS** at **lab@coozila.com** or visit our official page for updates and more information: [Coozila! LABS](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
 
-This documentation provides a comprehensive overview of the master-slave cluster configuration for DragonflyDB, ensuring clarity and ease of use for setup and management.
+## Installation Assistance
+
+If you would like assistance with the installation of this product, please contact **Coozila! Labs** at [labs@coozila.com](mailto:lab@coozila.com). Our team is ready to help you with the installation process and ensure a smooth setup.
+
+Based on the size and complexity of your project, we will provide you with a tailored pricing quote.
+
+For purchasing the installation, please visit the following link: [Coozila Docker Package App for Memcached](https://www.coozila.com/plus/view-product/coozila-docker-package-app-for-memcached).
+
+You can also check out the official Coozila! Labs page for more information: [Coozila! Labs](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
+
+For any inquiries, feel free to reach out through our contact page: [Contact Coozila!](https://www.coozila.com/plus/contact).
+
+### After Purchase Notes
+
+After your purchase, please provide the following information via email:
+
+- Server login credentials
+- An SSH key for secure access
+- Details about the project you wish to integrate
+
+## Additional Documentation
+
+For more details, please refer to the main repository: 
+
+- [Coozila! Apps](https://github.com/coozila/apps).
+- [Mcrouter](https://github.com/facebook/mcrouter)
+- [DragonflyDB](https://github.com/dragonflydb/dragonfly/tree/main/docs)
+
+## Trademarks and Copyright
+
+This software listing is packaged by Coozila!. All trademarks mentioned are the property of their respective owners, and their use does not imply any affiliation or endorsement.
+
+### Copyright
+
+Copyright (C) 2009 - 2025 Coozila! Licensed under the MIT License.
+
+### Licenses
+
+- **Coozila!**: [MIT License](https://github.com/coozila/dragonflydb-cluster/blob/dev/LICENSE)
+- **DragonflyDB**: [DragonflyDB License](https://github.com/dragonflydb/dragonfly/blob/main/LICENSE.md)
+- **McRouter**: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE)
+- **Memcached**: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE)
+
+### Important Notice Regarding DragonflyDB Usage  
+
+In compliance with the **Dragonfly Business Source License 1.1 (BSL 1.1)**:  
+- **Permitted Use:** This project involves installing and configuring DragonflyDB as part of your private caching infrastructure.  
+- **Prohibited Use:** You cannot offer DragonflyDB as a hosted or managed service, nor provide any solution that allows third parties (other than your employees or contractors) to access or use DragonflyDB features.  
+- This ensures that our service fully respects the licensing terms of DragonflyDB.
+
+## Disclaimer
+
+This product is provided "as is," without any guarantees or warranties regarding its functionality, performance, or reliability. By using this product, you acknowledge that you do so at your own risk. Coozila! and its contributors are not liable for any issues, damages, or losses that may arise from the use of this product. We recommend thoroughly testing the product in your own environment before deploying it in a production setting.
