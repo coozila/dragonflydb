@@ -96,14 +96,25 @@ services:
 
     command:
       #
-      #   Command to set the Memcache port and link to master
+      #   Command to startr= dragonfly and set the Memcache port
       #
 
       - "dragonfly"
       - "--memcached_port"
       - "11211"
+
+      #
+      #   Command to setup cluster mode
+      #
+
       - "--cluster_mode"
       - "yes"
+
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
 
     networks:
       #
@@ -178,14 +189,25 @@ services:
 
     command:
       #
-      #   Command to set the Memcache port and link to master
+      #   Command to startr= dragonfly and set the Memcache port
       #
 
       - "dragonfly"
       - "--memcached_port"
       - "11211"
+
+      #
+      #   Command to setup cluster mode
+      #
+
       - "--cluster_mode"
       - "yes"
+
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
 
     networks:
       #
@@ -261,14 +283,25 @@ services:
 
     command:
       #
-      #   Command to set the Memcache port and link to master
+      #   Command to startr= dragonfly and set the Memcache port
       #
 
       - "dragonfly"
       - "--memcached_port"
       - "11211"
+
+      #
+      #   Command to setup cluster mode
+      #
+
       - "--cluster_mode"
       - "yes"
+
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
 
     networks:
       #
@@ -343,14 +376,30 @@ services:
 
     command: 
       #
-      #   Command to set the Memcache port and link to master
+      #   Command to startr= dragonfly and set the Memcache port
       #
 
       - "dragonfly"
       - "--memcached_port"
       - "11211"
+
+      #
+      #   Command to setup cluster mode
+      #
+
       - "--cluster_mode"
       - "yes"
+
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
+
+      #
+      #   Command to setup slave and link to master
+      #
+
       - "--replicaof"
       - "dragonfly_master1:11214"
 
@@ -431,14 +480,30 @@ services:
 
     command: 
       #
-      #   Command to set the Memcache port and link to master
+      #   Command to startr= dragonfly and set the Memcache port
       #
 
       - "dragonfly"
       - "--memcached_port"
       - "11211"
+
+      #
+      #   Command to setup cluster mode
+      #
+
       - "--cluster_mode"
       - "yes"
+
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
+
+      #
+      #   Command to setup slave and link to master
+      #
+
       - "--replicaof"
       - "dragonfly_master2:11215"
 
@@ -519,14 +584,30 @@ services:
 
     command: 
       #
-      #   Command to set the Memcache port and link to master
+      #   Command to startr= dragonfly and set the Memcache port
       #
 
       - "dragonfly"
       - "--memcached_port"
       - "11211"
+
+      #
+      #   Command to setup cluster mode
+      #
+
       - "--cluster_mode"
       - "yes"
+
+      #
+      #   Use the environment variable for setup cron
+      #
+
+      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
+
+      #
+      #   Command to setup slave and link to master
+      #
+
       - "--replicaof"
       - "dragonfly_master3:11216"
 
