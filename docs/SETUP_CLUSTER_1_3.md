@@ -4,11 +4,11 @@
 This document outlines the setup of a basic DragonflyDB cluster using Docker, Docker Compose, and mcrouter. The cluster consists of 3 DragonflyDB instances and 1 mcrouter instance, providing a simple and efficient caching solution for applications with lower traffic demands.
 
 ### Recommended Server Specifications
-For the Basic Cluster configuration, we recommend using a cloud server instance with the following specifications:
-- **Instance Type**: **t3.micro** (or equivalent)
-- **CPU**: 1 vCPU
-- **RAM**: 2 GB
 
+For the Cluster configuration, we recommend using a cloud server instance with the following specifications:
+
+- **Minimum RAM**: 12 GB (This is the minimum requirement to run the cluster effectively.)
+- **Maximum RAM Supported**: Each DragonflyDB instance can support up to **768 GB of RAM**, allowing for extensive caching capabilities. With 3 instances configured, the effective storage capacity will be **2.274 TB**.
 This configuration is cost-effective and suitable for applications with light to moderate traffic.
 
 ### Architecture

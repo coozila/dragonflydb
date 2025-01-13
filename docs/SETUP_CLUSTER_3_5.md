@@ -17,10 +17,12 @@ This document outlines the setup of an intermediate DragonflyDB cluster using Do
 6. **Advanced Features**
 
 ### Recommended Server Specifications
-For the Intermediate Cluster configuration, we recommend using a cloud server instance with the following specifications:
-- **Minimum Instance Type**: **t3.large** (or equivalent)
-- **Minimum RAM**: 4 GB per instance (This is the minimum requirement to run each instance effectively.)
-- **Total RAM for Cluster**: With 5 instances, the total minimum RAM required is **20 GB**. This allows for effective caching capabilities and handling of large datasets, ensuring that the cluster can manage significant data requirements.
+
+For the Cluster configuration, we recommend using a cloud server instance with the following specifications:
+
+- **Minimum RAM**: 20 GB (This is the minimum requirement to run the cluster effectively.)
+- **Maximum RAM Supported**: Each DragonflyDB instance can support up to **768 GB of RAM**, allowing for extensive caching capabilities. With 5 instances configured, the effective storage capacity will be **3.79 TB**.
+This configuration is cost-effective and suitable for applications with light to moderate traffic.
 
 ### Architecture
 - **DragonflyDB Instances**: The cluster contains 5 instances of DragonflyDB.

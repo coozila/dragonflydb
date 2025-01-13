@@ -17,9 +17,8 @@ This document outlines the setup of a DragonflyDB master-slave cluster using Doc
 
 For the Master-Slave Cluster configuration, we recommend using a cloud server instance with the following specifications:
 
-- **Minimum Instance Type**: **t3.large** (or equivalent)
-- **Minimum RAM**: 8 GB (This is the minimum requirement to run the cluster effectively.)
-- **Maximum RAM Supported**: Each DragonflyDB instance can support up to **768 GB of RAM**, allowing for extensive caching capabilities. With 6 instances configured, if using 3 instances in a mirrored setup (replication), the effective storage capacity will be **2.304 TB** (or 2,304 GB), as the data is duplicated across the mirrored instances.
+- **Minimum RAM**: 24 GB (This is the minimum requirement to run the cluster effectively.)
+- **Maximum RAM Supported**: Each DragonflyDB instance can support up to **768 GB of RAM**, allowing for extensive caching capabilities. With 6 instances configured, if using 3 instances in a mirrored setup (replication), the effective storage capacity will be **2.274 TB**, as the data is duplicated across the mirrored instances.
 
 ### Architecture
 
