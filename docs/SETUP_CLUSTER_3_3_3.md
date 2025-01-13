@@ -595,66 +595,131 @@ command: dragonfly --memcached_port=11211 --master=dragonfly_master1:11211
 
 #### Starting the Cluster
 To start the DragonflyDB master-slave cluster using Docker Compose, navigate to the directory containing the `docker-compose-cluster-master-slave-3-3-3.yaml` file and run the following command:
-
 ```bash
 docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml up -d
 ```
+or
+```bash
+docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml up -d
+```
+
 #### Restarting the Cluster
 To restart the cluster:
-
 ```bash
 docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml restart
+```
+or
+```bash
+docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml restart
 ```
 
 #### Stopping the Cluster
 To stop the running cluster, use:
-
 ```bash
 docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml down
+```
+or
+```bash
+docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml down
 ```
 
 #### Removing Volumes
 To remove all the volumes associated with the containers:
-
 ```bash
 docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml down -v
 ```
+or
+```bash
+docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml down -v
+```
 
-### 6. Accessing the Services  
+### Accessing the Services  
 
 - **DragonflyDB Instances**:  
-  - Instance 1: [http://127.0.0.1:11214](http://127.0.0.1:11214)
-  - Instance 2: [http://127.0.0.1:11215](http://127.0.0.1:11215)
-  - Instance 3: [http://127.0.0.1:11216](http://127.0.0.1:11216)
-  - Instance 4: [http://127.0.0.1:11217](http://127.0.0.1:11217)
-  - Instance 4: [http://127.0.0.1:11218](http://127.0.0.1:11218)
-  - Instance 4: [http://127.0.0.1:11219](http://127.0.0.1:11219)
+  Instance 1: [http://127.0.0.1:11214](http://127.0.0.1:11214)  
+  Instance 2: [http://127.0.0.1:11215](http://127.0.0.1:11215)  
+  Instance 3: [http://127.0.0.1:11216](http://127.0.0.1:11216)  
+  Instance 4: [http://127.0.0.1:11217](http://127.0.0.1:11217)  
+  Instance 5: [http://127.0.0.1:11218](http://127.0.0.1:11218)  
+  Instance 6: [http://127.0.0.1:11219](http://127.0.0.1:11219)  
 
-
-- **McRouter Interface**:
-  - [http://127.0.0.1:11211](http://127.0.0.1:11211)
-  - [http://127.0.0.1:11212](http://127.0.0.1:11212)
-  - [http://127.0.0.1:11213](http://127.0.0.1:11213)
+- **McRouter Interface**:  
+  [http://127.0.0.1:11211](http://127.0.0.1:11211)  
+  [http://127.0.0.1:11212](http://127.0.0.1:11212)  
+  [http://127.0.0.1:11213](http://127.0.0.1:11213)  
 
 ### Commands for Configuring the Cluster
 
-- **Retrieve Node IDs**:
-   Execute the following command on each node to get their unique IDs:
-   ```bash
-   DFLYCLUSTER MYID
-   ```
+- **Retrieve Node IDs**:  
+Execute the following command on each node to get their unique IDs:
+```bash
+DFLYCLUSTER MYID
+```
 
-- **Build the Configuration String**:
-   Create a JSON-encoded string based on the structure provided above, replacing placeholders with actual values.
+- **Build the Configuration String**:  
+Create a JSON-encoded string based on the structure provided above, replacing placeholders with actual values.
 
-- **Apply Configuration**:
-   Use the following command to configure each node:
-   ```bash
-   DFLYCLUSTER CONFIG <json-encoded-string>
-   ```
+- **Apply Configuration**:  
+Use the following command to configure each node:
+```bash
+DFLYCLUSTER CONFIG <json-encoded-string>
+```
 
+### Viewing Logs
 
-This cluster setup can manage up to **5 TB of data** in total across its instances, making it suitable for applications with significant data demands. It is recommended to scale the infrastructure when utilization reaches **60-70%** of capacity to maintain optimal performance.
+- **View Logs for a Specific Container**:  
+To view logs for a specific container, use:
+```bash
+docker logs -f <container_name>
+```
+For example, to view logs for `dragonfly_master1`:
+```bash
+docker logs -f dragonflydb-cluster.dragonfly_master1
+```
+
+- **View Logs for All Containers**:  
+To view logs for all containers in the cluster:
+```bash
+docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f
+```
+or
+```bash
+docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f
+```
+
+- **View Logs for a Specific Service**:  
+To view logs for a specific service, use:
+```bash
+docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f <service_name>
+```
+For example, to view logs for `memcached`:
+```bash
+docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f memcached
+```
+
+### Additional Operations
+
+- **Check Container Status**:  
+To check the status of all containers:
+```bash
+docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml ps
+```
+or
+```bash
+docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml ps
+```
+
+- **Execute a Command in a Running Container**:  
+To execute a command in a running container:
+```bash
+docker exec -it <container_name> <command>
+```
+For example, to open a shell in `dragonfly_master1`:
+```bash
+docker exec -it dragonflydb-cluster.dragonfly_master1 /bin/sh
+```
+
+This cluster setup can manage up to ***2.27 TB of data** in total across its instances, making it suitable for applications with significant data demands. It is recommended to scale the infrastructure when utilization reaches **60-70%** of capacity to maintain optimal performance.
 
 > [!TIP]
 > For suggestions or to propose alternative configurations, you are encouraged to [fork the repository](https://github.com/coozila/dragonflydb-cluster/fork) and submit a pull request with your changes.
