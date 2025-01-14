@@ -3,7 +3,7 @@ import yaml
 
 # GitHub repository details
 owner = "coozila"
-repo = "dragonflydb"
+repo = "dragonflydb-cluster"
 url = f"https://api.github.com/repos/{owner}/{repo}"
 
 # Fetch repository data
