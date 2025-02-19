@@ -207,27 +207,27 @@ cd dragonflydb-cluster
 To start the cluster:
 
 ```bash
-docker compose -f docker-compose-cluster-3-5.yaml up -d
+docker compose up -d
 ```
 #### 5. Restarting the Cluster
 To restart the cluster:
 
 ```bash
-docker compose -f docker-compose-cluster-3-5.yaml restart
+docker compose  restart
 ```
 
 #### 6. Stopping the Cluster
 To stop the running cluster, use:
 
 ```bash
-docker compose -f docker-compose-cluster-3-5.yaml down
+docker compose  down
 ```
 
 #### 7. Removing Volumes
 To remove all the volumes associated with the containers:
 
 ```bash
-docker compose -f docker-compose-cluster-3-5.yaml down -v
+docker compose down -v
 ```
 
 ### 6. Accessing the Services  
