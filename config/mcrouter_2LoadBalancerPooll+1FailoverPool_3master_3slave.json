@@ -1,0 +1,103 @@
+{
+  "pools": {
+    "LoadBalancerPoolA": {
+      "servers": [
+        "dragonfly_master1:11211",
+        "dragonfly_slave1:11211"
+      ]
+    },
+    "LoadBalancerPoolB": {
+      "servers": [
+        "dragonfly_master2:11211",
+        "dragonfly_slave2:11211"
+      ]
+    },
+    "FailoverPool": {
+      "servers": [
+        "dragonfly_master3:11211",
+        "dragonfly_slave3:11211"
+      ]
+    }
+  },
+  "route": {
+    "type": "OperationSelectorRoute",
+    "operation_policies": {
+      "add": {
+        "type": "FailoverRoute",
+        "children": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "type": "FailoverRoute",
+        "children": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      },
+      "set": {
+        "type": "FailoverRoute",
+        "children": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      },
+      "get": {
+        "type": "FailoverRoute",
+        "children": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

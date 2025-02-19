@@ -95,7 +95,7 @@ services:                                                                       
       #   Config for dragonfly instance
       #
 
-      - ./config/dragonfly1_config.json:/etc/dragonfly/dragonfly_config.json
+      - ../config/dragonfly1_config.json:/etc/dragonfly/dragonfly_config.json
       #
       #   Local time
       #
@@ -186,7 +186,7 @@ services:                                                                       
       #   Config for dragonfly instance
       #
 
-      - ./config/dragonfly2_config.json:/etc/dragonfly/dragonfly_config.json
+      - ../config/dragonfly2_config.json:/etc/dragonfly/dragonfly_config.json
 
     networks:
       #
@@ -272,7 +272,7 @@ services:                                                                       
       #   Config for dragonfly instance
       #
 
-      - ./config/dragonfly3_config.json:/etc/dragonfly/dragonfly_config.json
+      - ../config/dragonfly3_config.json:/etc/dragonfly/dragonfly_config.json
 
     networks:
       #
@@ -347,7 +347,7 @@ services:                                                                       
       #   Config for dragonfly instance
       #
 
-      - ./config/dragonfly4_config.json:/etc/dragonfly/dragonfly_config.json
+      - ../config/dragonfly4_config.json:/etc/dragonfly/dragonfly_config.json
 
     networks:
       #
@@ -422,7 +422,7 @@ services:                                                                       
       #
       #   Config for dragonfly instance
       #
-      - ./config/dragonfly5_config.json:/etc/dragonfly/dragonfly_config.json
+      - ../config/dragonfly5_config.json:/etc/dragonfly/dragonfly_config.json
 
     networks:
       #
@@ -469,7 +469,7 @@ services:                                                                       
             #   Map config file
             #
 
-            - "./config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
+            - "../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
 
         command: "mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211"
         ports:
@@ -526,7 +526,7 @@ services:                                                                       
             #   Map config file
             #
 
-            - "./config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
+            - "../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
 
         command: "mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211"
         ports:
@@ -583,7 +583,7 @@ services:                                                                       
             #   Map config file
             #
 
-            - "./config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
+            - "../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_5dragonfly.json:/etc/mcrouter/mcrouter_config.json"
 
         command: "mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211"
         ports:

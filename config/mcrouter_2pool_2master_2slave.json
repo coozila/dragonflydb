@@ -1,0 +1,49 @@
+{
+    "pools": {
+      "Pool1": {
+        "servers": [
+          "dragonfly_master1:11211",
+          "dragonfly_slave1:11211"
+        ]
+      },
+      "Pool2": {
+        "servers": [
+          "dragonfly_master2:11211",
+          "dragonfly_slave2:11211"
+        ]
+      }
+    },
+    "route": {
+      "type": "OperationSelectorRoute",
+      "operation_policies": {
+        "add": {
+          "type": "HashRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "Pool1" },
+            { "type": "PoolRoute", "pool": "Pool2" }
+          ]
+        },
+        "delete": {
+          "type": "HashRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "Pool1" },
+            { "type": "PoolRoute", "pool": "Pool2" }
+          ]
+        },
+        "set": {
+          "type": "HashRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "Pool1" },
+            { "type": "PoolRoute", "pool": "Pool2" }
+          ]
+        },
+        "get": {
+          "type": "HashRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "Pool1" },
+            { "type": "PoolRoute", "pool": "Pool2" }
+          ]
+        }
+      }
+    }
+  }

@@ -1,0 +1,41 @@
+{
+    "pools": {
+      "LoadBalancerPool": {
+        "servers": [
+          "dragonfly_master1:11211",
+          "dragonfly_master2:11211",
+          "dragonfly_slave1:11211",
+          "dragonfly_slave2:11211"
+        ]
+      }
+    },
+    "route": {
+      "type": "OperationSelectorRoute",
+      "operation_policies": {
+        "add": {
+          "type": "LoadBalancerRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "LoadBalancerPool" }
+          ]
+        },
+        "delete": {
+          "type": "LoadBalancerRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "LoadBalancerPool" }
+          ]
+        },
+        "set": {
+          "type": "LoadBalancerRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "LoadBalancerPool" }
+          ]
+        },
+        "get": {
+          "type": "LoadBalancerRoute",
+          "children": [
+            { "type": "PoolRoute", "pool": "LoadBalancerPool" }
+          ]
+        }
+      }
+    }
+  }
