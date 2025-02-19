@@ -91,7 +91,7 @@ MCROUTER_POOL_VARIANT=3pool
 ## Cluster Configuration
 
 ### Docker Compose File
-The configuration is defined in a `docker-compose-cluster-master-slave-3-3-3.yaml` file, which is used to create and manage the cluster's services.
+The configuration is defined in a `docker-compose.yaml` file in the folder 3x3x3-master-slave folder, which is used to create and manage the cluster's services.
 
 ### Configuration Files
 
@@ -596,41 +596,41 @@ command: dragonfly --memcached_port=11211 --master=dragonfly_master1:11211
 #### Starting the Cluster
 To start the DragonflyDB master-slave cluster using Docker Compose, navigate to the directory containing the `docker-compose-cluster-master-slave-3-3-3.yaml` file and run the following command:
 ```bash
-docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml up -d
+docker compose up -d
 ```
 or
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml up -d
+docker-compose up -d
 ```
 
 #### Restarting the Cluster
 To restart the cluster:
 ```bash
-docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml restart
+docker compose restart
 ```
 or
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml restart
+docker-compose restart
 ```
 
 #### Stopping the Cluster
 To stop the running cluster, use:
 ```bash
-docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml down
+docker compose down
 ```
 or
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml down
+docker-compose down
 ```
 
 #### Removing Volumes
 To remove all the volumes associated with the containers:
 ```bash
-docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml down -v
+docker compose down -v
 ```
 or
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml down -v
+docker-compose down -v
 ```
 
 ### Accessing the Services  
@@ -680,21 +680,21 @@ docker logs -f dragonflydb-cluster.dragonfly_master1
 - **View Logs for All Containers**:  
 To view logs for all containers in the cluster:
 ```bash
-docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f
+docker compose logs -f
 ```
 or
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f
+docker-compose logs -f
 ```
 
 - **View Logs for a Specific Service**:  
 To view logs for a specific service, use:
 ```bash
-docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f <service_name>
+docker compose logs -f <service_name>
 ```
-For example, to view logs for `memcached`:
+For example, to view logs for `dragonfly_master1`:
 ```bash
-docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f memcached
+docker compose logs -f dragonfly_master1
 ```
 
 ### Additional Operations
@@ -702,11 +702,11 @@ docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml logs -f memcach
 - **Check Container Status**:  
 To check the status of all containers:
 ```bash
-docker compose -f docker-compose-cluster-master-slave-3-3-3.yaml ps
+docker compose ps
 ```
 or
 ```bash
-docker-compose -f docker-compose-cluster-master-slave-3-3-3.yaml ps
+docker-compose ps
 ```
 
 - **Execute a Command in a Running Container**:  
