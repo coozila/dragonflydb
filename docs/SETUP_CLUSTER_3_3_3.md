@@ -593,8 +593,19 @@ command: dragonfly --memcached_port=11211 --master=dragonfly_master1:11211
 
 ### Starting and Managing the Cluster
 
+#### Prepare the Environment Variables  
+Copy the example environment file and configure it:  
+
+```bash
+cp .env.example .env  
+```  
+Edit the `.env` file to set the required variables for your setup.  
+
+---
+
 #### Starting the Cluster
-To start the DragonflyDB master-slave cluster using Docker Compose, navigate to the directory containing the `docker-compose-cluster-master-slave-3-3-3.yaml` file and run the following command:
+
+To start the DragonflyDB master-slave cluster using Docker Compose, navigate to the directory containing the `docker-compose.yaml` file and run the following command:
 ```bash
 docker compose up -d
 ```

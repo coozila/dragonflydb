@@ -202,35 +202,43 @@ cd dragonflydb-cluster
   ```bash
   git checkout dev  
   ```  
+### 4. Prepare the Environment Variables  
+Copy the example environment file and configure it:  
+```bash
+cp .env.example .env  
+```  
+Edit the `.env` file to set the required variables for your setup.  
 
-#### 4. Starting the Cluster
+---
+
+#### 5. Starting the Cluster
 To start the cluster:
 
 ```bash
 docker compose up -d
 ```
-#### 5. Restarting the Cluster
+#### 6. Restarting the Cluster
 To restart the cluster:
 
 ```bash
 docker compose  restart
 ```
 
-#### 6. Stopping the Cluster
+#### 7. Stopping the Cluster
 To stop the running cluster, use:
 
 ```bash
 docker compose  down
 ```
 
-#### 7. Removing Volumes
+#### 8. Removing Volumes
 To remove all the volumes associated with the containers:
 
 ```bash
 docker compose down -v
 ```
 
-### 6. Accessing the Services  
+### 9. Accessing the Services  
 
 - **DragonflyDB Instances**:  
   - Instance 1: [http://127.0.0.1:11214](http://127.0.0.1:11214)

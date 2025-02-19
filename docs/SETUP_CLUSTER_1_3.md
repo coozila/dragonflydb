@@ -119,7 +119,7 @@ Edit the `.env` file to set the required variables for your setup.
 To start the cluster, run the following command in the terminal:
 
 ```bash
-docker compose -f docker-compose.yaml up -d
+docker compose up -d
 ```
 
 The `-d` flag runs the containers in detached mode.
@@ -128,7 +128,7 @@ The `-d` flag runs the containers in detached mode.
 You can monitor the logs of each service using:
 
 ```bash
-docker compose -f docker-compose.yaml logs -f
+docker compose logs -f
 ```
 
 ## Cleanup
@@ -136,8 +136,15 @@ docker compose -f docker-compose.yaml logs -f
 To stop and remove all containers and networks, run:
 
 ```bash
-docker compose -f docker-compose.yaml down
+docker compose down
 ```
+## Removing Volumes
+To remove all the volumes associated with the containers:
+
+```bash
+docker compose down -v
+```
+
 ### Accessing the Services  
 
 - **DragonflyDB Instances**:  
