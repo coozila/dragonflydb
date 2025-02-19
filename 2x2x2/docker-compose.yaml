@@ -466,10 +466,10 @@ services:
     volumes:
 
       #
-      #   Bind Pools: Edit .env file to change the pool variant or use the default 3pool
+      #   Bind Pools: Edit .env file to change the pool variant or use the default 1pool
       #
 
-      - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-3pool}_2master_2slave.json:/etc/mcrouter/mcrouter_config.json
+      - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_2master_2slave.json:/etc/mcrouter/mcrouter_config.json
 
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
@@ -528,10 +528,10 @@ services:
     volumes:
 
       #
-      #   Bind Pools: Edit .env file to change the pool variant or use the default 3pool
+      #   Bind Pools: Edit .env file to change the pool variant or use the default 1pool
       #
 
-      - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-3pool}_2master_2slave.json:/etc/mcrouter/mcrouter_config.json
+      - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_2master_2slave.json:/etc/mcrouter/mcrouter_config.json
 
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
