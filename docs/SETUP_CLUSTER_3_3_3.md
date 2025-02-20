@@ -722,7 +722,7 @@ The cluster supports multiple pool configurations for routing requests, each des
                                 |
                                 v
                         +-------+-------+       +-------+-------+
-                        |     CADDY     |       |    UNA PHP    | 
+                        |     CADDY     |       |    PHP APP    | 
                         +-------+-------+       +-------+-------+
                                 |                       |
                                 v                       |
