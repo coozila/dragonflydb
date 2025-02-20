@@ -563,6 +563,214 @@ The cluster supports multiple pool configurations for routing requests, each des
    }
    ```
 
+###   11. Load Balancer Pool With Failover and Shard:
+   - **Description**:   Utilizes two load balancing pools and a failover pool, with sharding for distributed caching. This configuration enhances scalability and performance by distributing data across multiple shards, ensuring efficient resource utilization and fault tolerance.
+
+####  Exemple: MCROUTER_POOL_VARIANT=2LoadBalancerPooll+1FailoverPool+Shard
+
+   ```json
+
+{
+  "pools": {
+    "LoadBalancerPoolA": {
+      "servers": [
+        "dragonfly_master1:11211",
+        "dragonfly_slave1:11211"
+      ]
+    },
+    "LoadBalancerPoolB": {
+      "servers": [
+        "dragonfly_master2:11211",
+        "dragonfly_slave2:11211"
+      ]
+    },
+    "FailoverPool": {
+      "servers": [
+        "dragonfly_master3:11211",
+        "dragonfly_slave3:11211"
+      ]
+    }
+  },
+  "route": {
+    "type": "OperationSelectorRoute",
+    "operation_policies": {
+      "add": {
+        "type": "FailoverRoute",
+        "children": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "type": "FailoverRoute",
+        "children": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      },
+      "set": {
+        "type": "FailoverRoute",
+        "children": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      },
+      "get": {
+        "type": "FailoverRoute",
+        "children": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      },
+      "hash": {
+        "type": "ShardRoute",
+        "shards": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+   ```
+
+#### Configuration Diagram:
+
+```plaintext
+
+                        
+                        +-------+-------+
+                        |     CLIENT    |
+                        +-------+-------+
+                                |
+                                v       
+                        +-------+-------+
+                        |    PUBLIC     |
+                        |    NETWORK    |
+                        +-------+-------+
+                                |
+                                v       
+                        +-------+-------+
+                        | REVERSE PROXY |
+                        +-------+-------+
+                                |
+                                v
+                        +-------+-------+
+                        |    PRIVATE    |
+                        |    NETWORK    |
+                        +-------+-------+
+                                |
+                                v
+                        +-------+-------+       +-------+-------+
+                        |     CADDY     |       |    UNA PHP    | 
+                        +-------+-------+       +-------+-------+
+                                |                       |
+                                v                       |
+                        +-------+-------+               |
+                        |     NGINX     |               v
+                        +               +<------------->+
+                        |  NGINX PROXY  |               |
+                        +-------+-------+               |
+                                |                       |
+                                |                       v
+                                |               +-------+-------+
+                                |               |     MySQL     | 
+                                |               +-------+-------+
+                                |
+                                v                      
+        +-----------------------+-----------------------+
+        |                       |                       |
+        v                       v                       v
++---------------+        +------+-------+       +-------+-------+
+|   McRouter 1  |        |  McRouter 2  |       |  McRouter 3  |
++-------+-------+        +------+-------+       +-------+-------+
+        |                       |                       |
+        v                       v                       v
+        +-----------------------+-----------------------+
+        |                       |                       |
+        v                       v                       v
++-------+-------+        +------+-------+       +-------+-------+
+| LoadBalancer  |        | LoadBalancer |       |  FailoverPool |
+|    Pool A     |        |    Pool B    |       |    Cold Pool  |
++-------+-------+        +------+-------+       +-------+-------+
+        |                       |                       |
+        v                       v                       v
+        +<----------------------+---------------------->+
+        |                       |                       |
+        v                       v                       v
++-------+-------+        +------+-------+       +-------+-------+
+|  dragonfly_   |        |  dragonfly_  |       |   dragonfly_  |
+|    master1    |        |    master2   |       |     master3   |
++-------+-------+        +------+-------+       +-------+-------+
+        |                       |                       |
+        v                       v                       v
++-------+-------+        +------+-------+       +-------+-------+
+|  dragonfly_   |        |  dragonfly_  |       |   dragonfly_  |
+|    slave1     |        |    slave2    |       |     slave3    |
++-------+-------+        +------+-------+       +-------+-------+
+
+```
+
 ### Volume Mappings and Commands
 
 The following commands and volume mappings are used in the Docker Compose file to ensure each instance loads the correct configuration:
