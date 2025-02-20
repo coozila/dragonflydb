@@ -97,6 +97,25 @@
             ]
           }
         ]
+      },
+      "hash": {
+        "type": "ShardRoute",
+        "shards": [
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolA" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          },
+          {
+            "type": "LoadBalancerRoute",
+            "children": [
+              { "type": "PoolRoute", "pool": "LoadBalancerPoolB" },
+              { "type": "PoolRoute", "pool": "FailoverPool" }
+            ]
+          }
+        ]
       }
     }
   }
