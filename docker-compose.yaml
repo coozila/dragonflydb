@@ -94,7 +94,7 @@ services:                                                                       
       #
       #   Setup DRAGONFLYDB1_HOSTNAME variable in .env file
       #
-      - "${DRAGONFLYDB1_HOSTNAME:-ldragonfly1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+      - "${DRAGONFLYDB1_HOSTNAME:-dragonfly1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
   #   DRAGONFLY SERVER 2    ------------------------------------------------------#
 
@@ -143,7 +143,7 @@ services:                                                                       
       #
       #   Setup DRAGONFLYDB2_HOSTNAME variable in .env file
       #
-      - "${DRAGONFLYDB2_HOSTNAME:-ldragonfly2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+      - "${DRAGONFLYDB2_HOSTNAME:-dragonfly2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
   #   DRAGONFLY SERVER 3    ------------------------------------------------------#
 
@@ -192,7 +192,7 @@ services:                                                                       
       #
       #   Setup DRAGONFLYDB3_HOSTNAME variable in .env file
       #
-      - "${DRAGONFLYDB3_HOSTNAME:-ldragonfly3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+      - "${DRAGONFLYDB3_HOSTNAME:-dragonfly3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
   #   MCROUTER 1    ----------------------------------------------------------------#
 

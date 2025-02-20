@@ -143,99 +143,6 @@ services:
 
   # --------------------------------------------------------------------------------#
 
-  #   MASTER NODE 2    -------------------------------------------------------------#
-
-  dragonfly_master2:
-    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    #image: coozila/dragonflydb-cluster:latest
-    container_name: dragonflydb-cluster.${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}
-    hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
-    restart: always
-    healthcheck:
-      #test: ["CMD", "/usr/local/bin/healthcheck.sh"]
-      test: ["CMD", "nc", "-z", "localhost", "11211"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    ulimits:
-      #
-      #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
-      #
-
-      memlock: ${DRAGONFLYDB_MEMLOCK:--1}
-
-    ports:
-      #
-      #   Expose the master node port
-      #
-
-      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11215:11211"
-
-    volumes:
-      #
-      #   Config for master
-      #
-
-      - ../config/dragonfly_master2_config.json:/etc/dragonfly/dragonfly_config.json
-
-      #
-      #   Volume for master data
-      #
-
-      - dragonfly_master2_data:/data
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
-
-    command:
-      #
-      #   Command to startr= dragonfly and set the Memcache port
-      #
-
-      - "dragonfly"
-      - "--memcached_port"
-      - "11211"
-
-      #
-      #   Command to setup cluster mode
-      #
-
-      - "--cluster_mode"
-      - "yes"
-
-      #
-      #   Use the environment variable for setup cron
-      #
-
-      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
-
-    networks:
-      #
-      #   Connect to the private networks
-      #
-
-      - dragonfly_private_network
-
-    extra_hosts:
-      #
-      #   Add extra host entries for internal resolution
-      #
-
-      - "host.docker.internal:host-gateway"
-      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
-
-      #
-      #   Add extra service entries for internal resolution
-      #
-
-      - "${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
-
-
-  # --------------------------------------------------------------------------------#
-
   #   SLAVE NODE 1    --------------------------------------------------------------#
 
   dragonfly_slave1:
@@ -340,109 +247,6 @@ services:
 
   # --------------------------------------------------------------------------------#
 
-  #   SLAVE NODE 2    --------------------------------------------------------------#
-
-  dragonfly_slave2:
-    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    #image: coozila/dragonflydb-cluster:latest        
-    container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
-    hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
-    restart: always
-    healthcheck:
-      #test: ["CMD", "/usr/local/bin/healthcheck.sh"]
-      test: ["CMD", "nc", "-z", "localhost", "11211"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    ulimits:
-      #
-      #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
-      #
-
-      memlock: ${DRAGONFLYDB_MEMLOCK:--1}
-
-    ports:
-      #
-      #   Expose the slave node port
-      #
-
-      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:11218:11211"
-
-    volumes:
-      #
-      #   Volume for slave data
-      #
-
-      - dragonfly_slave2_data:/data
-
-      #
-      #   Slave config
-      #
-
-      - ../config/dragonfly_slave2_config.json:/etc/dragonfly/dragonfly_config.json
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
-
-    command: 
-      #
-      #   Command to startr= dragonfly and set the Memcache port
-      #
-
-      - "dragonfly"
-      - "--memcached_port"
-      - "11211"
-
-      #
-      #   Command to setup cluster mode
-      #
-
-      - "--cluster_mode"
-      - "yes"
-
-      #
-      #   Use the environment variable for setup cron
-      #
-
-      - "--snapshot_cron=${SNAPSHOT_CRON:-*/5 * * * *}"
-
-      #
-      #   Command to setup slave and link to master
-      #
-
-      - "--replicaof"
-      - "dragonfly_master2:11215"
-
-    networks:
-      #
-      #   Connect to the private networks
-      #
-
-      - dragonfly_private_network
-
-    extra_hosts:
-      #
-      #   Add extra host entries for internal resolution
-      #
-
-      - "host.docker.internal:host-gateway"
-      - "${LOCAL_LISTEN_ADDR:-127.0.0.1}:host-gateway"
-
-      #
-      #   Add extra service entries for internal resolution
-      #
-
-      - "${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
-
-    depends_on:
-      dragonfly_master2:
-        condition: service_healthy
-
-  # --------------------------------------------------------------------------------#
-
   #   MCROUTER 1    ----------------------------------------------------------------#
 
   mcrouter1:
@@ -456,9 +260,7 @@ services:
       #
 
       - ${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}
-      - ${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}
       - ${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
-      - ${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
 
 
     volumes:
@@ -467,7 +269,7 @@ services:
       #   Bind Pools: Edit .env file to change the pool variant or use the default 1pool
       #
 
-      - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_2master_2slave.json:/etc/mcrouter/mcrouter_config.json
+      - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_1master_1slave.json:/etc/mcrouter/mcrouter_config.json
 
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
@@ -517,9 +319,7 @@ services:
       #
 
       - ${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}
-      - ${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}
       - ${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
-      - ${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
 
     volumes:
 
@@ -527,7 +327,7 @@ services:
       #   Bind Pools: Edit .env file to change the pool variant or use the default 1pool
       #
 
-      - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_2master_2slave.json:/etc/mcrouter/mcrouter_config.json
+      - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_1master_1slave.json:/etc/mcrouter/mcrouter_config.json
 
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
@@ -575,22 +375,11 @@ volumes:
     dragonfly_master1_data:
         driver: local
 
-    #
-    #   STACK DRAGONFLY MASTER DATA STORAGE
-    #
-    dragonfly_master2_data:
-        driver: local
 
     #
     #   STACK DRAGONFLY SLAVE 1 DATA STORAGE
     #
     dragonfly_slave1_data:
-        driver: local
-
-    #
-    #   STACK DRAGONFLY SLAVE 2 DATA STORAGE
-    #
-    dragonfly_slave2_data:
         driver: local
 
 

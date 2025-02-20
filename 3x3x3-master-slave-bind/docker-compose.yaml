@@ -289,7 +289,7 @@ services:
 
   dragonfly_slave1:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE1_HOSTNAME:-ldragonfly_slave1}
+    container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
     hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
     restart: always
     healthcheck:
@@ -362,7 +362,7 @@ services:
       #   Add extra service entries for internal resolution
       #
 
-      - "${DRAGONFLYDB_SLAVE1_HOSTNAME:-ldragonfly_slave1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+      - "${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
     depends_on:
       dragonfly_master1:
@@ -375,7 +375,7 @@ services:
 
   dragonfly_slave2:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE2_HOSTNAME:-ldragonfly_slave2}
+    container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
     hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
     restart: always
     healthcheck:
@@ -448,7 +448,7 @@ services:
       #   Add extra service entries for internal resolution
       #
 
-      - "${DRAGONFLYDB_SLAVE2_HOSTNAME:-ldragonfly_slave2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+      - "${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
     depends_on:
       dragonfly_master2:
@@ -462,7 +462,7 @@ services:
   dragonfly_slave3:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
     #image: coozila/dragonflydb-cluster:latest
-    container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE3_HOSTNAME:-ldragonfly_slave3}
+    container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE3_HOSTNAME:-dragonfly_slave3}
     hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
     restart: always
     healthcheck:
@@ -536,7 +536,7 @@ services:
       #   Add extra service entries for internal resolution
       #
 
-      - "${DRAGONFLYDB_SLAVE3_HOSTNAME:-ldragonfly_slave3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
+      - "${DRAGONFLYDB_SLAVE3_HOSTNAME:-dragonfly_slave3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
     depends_on:
       dragonfly_master3:
