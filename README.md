@@ -23,7 +23,7 @@ If you want to support our project and help us grow it, you can [become a sponso
 
 # DragonflyDB Cluster
 
-![Cluster](assets/dragpnflydb-cluster.png)
+![Cluster](assets/coozila-dragnflydb-cluster.png)
 
 ## Coozila! Docker Package APP for DragonflyDB Cluster with McRouter
 
