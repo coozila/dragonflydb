@@ -98,7 +98,7 @@
           }
         ]
       },
-      "hash": {
+      "shard": {
         "type": "ShardRoute",
         "shards": [
           {
