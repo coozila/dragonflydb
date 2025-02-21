@@ -52,7 +52,7 @@ services:                                                                       
       #
       #   Default value for memlock is set to -1 for auto-adjustment
       #
-      memlock: ${MEMLOCK:--1}
+      memlock: ${DRAGONFLYDB_MEMLOCK:-4194304}
 
     command:
       #
@@ -106,7 +106,7 @@ services:                                                                       
       #
       #   Default value for memlock is set to -1 for auto-adjustment
       #
-      memlock: ${MEMLOCK:--1}
+      memlock: ${DRAGONFLYDB_MEMLOCK:-4194304}
 
     command:
       #
@@ -155,7 +155,7 @@ services:                                                                       
       #
       #   Default value for memlock is set to -1 for auto-adjustment
       #
-      memlock: ${MEMLOCK:--1}
+      memlock: ${DRAGONFLYDB_MEMLOCK:-4194304}
 
     command:
       #
