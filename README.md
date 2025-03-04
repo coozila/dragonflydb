@@ -116,7 +116,7 @@ Special thanks to **Sandeep Kongathi** for the inspiration behind this project.
 
 We would also like to acknowledge **Hypatia AI**, a project of Coozila! AGI, for providing intelligent assistance and support in developing this documentation and enhancing the overall project experience.
 
-## What is a Cache Layer?
+### What is a Cache Layer?
 
 A cache layer is a fundamental component in modern system architectures, designed to accelerate data access by temporarily storing frequently used information in memory. This approach greatly enhances application performance and responsiveness while reducing the load on primary data sources. Here’s why a cache layer is essential for our applications:
 
