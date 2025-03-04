@@ -651,7 +651,6 @@ services:                                                                       
 
 #   STACK VOLUMES  -----------------------------------------------------------------#
 
-# Define named volumes for data persistence
 volumes:
 
     #
