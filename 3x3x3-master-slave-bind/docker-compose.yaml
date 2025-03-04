@@ -5,34 +5,41 @@
 #                                                                                   #
 # ----------------------------------------------------------------------------------#
 
+# ----------------------------------------------------------------------------------#
+
 #   STACK NETWORK    ---------------------------------------------------------------#
 
 networks:                                                                           #
 
-  #   Private network for application services    --------------------------------#
+  #   Private network for application services    ----------------------------------#
 
   stack_private_network:
     #
     #   SSH command to create the Docker network: 
     #   docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
     #
+
     external: true
 
-  #   Private network for mcrouter services    ----------------------------------#
+  #   Private network for mcrouter services    -------------------------------------#
 
   mcrouter_private_network:
     #
     #   Setup Network Driver in .env or use default bridge
     #
+
     driver: bridge
     external: false
 
-  #   Private network for dragonfly services    ----------------------------------#
+  # --------------------------------------------------------------------------------#
+
+  #   Private network for dragonfly services    ------------------------------------#
 
   dragonfly_private_network:
     #
     #   Setup Network Driver in .env or use default bridge
     #
+
     driver: bridge
     external: false
 
@@ -42,9 +49,9 @@ networks:                                                                       
 
 services:
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   MASTER NODE 1   ------------------------------------------------------------#
+  #   MASTER NODE 1   --------------------------------------------------------------#
 
   dragonfly_master1:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
@@ -83,12 +90,6 @@ services:
 
       - dragonfly_master1_data:/data
 
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
-
     command:
       #
       #   Command to set the Memcache port and link to master
@@ -122,9 +123,9 @@ services:
       - "${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   MASTER NODE 2    -----------------------------------------------------------#
+  #   MASTER NODE 2    -------------------------------------------------------------#
 
   dragonfly_master2:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
@@ -163,12 +164,6 @@ services:
 
       - dragonfly_master2_data:/data
 
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
-
     command:
       #
       #   Command to set the Memcache port and link to master
@@ -202,9 +197,9 @@ services:
       - "${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   MASTER NODE 3    -----------------------------------------------------------#
+  #   MASTER NODE 3    -------------------------------------------------------------#
 
   dragonfly_master3:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
@@ -243,13 +238,6 @@ services:
 
       - dragonfly_master3_data:/data
 
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
-
-
     command:
       #
       #   Command to set the Memcache port and link to master
@@ -283,9 +271,9 @@ services:
       - "${DRAGONFLYDB_MASTER3_HOSTNAME:-dragonfly_master}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   SLAVE NODE 1    ------------------------------------------------------------#
+  #   SLAVE NODE 1    --------------------------------------------------------------#
 
   dragonfly_slave1:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
@@ -323,12 +311,6 @@ services:
       #
 
       - ../config/dragonfly_slave1_config.json:/etc/dragonfly/dragonfly_config.json
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
 
     command: 
       #
@@ -369,9 +351,9 @@ services:
         condition: service_healthy
 
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   SLAVE NODE 2    ------------------------------------------------------------#
+  #   SLAVE NODE 2    --------------------------------------------------------------#
 
   dragonfly_slave2:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
@@ -409,12 +391,6 @@ services:
       #
 
       - ../config/dragonfly_slave2_config.json:/etc/dragonfly/dragonfly_config.json
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
 
     command: 
       #
@@ -455,18 +431,16 @@ services:
         condition: service_healthy
 
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   SLAVE NODE 3    ------------------------------------------------------------#
+  #   SLAVE NODE 3    --------------------------------------------------------------#
 
   dragonfly_slave3:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    #image: coozila/dragonflydb-cluster:latest
     container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE3_HOSTNAME:-dragonfly_slave3}
     hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
     restart: always
     healthcheck:
-      #test: ["CMD", "/usr/local/bin/healthcheck.sh"]
       test: ["CMD", "nc", "-z", "localhost", "11211"]
       interval: 30s
       timeout: 5s
@@ -497,12 +471,6 @@ services:
       #
 
       - ../config/dragonfly_slave3_config.json:/etc/dragonfly/dragonfly_config.json
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
 
     command: 
       #
@@ -543,9 +511,9 @@ services:
         condition: service_healthy
 
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   MCROUTER 1    --------------------------------------------------------------#
+  #   MCROUTER 1    ----------------------------------------------------------------#
 
   mcrouter1:
     image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
@@ -564,7 +532,6 @@ services:
       - ${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
       - ${DRAGONFLYDB_SLAVE3_HOSTNAME:-dragonfly_slave3}
 
-
     volumes:
 
       #
@@ -572,7 +539,6 @@ services:
       #
 
       - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-3pool}_3master_3slave.json:/etc/mcrouter/mcrouter_config.json
-
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
     ports:
@@ -606,9 +572,9 @@ services:
       - "${MCROUTER1_HOSTNAME:-mcrouter1}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   MCROUTER 2    --------------------------------------------------------------#
+  #   MCROUTER 2    ----------------------------------------------------------------#
 
   mcrouter2:
     image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
@@ -634,7 +600,6 @@ services:
       #
 
       - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-3pool}_3master_3slave.json:/etc/mcrouter/mcrouter_config.json
-
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
     ports:
@@ -667,9 +632,10 @@ services:
 
       - "${MCROUTER2_HOSTNAME:-mcrouter2}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
-  # ------------------------------------------------------------------------------#
 
-  #   MCROUTER 3    --------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
+
+  #   MCROUTER 3    ----------------------------------------------------------------#
 
   mcrouter3:
     image: coozila/mcrouter:${MCROUTER_VERSION:-40.0.0}
@@ -695,7 +661,6 @@ services:
       #
 
       - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-3pool}_3master_3slave.json:/etc/mcrouter/mcrouter_config.json
-
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
     ports:
@@ -728,15 +693,17 @@ services:
 
       - "${MCROUTER3_HOSTNAME:-mcrouter3}:${LOCAL_LISTEN_ADDR:-127.0.0.1}"
 
+
 # ----------------------------------------------------------------------------------#
 
 #   STACK VOLUMES  -----------------------------------------------------------------#
 
-# Define named volumes for data persistence
 volumes:
 
+    #
     #   STACK DRAGONFLY MASTER DATA STORAGE
     #
+
     dragonfly_master1_data:
         driver: local
         driver_opts:
@@ -744,8 +711,10 @@ volumes:
           device: ${DRAGONFLYDB_MASTER1_DATA}
           o: bind
 
+    #
     #   STACK DRAGONFLY MASTER DATA STORAGE
     #
+
     dragonfly_master2_data:
         driver: local
         driver_opts:
@@ -753,8 +722,10 @@ volumes:
           device: ${DRAGONFLYDB_MASTER2_DATA}
           o: bind
 
+    #
     #   STACK DRAGONFLY MASTER DATA STORAGE
     #
+
     dragonfly_master3_data:
         driver: local
         driver_opts:
@@ -762,8 +733,10 @@ volumes:
           device: ${DRAGONFLYDB_MASTER3_DATA}
           o: bind
 
+    #
     #   STACK DRAGONFLY SLAVE 1 DATA STORAGE
     #
+
     dragonfly_slave1_data:
         driver: local
         driver_opts:
@@ -771,8 +744,10 @@ volumes:
           device: ${DRAGONFLYDB_SLAVE1_DATA}
           o: bind
 
+    #
     #   STACK DRAGONFLY SLAVE 2 DATA STORAGE
     #
+
     dragonfly_slave2_data:
         driver: local
         driver_opts:
@@ -780,8 +755,10 @@ volumes:
           device: ${DRAGONFLYDB_SLAVE2_DATA}
           o: bind
 
+    #
     #   STACK DRAGONFLY SLAVE 3 DATA STORAGE
     #
+
     dragonfly_slave3_data:
         driver: local
         driver_opts:

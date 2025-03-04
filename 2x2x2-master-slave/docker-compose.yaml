@@ -16,8 +16,8 @@ networks:                                                                       
     #   SSH command to create the Docker network: 
     #   docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
     #
-    external: true
 
+    external: true
 
   #   Private network for mcrouter services    -------------------------------------#
 
@@ -25,9 +25,9 @@ networks:                                                                       
     #
     #   Setup Network Driver in .env or use default bridge
     #
+
     driver: bridge
     external: false
-
 
   #   Private network for dragonfly services    ------------------------------------#
 
@@ -35,9 +35,9 @@ networks:                                                                       
     #
     #   Setup Network Driver in .env or use default bridge
     #
+
     driver: bridge
     external: false
-
 
 # ----------------------------------------------------------------------------------#
 
@@ -51,15 +51,10 @@ services:
 
   dragonfly_master1:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    #image: coozila/dragonflydb:dragonfly
-    #build:
-    #    context: .
-    #    dockerfile: Dockerfile
     container_name: dragonflydb-cluster.${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}
     hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
     restart: always
     healthcheck:
-      #test: ["CMD", "/usr/local/bin/healthcheck.sh"]
       test: ["CMD", "nc", "-z", "localhost", "11211"]
       interval: 30s
       timeout: 5s
@@ -90,12 +85,6 @@ services:
       #
 
       - dragonfly_master1_data:/data
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
 
     command:
       #
@@ -147,12 +136,10 @@ services:
 
   dragonfly_master2:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    #image: coozila/dragonflydb-cluster:latest
     container_name: dragonflydb-cluster.${DRAGONFLYDB_MASTER2_HOSTNAME:-dragonfly_master2}
     hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
     restart: always
     healthcheck:
-      #test: ["CMD", "/usr/local/bin/healthcheck.sh"]
       test: ["CMD", "nc", "-z", "localhost", "11211"]
       interval: 30s
       timeout: 5s
@@ -183,12 +170,6 @@ services:
       #
 
       - dragonfly_master2_data:/data
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
 
     command:
       #
@@ -240,12 +221,10 @@ services:
 
   dragonfly_slave1:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    #image: coozila/dragonflydb-cluster:latest        
     container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
     hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
     restart: always
     healthcheck:
-      #test: ["CMD", "/usr/local/bin/healthcheck.sh"]
       test: ["CMD", "nc", "-z", "localhost", "11211"]
       interval: 30s
       timeout: 5s
@@ -276,12 +255,6 @@ services:
       #
 
       - ../config/dragonfly_slave1_config.json:/etc/dragonfly/dragonfly_config.json
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
 
     command: 
       #
@@ -344,12 +317,10 @@ services:
 
   dragonfly_slave2:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    #image: coozila/dragonflydb-cluster:latest        
     container_name: dragonflydb-cluster.${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
     hostname: ${DRAGONFLYDB_HOSTNAME:-localhost}
     restart: always
     healthcheck:
-      #test: ["CMD", "/usr/local/bin/healthcheck.sh"]
       test: ["CMD", "nc", "-z", "localhost", "11211"]
       interval: 30s
       timeout: 5s
@@ -380,12 +351,6 @@ services:
       #
 
       - ../config/dragonfly_slave2_config.json:/etc/dragonfly/dragonfly_config.json
-
-      #
-      #   Healthcheck
-      #
-
-      #- ./healthcheck.sh:/usr/local/bin/healthcheck.sh
 
     command: 
       #
@@ -460,7 +425,6 @@ services:
       - ${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
       - ${DRAGONFLYDB_SLAVE2_HOSTNAME:-dragonfly_slave2}
 
-
     volumes:
 
       #
@@ -468,7 +432,6 @@ services:
       #
 
       - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_2master_2slave.json:/etc/mcrouter/mcrouter_config.json
-
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
     ports:
@@ -572,24 +535,28 @@ volumes:
     #
     #   STACK DRAGONFLY MASTER DATA STORAGE
     #
+
     dragonfly_master1_data:
         driver: local
 
     #
     #   STACK DRAGONFLY MASTER DATA STORAGE
     #
+
     dragonfly_master2_data:
         driver: local
 
     #
     #   STACK DRAGONFLY SLAVE 1 DATA STORAGE
     #
+
     dragonfly_slave1_data:
         driver: local
 
     #
     #   STACK DRAGONFLY SLAVE 2 DATA STORAGE
     #
+
     dragonfly_slave2_data:
         driver: local
 
