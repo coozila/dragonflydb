@@ -250,7 +250,6 @@ services:
       - ${DRAGONFLYDB_MASTER1_HOSTNAME:-dragonfly_master1}
       - ${DRAGONFLYDB_SLAVE1_HOSTNAME:-dragonfly_slave1}
 
-
     volumes:
 
       #
@@ -258,7 +257,6 @@ services:
       #
 
       - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_1master_1slave.json:/etc/mcrouter/mcrouter_config.json
-
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
     ports:
@@ -316,7 +314,6 @@ services:
       #
 
       - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-1pool}_1master_1slave.json:/etc/mcrouter/mcrouter_config.json
-
 
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
     ports:

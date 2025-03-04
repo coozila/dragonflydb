@@ -678,7 +678,6 @@ services:
 
       - ../config/mcrouter_${MCROUTER_POOL_VARIANT:-2LoadBalancerPooll+1FailoverPool}_3master_3slave.json:/etc/mcrouter/mcrouter_config.json
 
-
     command: mcrouter --config-file=/etc/mcrouter/mcrouter_config.json -p 11211
     ports:
       #
