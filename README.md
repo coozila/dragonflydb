@@ -68,7 +68,7 @@ Elevate your application's performance with the **DragonflyDB Cluster** a powerf
 
 We welcome contributions to this project! Please refer to our [Contributing Guidelines](CONTRIBUTING.md) for detailed instructions on how to contribute.
 
-For questions or contributions, feel free to contact the **DragonflyDB Cluster Team** at [olariu_romeo@yahoo.it](mailto:olariu_romeo@yahoo.it).
+For questions or contributions, feel free to contact the **DragonflyDB Cluster Developer* at [olariu_romeo@yahoo.it](mailto:olariu_romeo@yahoo.it).
 
 
 ### Code of Conduct
@@ -85,14 +85,12 @@ We extend our gratitude to the creators and maintainers of the tools and technol
 - [Docker Hub Official Website](https://hub.docker.com/)
 - [DragonflyDB Official Website](https://www.dragonflydb.io/)
 - [Memcached Official Website](https://memcached.org/)
-- [Github Official Website](https://github.com/)
 
 ### Github:
 
 - [DragonflyDB GitHub Repository](https://github.com/dragonflydb/dragonfly)
 - [McRouter GitHub Repository](https://github.com/facebook/mcrouter)
 - [Memcached GitHub Repository](https://github.com/memcached/memcached)
-- [Developer Github main Repository](https://github.com/olariuromeo)
 
 ### Acknowledgments:
 
