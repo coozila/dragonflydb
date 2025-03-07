@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------#
 #                                                                                   #
-#   Copyright (C) 2009 - 2025 Coozila! Licensed under the MIT License.              #
-#   Coozila! Team    lab@coozila.com                                                #
+#   Copyright (C) 2025 Romulus Licensed under the MIT License.                      #
+#   Developer Contact    olariu_romeo@yahoo.it                                      #
 #                                                                                   #
 # ----------------------------------------------------------------------------------#
 
@@ -9,7 +9,7 @@
 
 networks:                                                                           #
 
-  #   Private network for application services    --------------------------------#
+  #   Private network for application services    ----------------------------------#
 
   stack_private_network:
     #
@@ -19,7 +19,7 @@ networks:                                                                       
 
     external: true
 
-  #   Private network for mcrouter services    ----------------------------------#
+  #   Private network for mcrouter services    ------------------------------------#
 
   mcrouter_private_network:
     #
@@ -29,7 +29,7 @@ networks:                                                                       
     driver: bridge
     external: false
 
-  #   Private network for dragonfly services    ----------------------------------#
+  #   Private network for dragonfly services    ------------------------------------#
 
   dragonfly_private_network:
     #
@@ -45,9 +45,9 @@ networks:                                                                       
 
 services:
 
-  # ------------------------------------------------------------------------------#
+  # --------------------------------------------------------------------------------#
 
-  #   MASTER NODE 1   ------------------------------------------------------------#
+  #   MASTER NODE 1   --------------------------------------------------------------#
 
   dragonfly_master1:
     image: 'docker.dragonflydb.io/dragonflydb/dragonfly'

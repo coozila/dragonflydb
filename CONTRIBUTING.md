@@ -21,7 +21,7 @@ Any type of contribution is welcome: new features, bug fixes, documentation impr
 When submitting a PR, please ensure that:
 
 - It must pass CI jobs for linting and test the changes (if any).
-- The title of the PR is clear enough and starts with "[coozila/apps-name]"
+- The title of the PR is clear enough and starts with "[olariuromeo/dragonflydb-cluster]"
 - If necessary, add information to the repository's `README.md`.
 
 #### Sign Your Work
@@ -61,10 +61,10 @@ Notice the `Author` and `Signed-off-by` lines match. If they don't your PR will 
 
 ### PR Approval and Release Process
 
-1. Changes will be manually reviewed by Coozila! team members.
+1. Changes will be manually reviewed by team members.
 2. The changes will be automatically tested using our GitHub CI workflow.
-3. Once accepted, the PR will be tested in the internal Coozila! CI pipeline, which may include testing both the container and any associated Helm Chart.
-4. The PR will be merged by the reviewer(s) into the GitHub `main` branch.
+3. Once accepted, the PR will be tested in the internal CI pipeline, which may include testing both the container and any associated Helm Chart.
+4. The PR will be merged by the reviewer(s) into the GitHub `master` branch.
 5. Our CI/CD system will then push the container image to various registries, including the recently merged changes.
 
 > [!NOTE]

@@ -58,9 +58,9 @@ networks:                                                                       
 
 
 ### 2. Clone the Repository  
-Clone the Coozila! Apps repository to your local machine:  
+Clone the App repository to your local machine:  
 ```bash
-git clone https://github.com/coozila/dragonflydb-cluster.git  
+git clone https://github.com/olariuromeo/dragonflydb-cluster.git  
 cd dragonflydb-cluster
 ```  
 
@@ -151,15 +151,14 @@ We provide 3 variants of the DragonflyDB cluster:
 
 ## Installation Assistance
 
-If you would like assistance with the installation of this product, please contact **Coozila! Labs** at [labs@coozila.com](mailto:lab@coozila.com). Our team is ready to help you with the installation process and ensure a smooth setup.
+If you would like assistance with the installation of this product, please contact **Romulus** at [olariu_romeo@yahoo.it](mailto:olariu_romeo@yahoo.it). I will be happy to help you with the installation process and ensure a smooth setup.
 
 Based on the size and complexity of your project, we will provide you with a tailored pricing quote.
 
-For purchasing the installation, please visit the following link: [Coozila Docker Package App for Memcached](https://www.coozila.com/plus/view-product/coozila-docker-package-app-for-memcached).
+For purchasing the custom installation, please visit the following link: [DragonflyDB Cluster Custom](https://www.coozila.com/plus/view-product/dragonflydb-cluster-custom).
 
-You can also check out the official Coozila! Labs page for more information: [Coozila! Labs](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
+You can also check out my page for more information: [Romulus](https://www.coozila.com/plus/view-persons-profile/romulus).
 
-For any inquiries, feel free to reach out through our contact page: [Contact Coozila!](https://www.coozila.com/plus/contact).
 
 ### After Purchase Notes
 
@@ -173,10 +172,33 @@ After your purchase, please provide the following information via email:
 
 For more details, please refer to the main repository: 
 
-- [Coozila! Apps](https://github.com/coozila/apps).
 - [Mcrouter](https://github.com/facebook/mcrouter)
 - [DragonflyDB](https://github.com/dragonflydb/dragonfly/tree/main/docs)
 
+## Trademarks and Copyright
 
-Happy coding! 🚀  
-```
+This software listing is packaged by Romulus. All trademarks mentioned are the property of their respective owners, and their use does not imply any affiliation or endorsement.
+
+### Copyright
+
+Copyright (C) Romulus Licensed under the MIT License.
+
+### Licenses
+
+- **Romulus!**: [MIT License](https://github.com/olariuromeo/dragonflydb-cluster/blob/dev/LICENSE)
+- **DragonflyDB**: [DragonflyDB License](https://github.com/dragonflydb/dragonfly/blob/main/LICENSE.md)
+- **McRouter**: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE)
+- **Memcached**: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE)
+
+### Important Notice Regarding DragonflyDB Usage  
+
+In compliance with the **Dragonfly Business Source License 1.1 (BSL 1.1)**:  
+- **Permitted Use:** This project involves installing and configuring DragonflyDB as part of your private caching infrastructure.  
+- **Prohibited Use:** You cannot offer DragonflyDB as a hosted or managed service, nor provide any solution that allows third parties (other than your employees or contractors) to access or use DragonflyDB features.  
+- This ensures that our service fully respects the licensing terms of DragonflyDB.
+
+## Disclaimer
+
+This product is provided "as is," without any guarantees or warranties regarding its functionality, performance, or reliability. By using this product, you acknowledge that you do so at your own risk. Romulus and its contributors are not liable for any issues, damages, or losses that may arise from the use of this product. We recommend thoroughly testing the product in your own environment before deploying it in a production setting.
+
+Happy coding!

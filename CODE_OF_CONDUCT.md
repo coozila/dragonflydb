@@ -2,7 +2,7 @@
 
 As contributors and maintainers of this project, we are committed to fostering an inclusive and respectful environment for all participants. We pledge to honor and support everyone who engages with our community, whether by reporting issues, updating documentation, submitting pull requests, providing constructive feedback, or participating in discussions.
 
-Communication across all Coozila! channels (including GitHub, mailing lists, Twitter, etc.) should always be constructive. We will not tolerate personal attacks, trolling, harassment (public or private), insults, or any form of unprofessional behavior.
+Communication across all channels (including GitHub, mailing lists, Twitter, etc.) should always be constructive. We will not tolerate personal attacks, trolling, harassment (public or private), insults, or any form of unprofessional behavior.
 
 We strive to treat all individuals with courtesy and respect, regardless of gender, gender identity, sexual orientation, disability, age, race, ethnicity, religion, or level of experience. We expect all participants in this project to uphold these values.
 

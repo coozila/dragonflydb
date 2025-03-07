@@ -1,38 +1,31 @@
 <p align="center">
-    <a href="https://twitter.com/coozila" target="_blank"><img src="https://img.shields.io/twitter/follow/:coozila" alt="Follow on Twitter" /></a>
-</p>
-
-<p align="center">
-    <img width="233px" height="auto" src="https://www.coozila.com/static/themes/prometheus/img/coozila.png" />
-</p>
-<p align="center">
-    <a href="https://github.com/coozila/dragonflydb-cluster/dev/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" /></a>
+    <a href="https://github.com/olariuromeo/dragonflydb-cluster/dev/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-1c7ed6" alt="License" /></a>
 </p>
 
 > If you enjoy the project, please consider giving us a GitHub star ⭐️. Thank you!
 
 ## Sponsors
 
-If you want to support our project and help us grow it, you can [become a sponsor on GitHub](https://github.com/sponsors/coozila)
+If you want to support our project and help us grow it, you can [become a sponsor on GitHub](https://github.com/sponsors/olariuromeo)
 
 <p align="center">
-  <a href="https://github.com/sponsors/coozila">
+  <a href="https://github.com/sponsors/olariuromeo">
   </a>
 </p>
 
 # DragonflyDB Cluster
 
-![Cluster](assets/coozila-dragnflydb-cluster.png)
+![Cluster](assets/dragnflydb-cluster.png)
 
-## Coozila! Docker Package APP for DragonflyDB Cluster with McRouter
+## Docker Package APP for DragonflyDB Cluster with McRouter
 
-The **Coozila! Package for DragonflyDB Cluster** integrates **DragonflyDB** and **McRouter**, delivering a cutting-edge caching solution tailored for modern applications. Designed to maximize scalability and performance, this package empowers developers to deploy a distributed caching layer effortlessly, alleviating database load while significantly improving response times.
+The **Package for DragonflyDB Cluster** integrates **DragonflyDB** and **McRouter**, delivering a cutting-edge caching solution tailored for modern applications. Designed to maximize scalability and performance, this package empowers developers to deploy a distributed caching layer effortlessly, alleviating database load while significantly improving response times.
 
-### Why Choose Coozila?
+### Why Choose DragonflyDB Cluster?
 
 - **Simplified Scalability**: Deploy a highly efficient distributed caching layer using pre-configured Docker packages, reducing complexity and ensuring faster response times.
 - **Intelligent Request Routing**: Take advantage of McRouter's advanced capabilities, including prefix routing, replicated pools, and failover mechanisms, for seamless cache operation.
-- **Blazing-Fast Performance**: With DragonflyDB at its core, Coozila! offers a high-speed, fault-tolerant caching system optimized for high-demand environments.
+- **Blazing-Fast Performance**: With DragonflyDB at its core, DragonflyDB Cluster offers a high-speed, fault-tolerant caching system optimized for high-demand environments.
 - **Dynamic Configuration**: Easily manage and scale your caching infrastructure with live updates, ensuring zero downtime.
 - **Multi-Level Caching**: Implement tiered caching with local and remote caches for enhanced data retrieval efficiency.
 
@@ -54,7 +47,7 @@ The **Coozila! Package for DragonflyDB Cluster** integrates **DragonflyDB** and 
 
 ### Easy Deployment
 
-The package comes with pre-configured Docker containers and a straightforward setup process, enabling developers to get started quickly. With Coozila!, you can build a scalable, reliable caching infrastructure in minutes.
+The package comes with pre-configured Docker containers and a straightforward setup process, enabling developers to get started quickly. With DragonflyDB Cluster, you can build a scalable, reliable caching infrastructure in minutes.
 
 ### Who Is It For?
 
@@ -69,13 +62,13 @@ The package comes with pre-configured Docker containers and a straightforward se
 - **Streaming Services**: Overseeing user preferences, recommendations, and playback data.
 - **Enterprises**: Running data-intensive applications that require high availability and responsiveness.
 
-Elevate your application's performance with the **Coozila! Memcached Cluster** a powerful caching solution that combines the reliability of DragonflyDB with the flexibility of McRouter. Whether you're managing high-demand environments or planning for future growth, Coozila! is your ideal package for effortless deployment and unparalleled efficiency.
+Elevate your application's performance with the **DragonflyDB Cluster** a powerful caching solution that combines the reliability of DragonflyDB with the flexibility of McRouter. Whether you're managing high-demand environments or planning for future growth, DragonflyDB Cluster is your ideal package for effortless deployment and unparalleled efficiency.
 
 ## Contributing
 
 We welcome contributions to this project! Please refer to our [Contributing Guidelines](CONTRIBUTING.md) for detailed instructions on how to contribute.
 
-For questions or contributions, feel free to contact the **Coozila! Labs** at [labs@coozila.com](mailto:lab@coozila.com).
+For questions or contributions, feel free to contact the **DragonflyDB Cluster Team** at [olariu_romeo@yahoo.it](mailto:olariu_romeo@yahoo.it).
 
 
 ### Code of Conduct
@@ -92,9 +85,6 @@ We extend our gratitude to the creators and maintainers of the tools and technol
 - [Docker Hub Official Website](https://hub.docker.com/)
 - [DragonflyDB Official Website](https://www.dragonflydb.io/)
 - [Memcached Official Website](https://memcached.org/)
-- [Coozila! AGI Official Website](https://agi.coozila.com/)
-- [Coozila! AGI Developer API](https://agi.coozila.com/api/docs/)
-- [Coozila! Official Website](https://www.coozila.com/)
 - [Github Official Website](https://github.com/)
 
 ### Github:
@@ -102,7 +92,7 @@ We extend our gratitude to the creators and maintainers of the tools and technol
 - [DragonflyDB GitHub Repository](https://github.com/dragonflydb/dragonfly)
 - [McRouter GitHub Repository](https://github.com/facebook/mcrouter)
 - [Memcached GitHub Repository](https://github.com/memcached/memcached)
-- [Coozila! Github main Repository](https://github.com/coozila)
+- [Developer Github main Repository](https://github.com/olariuromeo)
 
 ### Acknowledgments:
 
@@ -181,15 +171,14 @@ Each instance:
 
 ## Installation Assistance
 
-If you would like assistance with the installation of this product, please contact **Coozila! Labs** at [labs@coozila.com](mailto:lab@coozila.com). Our team is ready to help you with the installation process and ensure a smooth setup.
+If you would like assistance with the installation of this product, please contact **Romulus** at [olariu_romeo@yahoo.it](mailto:olariu_romeo@yahoo.it). I will be happy to help you with the installation process and ensure a smooth setup.
 
 Based on the size and complexity of your project, we will provide you with a tailored pricing quote.
 
-For purchasing the installation, please visit the following link: [Coozila Docker Package App for Memcached](https://www.coozila.com/plus/view-product/coozila-docker-package-app-for-memcached).
+For purchasing the custom installation, please visit the following link: [DragonflyDB Cluster Custom](https://www.coozila.com/plus/view-product/dragonflydb-cluster-custom).
 
-You can also check out the official Coozila! Labs page for more information: [Coozila! Labs](https://www.coozila.com/plus/view-organization-profile/coozila-labs).
+You can also check out my page for more information: [Romulus](https://www.coozila.com/plus/view-persons-profile/romulus).
 
-For any inquiries, feel free to reach out through our contact page: [Contact Coozila!](https://www.coozila.com/plus/contact).
 
 ### After Purchase Notes
 
@@ -203,21 +192,20 @@ After your purchase, please provide the following information via email:
 
 For more details, please refer to the main repository: 
 
-- [Coozila! Apps](https://github.com/coozila/apps).
 - [Mcrouter](https://github.com/facebook/mcrouter)
 - [DragonflyDB](https://github.com/dragonflydb/dragonfly/tree/main/docs)
 
 ## Trademarks and Copyright
 
-This software listing is packaged by Coozila!. All trademarks mentioned are the property of their respective owners, and their use does not imply any affiliation or endorsement.
+This software listing is packaged by Romulus. All trademarks mentioned are the property of their respective owners, and their use does not imply any affiliation or endorsement.
 
 ### Copyright
 
-Copyright (C) 2009 - 2025 Coozila! Licensed under the MIT License.
+Copyright (C) Romulus Licensed under the MIT License.
 
 ### Licenses
 
-- **Coozila!**: [MIT License](https://github.com/coozila/dragonflydb-cluster/blob/dev/LICENSE)
+- **Romulus!**: [MIT License](https://github.com/olariuromeo/dragonflydb-cluster/blob/dev/LICENSE)
 - **DragonflyDB**: [DragonflyDB License](https://github.com/dragonflydb/dragonfly/blob/main/LICENSE.md)
 - **McRouter**: [McRouter License](https://github.com/facebook/mcrouter/blob/main/LICENSE)
 - **Memcached**: [Memcached License](https://github.com/memcached/memcached/blob/master/LICENSE)
@@ -231,6 +219,6 @@ In compliance with the **Dragonfly Business Source License 1.1 (BSL 1.1)**:
 
 ## Disclaimer
 
-This product is provided "as is," without any guarantees or warranties regarding its functionality, performance, or reliability. By using this product, you acknowledge that you do so at your own risk. Coozila! and its contributors are not liable for any issues, damages, or losses that may arise from the use of this product. We recommend thoroughly testing the product in your own environment before deploying it in a production setting.
+This product is provided "as is," without any guarantees or warranties regarding its functionality, performance, or reliability. By using this product, you acknowledge that you do so at your own risk. Romulus and its contributors are not liable for any issues, damages, or losses that may arise from the use of this product. We recommend thoroughly testing the product in your own environment before deploying it in a production setting.
 
 Happy coding!
