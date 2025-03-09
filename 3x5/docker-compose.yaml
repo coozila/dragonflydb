@@ -15,10 +15,10 @@ networks:                                                                       
 
   #   Private network for application services    ----------------------------------#
 
-  stack_private_network:
+  kabba_private_network:
     #
     #   SSH command to create the Docker network: 
-    #   docker network create --driver bridge stack_private_network --subnet=172.16.0.0/16
+    #   docker network create --driver bridge kabba_private_network --subnet=172.16.0.0/16
     #
 
     external: true
@@ -510,7 +510,7 @@ services:                                                                       
       #   Connect to the private network
       #
 
-      - stack_private_network
+      - kabba_private_network
       - mcrouter_private_network
       - dragonfly_private_network
 
@@ -569,7 +569,7 @@ services:                                                                       
       #   Connect to the private network
       #
 
-      - stack_private_network
+      - kabba_private_network
       - mcrouter_private_network
       - dragonfly_private_network
 
@@ -628,7 +628,7 @@ services:                                                                       
       #   Connect to the private network
       #
 
-      - stack_private_network
+      - kabba_private_network
       - mcrouter_private_network
       - dragonfly_private_network
 
