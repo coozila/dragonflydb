@@ -29,10 +29,10 @@ The configuration is defined in a `docker-compose.yaml` file, which is used to c
 
 ### 1. Create the Private Network
 
-Before building the containers and images, you must manually create the `kabba_private_network` Exemple:
+Before building the containers and images, you must manually create the `kabballa_private_network` Exemple:
 
 ```bash
-docker network create --driver bridge kabba_private_network --subnet=172.16.0.0/16
+docker network create --driver bridge kabbala_private_network --subnet=172.16.0.0/16
 ```
 
 Alternatively, you can personalize your network according to your preferences directly in your docker-compose.yaml file like this:
