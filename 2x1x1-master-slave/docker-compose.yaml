@@ -71,7 +71,7 @@ services:
       #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
       #
 
-      memlock: ${DRAGONFLYDB_MEMLOCK:-4194304}
+      memlock: ${DRAGONFLYDB_MEMLOCK:-4294967296}
 
     ports:
       #
@@ -156,7 +156,7 @@ services:
       #   Set memory lock limits on .env or use value for memlock is set to -1 for auto-adjustment
       #
 
-      memlock: ${DRAGONFLYDB_MEMLOCK:-4194304}
+      memlock: ${DRAGONFLYDB_MEMLOCK:-4294967296}
 
     ports:
       #
